@@ -1,0 +1,12 @@
+Z:\Repositories\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csprojAssemblyReference.cache
+Z:\Repositories\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csproj.CoreCompileInputs.cache
+Z:\Repositories\WMSDS\Wmsds.Entities\bin\Debug\Wmsds.Entities.dll
+Z:\Repositories\WMSDS\Wmsds.Entities\bin\Debug\Wmsds.Entities.pdb
+Z:\Repositories\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.dll
+Z:\Repositories\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.pdb
+D:\WMSDS v1.1\Wmsds.Entities\bin\Debug\Wmsds.Entities.dll
+D:\WMSDS v1.1\Wmsds.Entities\bin\Debug\Wmsds.Entities.pdb
+D:\WMSDS v1.1\Wmsds.Entities\obj\Debug\Wmsds.Entities.csprojAssemblyReference.cache
+D:\WMSDS v1.1\Wmsds.Entities\obj\Debug\Wmsds.Entities.csproj.CoreCompileInputs.cache
+D:\WMSDS v1.1\Wmsds.Entities\obj\Debug\Wmsds.Entities.dll
+D:\WMSDS v1.1\Wmsds.Entities\obj\Debug\Wmsds.Entities.pdb

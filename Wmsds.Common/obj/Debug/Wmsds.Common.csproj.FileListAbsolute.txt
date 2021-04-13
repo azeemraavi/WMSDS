@@ -1,0 +1,12 @@
+Z:\Repositories\WMSDS\Wmsds.Common\bin\Debug\Wmsds.Common.dll
+Z:\Repositories\WMSDS\Wmsds.Common\bin\Debug\Wmsds.Common.pdb
+Z:\Repositories\WMSDS\Wmsds.Common\obj\Debug\Wmsds.Common.csprojAssemblyReference.cache
+Z:\Repositories\WMSDS\Wmsds.Common\obj\Debug\Wmsds.Common.csproj.CoreCompileInputs.cache
+Z:\Repositories\WMSDS\Wmsds.Common\obj\Debug\Wmsds.Common.dll
+Z:\Repositories\WMSDS\Wmsds.Common\obj\Debug\Wmsds.Common.pdb
+D:\WMSDS v1.1\Wmsds.Common\bin\Debug\Wmsds.Common.dll
+D:\WMSDS v1.1\Wmsds.Common\bin\Debug\Wmsds.Common.pdb
+D:\WMSDS v1.1\Wmsds.Common\obj\Debug\Wmsds.Common.csprojAssemblyReference.cache
+D:\WMSDS v1.1\Wmsds.Common\obj\Debug\Wmsds.Common.csproj.CoreCompileInputs.cache
+D:\WMSDS v1.1\Wmsds.Common\obj\Debug\Wmsds.Common.dll
+D:\WMSDS v1.1\Wmsds.Common\obj\Debug\Wmsds.Common.pdb

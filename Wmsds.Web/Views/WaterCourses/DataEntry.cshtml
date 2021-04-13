@@ -1,0 +1,794 @@
+﻿@model Wmsds.Web.Models.WcDataEntryDto
+
+@section styles{
+    <!-- Include SmartWizard CSS -->
+    <link href="../content/assets/plugins/smart-wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+    <!-- Optional SmartWizard theme -->
+    <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+    <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+
+}
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Wizard</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Wizard</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="card card-topline-aqua">
+                <div class="card-head">
+                    <header>Watercourse Identification</header>
+                    <div class="tools">
+                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                        <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                        <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <b>
+                                    District:&nbsp;&nbsp;&nbsp;
+                                </b> @Model.WcIdentification.DistrictName
+                            </div>
+                            <div><b>Tehsil: &nbsp;&nbsp;&nbsp;</b> @Model.WcIdentification.TehsilName</div>
+                            <div><b>Channel Name: &nbsp;&nbsp;&nbsp;</b> @Model.WcIdentification.ChannelName </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div><b>Watercourse No.:&nbsp;&nbsp;&nbsp; </b> @Model.WcIdentification.WaterCourseNo </div>
+                            <div><b>Improvement Year:&nbsp;&nbsp;&nbsp; </b>  @Model.WcIdentification.ImprovementYear </div>
+                            <div><b>Improvement Type: &nbsp;&nbsp;&nbsp;</b> @Model.WcIdentification.ImprovementType </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- add content here -->
+        <div class="container">
+            <form class="form-inline wizard-form">
+                <div class="form-group" style="display:none;">
+                    <label>Choose Theme:</label>
+                    <select id="theme_selector" class="form-control">
+                        <option value="arrows" selected>arrows</option>
+                        <option value="default">default</option>
+
+                        <option value="circles">circles</option>
+                        <option value="dots">dots</option>
+                    </select>
+                </div>
+            </form>
+            <br />
+           
+            <!-- SmartWizard html -->
+            <div id="smartwizard">
+                <ul>
+                    <li><a href="#step-1">Step 1<br /><small>Basic Information</small></a></li>
+                    <li><a href="#step-2">Step 2<br /><small>Design Parameters</small></a></li>
+                    <li><a href="#step-3">Step 3<br /><small>ICR-I & ICR-II</small></a></li>
+                    <li><a href="#step-4">Step 4<br /><small>FCR</small></a></li>
+                </ul>
+                <div>
+                    <div id="step-1" class="">
+                        <form id="frmBasicInformation" name="frmBasicInformation">
+                            <input type="hidden" id="hdWcIdentificationIdBI" name="hdWcIdentificationIdBI" value="@Model.WcIdentification.Id">
+                            <input type="hidden" id="hdWcIdentificationDetailsIdBI" name="hdWcIdentificationDetailsIdBI" value="@Model.WcIdentificationDetail.Id">
+                            <fieldset>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label for="txtLatitude">Latitude</label>
+                                                @Html.TextBox("txtLatitude", Model.WcIdentificationDetail.Latitude, new { @class = "form-control", @id = "txtLatitude", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Longitude </label>
+                                                @Html.TextBox("txtLongitude", Model.WcIdentificationDetail.Longitude, new { @class = "form-control", @id = "txtLongitude", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Project Name</label>
+                                                <select class="form-control" id="ddlProjectName" name="ddlProjectName" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="PIPIP">PIPIP</option>
+                                                    <option value="NPIW-II">NPIW-II</option>
+                                                    <option value="JIP">JIP</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Village Name</label>
+                                                @Html.TextBox("txtVillageName", Model.WcIdentificationDetail.VillageName, new { @class = "form-control", @id = "txtVillageName", @placeholder = "", required = "required" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>UC</label>
+                                                @Html.TextBox("txtUC", Model.WcIdentificationDetail.UC, new { @class = "form-control", @id = "txtUC", @placeholder = "", required = "required" })
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>GCA (Acres)</label>
+                                                @Html.TextBox("txtGCA", Model.WcIdentificationDetail.GCA, new { @class = "form-control", @id = "txtGCA", @placeholder = "", required = "required", type = "number" })
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>CCA (Acres)</label>
+                                                @Html.TextBox("txtCCA", Model.WcIdentificationDetail.CCA, new { @class = "form-control", @id = "txtCCA", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sanctioned Discharge (LPS)</label>
+                                                @Html.TextBox("txtSanctionedDischarge", Model.WcIdentificationDetail.SanctionedDischargeLPS, new { @class = "form-control", @id = "txtSanctionedDischarge", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+
+                                            <div class="form-group">
+                                                <label>Design Discharge</label>
+                                                @Html.TextBox("txtDesignDischarge", Model.WcIdentificationDetail.DesignDischargeLPS, new { @class = "form-control", @id = "txtDesignDischarge", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mogha Type</label>
+                                                <select id="ddlMoghaType" name="ddlMoghaType" required class="form-control">
+                                                    <option value="">--Select--</option>
+                                                    <option value="AOSM">AOSM</option>
+                                                    <option value="Scratchily">Scratchily</option>
+                                                    <option value="Pipe">Pipe</option>
+                                                    <option value="Open Flume">Open Flume</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Groundwater Quality</label>
+                                                <select class="form-control" id="ddlGroundwaterQuality" name="ddlGroundwaterQuality" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Loom">Loom</option>
+                                                    <option value="Fresh">Fresh</option>
+                                                    <option value="Saline">Saline</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Name of WUA Chairman</label>
+                                                @Html.TextBox("txtNameOfWUAChairman", Model.WcIdentificationDetail.WUAChairman, new { @class = "form-control", @id = "txtNameOfWUAChairman", @placeholder = "", required = "required" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Contact # WUA Chairman</label>
+                                                @Html.TextBox("txtContactOfWUAChairman", Model.WcIdentificationDetail.ChairmanContactNo, new { @class = "form-control", @id = "txtContactOfWUAChairman", @placeholder = "", required = "required" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>No. of Beneficiaries</label>
+                                                @Html.TextBox("txtNoOfBeneficiaries", Model.WcIdentificationDetail.NoOfBeneficiaries, new { @class = "form-control", @id = "txtNoOfBeneficiaries", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total Length (M)</label>
+                                                @Html.TextBox("txtTotalLength", Model.WcIdentificationDetail.TotalLengthM, new { @class = "form-control", @id = "txtTotalLength", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div id="step-2" class="">
+                        <form id="frmDesignParameters" name="frmDesignParameters">
+                            <input type="hidden" id="hdWcIdentificationIdDP" name="hdWcIdentificationIdDP" value="@Model.WcIdentification.Id">
+                            <input type="hidden" id="hdWcIdentificationDetailsIdDP" name="hdWcIdentificationDetailsIdDP" value="@Model.WcIdentificationDetail.Id">
+
+                            <fieldset>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Design approved</label>
+                                                <select class="form-control" id="ddlDesignApproved" name="ddlDesignApproved" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>TS Amount/Material Cost (Rs.)</label>
+                                                @Html.TextBox("txtTSAmount", Model.WcIdentificationDetail.MaterialCost, new { @class = "form-control", @id = "txtTSAmount", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Labour share (Earthen Works) (Rs.)</label>
+                                                @Html.TextBox("txtLabourShareEarthenWorks", Model.WcIdentificationDetail.EarthenWorks, new { @class = "form-control", @id = "txtLabourShareEarthenWorks", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Labour share (Masonry Works) (Rs.)</label>
+                                                @Html.TextBox("txtLabourShareMasonryWorks", Model.WcIdentificationDetail.MasonryWorks, new { @class = "form-control", @id = "txtLabourShareMasonryWorks", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lining Type</label>
+                                                <select class="form-control" id="ddlLiningType" name="ddlLiningType" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Brick">Brick</option>
+                                                    <option value="PCPS">PCPS</option>
+                                                    <option value="Pipe">Pipe</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Earthen Length (m)</label>
+                                                @Html.TextBox("txtEarthenLength", Model.WcIdentificationDetail.EarthenLengthM, new { @class = "form-control", @id = "txtEarthenLength", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lining Length (m)</label>
+                                                @Html.TextBox("txtLiningLength", Model.WcIdentificationDetail.LiningLengthM, new { @class = "form-control", @id = "txtLiningLength", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>PCP Segment size</label>
+                                                <select class="form-control" id="ddlPCPSegmentSize" name="ddlPCPSegmentSize" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="6a">6a</option>
+                                                    <option value="7a">7a</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>PCP Segment (Nos.)</label>
+                                                @Html.TextBox("txtPCPSegment", Model.WcIdentificationDetail.PcpSegment, new { @class = "form-control", @id = "txtPCPSegment", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+
+                                            <div class="form-group">
+                                                <label>Nakkas (Nos.)</label>
+                                                @Html.TextBox("txtNakkas", Model.WcIdentificationDetail.Nakkas, new { @class = "form-control", @id = "txtNakkas", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Culverts (Nos.)</label>
+                                                @Html.TextBox("txtCulverts", Model.WcIdentificationDetail.Culverts, new { @class = "form-control", @id = "txtCulverts", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Buffalo Wallow (Nos.)</label>
+                                                @Html.TextBox("txtBuffaloWallow", Model.WcIdentificationDetail.BuffaloWallow, new { @class = "form-control", @id = "txtBuffaloWallow", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Distribution Box (Nos.)</label>
+                                                @Html.TextBox("txtDistributionBox", Model.WcIdentificationDetail.DistributionBox, new { @class = "form-control", @id = "txtDistributionBox", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Water Storage Tank (Nos.)</label>
+                                                @Html.TextBox("txtWaterStorageTank", Model.WcIdentificationDetail.WaterStorageTank, new { @class = "form-control", @id = "txtWaterStorageTank", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Drop Structure (Nos.)</label>
+                                                @Html.TextBox("txtDropStructure", Model.WcIdentificationDetail.DropStructure, new { @class = "form-control", @id = "txtDropStructure", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Others (Nos.)</label>
+                                                @Html.TextBox("txtOthers", Model.WcIdentificationDetail.Others, new { @class = "form-control", @id = "txtOthers", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div id="step-3" class="">
+                        <form id="frmICR1and2" name="frmICR1and2">
+                            <input type="hidden" id="hdWcIdentificationIdICR" name="hdWcIdentificationIdICR" value="@Model.WcIdentification.Id">
+                            <input type="hidden" id="hdWcIdentificationDetailsIdICR" name="hdWcIdentificationDetailsIdICR" value="@Model.WcIdentificationDetail.Id">
+                            <fieldset>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>ICR-I approved</label>
+                                                <select class="form-control" id="ddlICR1" name="ddlICR1" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ICR-I Released Amount (Rs.)</label>
+                                                @Html.TextBox("txtICR1ReleasedAmount", Model.WcIdentificationDetail.ICR1ReleasedAmount, new { @class = "form-control", @id = "txtICR1ReleasedAmount", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>ICR-II approved</label>
+                                                <select class="form-control" id="ddlICR2" name="ddlICR2" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ICR-II Released Amount (Rs.)</label>
+                                                @Html.TextBox("txtICR2ReleasedAmount", Model.WcIdentificationDetail.ICR2ReleasedAmount, new { @class = "form-control", @id = "txtICR2ReleasedAmount", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div id="step-4" class="">
+                        <form id="frmFCR" name="frmFCR">
+                            <input type="hidden" id="hdWcIdentificationIdFCR" name="hdWcIdentificationIdFCR" value="@Model.WcIdentification.Id">
+                            <input type="hidden" id="hdWcIdentificationDetailsIdFCR" name="hdWcIdentificationDetailsIdFCR" value="@Model.WcIdentificationDetail.Id">
+                            <fieldset>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label>FCR approved</label>
+                                                <select class="form-control" id="ddlFCRApproved" name="ddlFCRApproved" required>
+                                                    <option value="">--Select--</option>
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                    <option>Offered</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lined length (m)</label>
+
+                                                @Html.TextBox("txtFCRLinedlength", Model.WcIdentificationDetail.FCRLinedLength, new { @class = "form-control", @id = "txtFCRLinedlength", required = "required", type = "number" })
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lined (%)</label>
+                                                @Html.TextBox("txtFCRLined", Model.WcIdentificationDetail.LinedPercentage, new { @class = "form-control", @id = "txtFCRLined", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total cost of civil works verified (Rs.)</label>
+                                                @Html.TextBox("txtFCRTotalCostOfCivilWorksVerified", Model.WcIdentificationDetail.TotalCostOfCivilWrkVerfied, new { @class = "form-control", @id = "txtFCRTotalCostOfCivilWorksVerified", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Labour share verified (Earthen Works) (Rs.)</label>
+                                                @Html.TextBox("txtFCRLabourShareVerifiedEarthen", Model.WcIdentificationDetail.FCREarthenWorks, new { @class = "form-control", @id = "txtFCRLabourShareVerifiedEarthen", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Labour share verified (Masonry Works) (Rs.)</label>
+                                                @Html.TextBox("txtFCRLabourShareVerifiedMasonry", Model.WcIdentificationDetail.FCRMasonryWorks, new { @class = "form-control", @id = "txtFCRLabourShareVerifiedMasonry", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total scheme cost (Rs.)</label>
+                                                //SUM of all above
+                                                @Html.TextBox("txtFCRTotalSchemeCost", Model.WcIdentificationDetail.TotalSchemeCost, new { @class = "form-control", @id = "txtFCRTotalSchemeCost", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>PCP Segment No</label>
+                                                @Html.TextBox("txtFCRPCPSegmentNo", Model.WcIdentificationDetail.FCRPcpSegment, new { @class = "form-control", @id = "txtFCRPCPSegmentNo", required = "required", type = "number" })
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+
+                                            <div class="form-group">
+                                                <label>PCP Segment size</label>
+                                                <select class="form-control" id="ddlFCRPCPSegmentSize" name="ddlFCRPCPSegmentSize" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="6a">6a</option>
+                                                    <option value="7a">7a</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Nakkas (Nos.)</label>
+                                                @Html.TextBox("txtFCRNakkas", Model.WcIdentificationDetail.FCRNakkas, new { @class = "form-control", @id = "txtFCRNakkas", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Culverts (Nos.)</label>
+                                                @Html.TextBox("txtFCRCulverts", Model.WcIdentificationDetail.FCRCulverts, new { @class = "form-control", @id = "txtFCRCulverts", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Buffalo Wallow (Nos.)</label>
+                                                @Html.TextBox("txtFCRBuffaloWallow", Model.WcIdentificationDetail.FCRBuffaloWallow, new { @class = "form-control", @id = "txtFCRBuffaloWallow", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Distribution Box (Nos.)</label>
+                                                @Html.TextBox("txtFCRDistributionBox", Model.WcIdentificationDetail.FCRDistributionBox, new { @class = "form-control", @id = "txtFCRDistributionBox", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Water Storage Tank (Nos.)</label>
+                                                @Html.TextBox("txtFCRWaterStorageTank", Model.WcIdentificationDetail.FCRWaterStorageTank, new { @class = "form-control", @id = "txtFCRWaterStorageTank", required = "required", type = "number" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Drop Structure (Nos.)</label>
+                                                @Html.TextBox("txtFCRDropStructure", Model.WcIdentificationDetail.FCRDropStructure, new { @class = "form-control", @id = "txtFCRDropStructure", required = "required", type = "number" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Others (Nos.)</label>
+                                                @Html.TextBox("txtFCROthers", Model.WcIdentificationDetail.FCROthers, new { @class = "form-control", @id = "txtFCROthers", required = "required", type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="../content/assets/js/pages/validation/form-validation.js"></script>
+    <!-- Include SmartWizard JavaScript source -->
+    <script src="../content/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js"></script>
+    @*<script src="../content/assets/js/pages/smart-wizard/wizard-data.js"></script>*@
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#ddlProjectName").val('@(Model.WcIdentificationDetail.ProjectName)').change();
+        $("#ddlMoghaType").val('@(Model.WcIdentificationDetail.MoghaType)').change();
+        $("#ddlGroundwaterQuality").val('@(Model.WcIdentificationDetail.GroundwaterQuality)').change();
+
+        $("#ddlDesignApproved").val('@(Model.WcIdentificationDetail.DesignApproved)').change();
+        @*$("#ddlLiningType").val('@(Model.WcIdentificationDetail.LiningType)').change();*@
+        $("#ddlPCPSegmentSize").val('@(Model.WcIdentificationDetail.PcpSegmentSize)').change();
+
+        $("#ddlICR1").val('@(Model.WcIdentificationDetail.ICR1ApprovedStatus)').change();
+        $("#ddlICR2").val('@(Model.WcIdentificationDetail.ICR2ApprovedStatus)').change();
+
+        $("#ddlFCRApproved").val('@(Model.WcIdentificationDetail.FCRApprovedStatus)').change();
+        $("#ddlFCRPCPSegmentSize").val('@(Model.WcIdentificationDetail.FCRPcpSegmentSize)').change();
+
+
+
+        $("#frmBasicInformation").validate({
+                errorClass: 'help-block',
+                validClass: 'success',
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+                },
+                rules: {
+                    txtLatitude: {
+                        required: true,
+                        // Using the normalizer to trim the value of the element
+                        // before validating it.
+                        //
+                        // The value of `this` inside the `normalizer` is the corresponding
+                        // DOMElement. In this example, `this` references the `username` element.
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                    txtLatitude: "Please enter Latitude"
+                },
+            });
+
+            $("#frmDesignParameters").validate({
+                errorClass: 'help-block',
+                validClass: 'success',
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+                },
+                rules: {
+                    txtTSAmount: {
+                        required: true,
+                        // Using the normalizer to trim the value of the element
+                        // before validating it.
+                        //
+                        // The value of `this` inside the `normalizer` is the corresponding
+                        // DOMElement. In this example, `this` references the `username` element.
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                    txtTSAmount: "Please enter TSAmount"
+                },
+            });
+
+            $("#frmICR1and2").validate({
+                errorClass: 'help-block',
+                validClass: 'success',
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+                },
+                rules: {
+                    txtICR1ReleasedAmount: {
+                        required: true,
+                        // Using the normalizer to trim the value of the element
+                        // before validating it.
+                        //
+                        // The value of `this` inside the `normalizer` is the corresponding
+                        // DOMElement. In this example, `this` references the `username` element.
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                    txtICR1ReleasedAmount: "Please enter Released Amount"
+                },
+            });
+
+        $("#frmFCR").validate({
+            errorClass: 'help-block',
+            validClass: 'success',
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+            },
+            rules: {
+                txtFCRLined: {
+                    required: true,
+                    // Using the normalizer to trim the value of the element
+                    // before validating it.
+                    //
+                    // The value of `this` inside the `normalizer` is the corresponding
+                    // DOMElement. In this example, `this` references the `username` element.
+                    normalizer: function (value) {
+                        return $.trim(value);
+                    }
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                txtFCRLined: "Please enter FCR Lined"
+            },
+        });
+
+            // Step show event
+            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                //alert("You are on step " + stepNumber + " now");
+                if (stepPosition === 'first') {
+                    $("#prev-btn").addClass('disabled');
+                } else if (stepPosition === 'final') {
+                    $("#next-btn").addClass('disabled');
+                } else {
+                    $("#prev-btn").removeClass('disabled');
+                    $("#next-btn").removeClass('disabled');
+                }
+            });
+
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Save and Close')
+                .addClass('btn btn-info')
+                .on('click', function () {
+
+                    debugger;
+                    var valid = $("#frmFCR").valid();
+                    if (valid) {
+                        if (valid) {
+                            var form = new FormData($("form[name='frmFCR']")[0]);
+                        $.ajax({
+                                url: '@Url.Action("AddUpdateFCR", "WaterCourses")',
+                                data: form,
+                                headers: { 'x-my-custom-header': 'some value' },
+                                type: 'POST',
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                cache: false,
+                                timeout: 30000,
+                            success: function (data) {
+
+                                alert('All Data Saved');
+                                window.location.replace("http://localhost:57441/WaterCourses/Index");
+                                    debugger;
+                                    if (data.ResponseCode == 1000) {
+
+                                    } else {
+
+                                    }
+                                        console.log(data);
+                                    },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    valid = false;
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+                            });
+                    }
+                    }
+                    return valid;
+
+                });
+            var btnCancel = $('<button></button>').text('Cancel')
+                .addClass('btn btn-danger')
+                .on('click', function () { $('#smartwizard').smartWizard("reset"); });
+
+            $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
+                if (stepNumber == 0) {
+                    var valid = $("#frmBasicInformation").valid();
+                    if (valid) {
+                        var form = new FormData($("form[name='frmBasicInformation']")[0]);
+                        $.ajax({
+                                url: '@Url.Action("AddUpdateWatercourseDetails", "WaterCourses")',
+                                data: form,
+                                headers: { 'x-my-custom-header': 'some value' },
+                                type: 'POST',
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                cache: false,
+                                timeout: 30000,
+                                success: function (data) {
+                                    debugger;
+                                    if (data.ResponseCode == 1000 && $('#hdWcIdentificationDetailsIdBI').val() == "0") {
+                                        //data.DataObject.Id
+                                        $('#hdWcIdentificationDetailsIdBI').val(data.DataObject.Id);
+                                        $('#hdWcIdentificationDetailsIdDP').val(data.DataObject.Id);
+                                        $('#hdWcIdentificationDetailsIdICR').val(data.DataObject.Id);
+                                        $('#hdWcIdentificationDetailsIdFCR').val(data.DataObject.Id);
+                                    } else {
+
+                                    }
+                                        console.log(data);
+                                    },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    valid = false;
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+                            });
+                    }
+
+                    return valid;
+                } else if (stepNumber == 1) {
+                    var valid = $("#frmDesignParameters").valid();
+                    if (valid) {
+                        if (valid) {
+                            var form = new FormData($("form[name='frmDesignParameters']")[0]);
+                        $.ajax({
+                                url: '@Url.Action("AddUpdateDesignParameters", "WaterCourses")',
+                                data: form,
+                                headers: { 'x-my-custom-header': 'some value' },
+                                type: 'POST',
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                cache: false,
+                                timeout: 30000,
+                                success: function (data) {
+                                    debugger;
+                                    if (data.ResponseCode == 1000) {
+
+                                    } else {
+
+                                    }
+                                        console.log(data);
+                                    },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    valid = false;
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+                            });
+                    }
+                    }
+                    return valid;
+                }
+                else if (stepNumber == 2) {
+                    var valid = $("#frmICR1and2").valid();
+                    if (valid) {
+                        if (valid) {
+                            var form = new FormData($("form[name='frmICR1and2']")[0]);
+                        $.ajax({
+                                url: '@Url.Action("AddUpdateICR1AndICR2", "WaterCourses")',
+                                data: form,
+                                headers: { 'x-my-custom-header': 'some value' },
+                                type: 'POST',
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                cache: false,
+                                timeout: 30000,
+                                success: function (data) {
+                                    debugger;
+                                    if (data.ResponseCode == 1000) {
+
+                                    } else {
+
+                                    }
+                                        console.log(data);
+                                    },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    valid = false;
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+                            });
+                    }
+                    }
+                    return valid;
+                } else if (stepNumber == 3) {
+                    alert('finish');
+                }
+            });
+
+            // Smart Wizard
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'default',
+                transitionEffect: 'fade',
+                showStepURLhash: false,
+                toolbarSettings: {
+                    toolbarPosition: 'both',
+                    toolbarExtraButtons: [btnFinish, btnCancel]
+                }
+            });
+
+            // External Button Events
+            $("#reset-btn").on("click", function () {
+                // Reset wizard
+                $('#smartwizard').smartWizard("reset");
+                return true;
+            });
+
+            $("#prev-btn").on("click", function () {
+                // Navigate previous
+                $('#smartwizard').smartWizard("prev");
+                return true;
+            });
+
+            $("#next-btn").on("click", function () {
+                // Navigate next
+                $('#smartwizard').smartWizard("next");
+                return true;
+            });
+
+            $("#theme_selector").on("change", function () {
+                // Change theme
+                $('#smartwizard').smartWizard("theme", $(this).val());
+                return true;
+            });
+
+            // Set selected theme on page refresh
+            $("#theme_selector").change();
+        });
+</script>
+}

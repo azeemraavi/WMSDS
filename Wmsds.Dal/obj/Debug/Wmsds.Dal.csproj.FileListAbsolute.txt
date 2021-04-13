@@ -1,0 +1,26 @@
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.pdb
+Z:\Repositories\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csprojAssemblyReference.cache
+Z:\Repositories\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CoreCompileInputs.cache
+Z:\Repositories\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
+Z:\Repositories\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll.config
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.dll
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.xml
+Z:\Repositories\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Repositories\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll.config
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\Wmsds.Dal.pdb
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\EntityFramework.dll
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.dll
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\Wmsds.Entities.dll
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\Wmsds.Entities.pdb
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\EntityFramework.xml
+D:\WMSDS v1.1\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.xml
+D:\WMSDS v1.1\Wmsds.Dal\obj\Debug\Wmsds.Dal.csprojAssemblyReference.cache
+D:\WMSDS v1.1\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CoreCompileInputs.cache
+D:\WMSDS v1.1\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
+D:\WMSDS v1.1\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
+D:\WMSDS v1.1\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb

@@ -1,0 +1,561 @@
+﻿@using Wmsds.Entities.WC;
+@model List<WcIdentification>
+@{
+    ViewBag.Title = "Index";
+}
+@section styles {
+
+    @*<link href="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
+}
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Water Courses</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Water Courses</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>SELECT WATERCOURCES</header>
+                        <button id="panel-button6"
+                                class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                                data-upgraded=",MaterialButton">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            data-mdl-for="panel-button6">
+                            <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                        </ul>
+                    </div>
+                    <div class="card-body " id="bar-parent5">
+
+                        <form class="row" name="frmGetWCListing" id="frmGetWCListing" action="@Url.Action("Index", "WaterCourses")">
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>District </label>
+                                <select id="ddlDistrict" name="ddlDistrict" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>Tehsil </label>
+                                <select id="ddlTehsil" name="ddlTehsil" class="form-control" required>
+                                    <option value="" selected>--Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>Improvement Type</label>
+                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="Additional">Additional</option>
+                                    <option value="IrrigationScheme">Irrigation Scheme</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>Improvement Year</label>
+                                <select id="ddlImprovementYear" name="ddlImprovementYear" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label> </label>
+                                <input id="btnGetWCListing" value="Get WC Listing" onClick='btnGetWCListingClick()' style="margin-top:21%" type="button" class="btn btn-round btn-primary" />
+                                @*<button type="submit" form="form1" value="Get WC Listing" style="margin-top:21%" type="button" class="btn btn-round btn-primary">Submit</button>*@
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-topline-red">
+                                    <div class="card-head">
+                                        <header>List of Selected Watercourses</header>
+
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="row p-b-20">
+                                            <div class="col-md-6 col-sm-6 col-6">
+                                                <div class="btn-group">
+                                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-info">
+                                                        Add New Scheme <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-6">
+
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label class="rt-chkbox rt-chkbox-single rt-chkbox-outline">
+                                                            <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                                            <span></span>
+                                                        </label>
+                                                    </th>
+                                                    <th> Division. </th>
+                                                    <th> District. </th>
+                                                    <th> Tehsil </th>
+                                                    <th> Channel </th>
+                                                    <th> WaterCourseNo </th>
+                                                    <th> Impr Year </th>
+                                                    <th>Impr Type</th>
+                                                    <th> Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr class="odd gradeX">
+                                                        <td>
+                                                            <label class="rt-chkbox rt-chkbox-single rt-chkbox-outline">
+                                                                <input type="checkbox" class="checkboxes" value="1" />
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td> @item.DivisionName </td>
+                                                        <td>
+                                                            <a href="#">
+                                                                @item.DistrictName
+                                                            </a>
+                                                        </td>
+                                                        <td>
+
+                                                            @item.TehsilName
+
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-success">
+                                                                @item.ChannelName
+                                                            </span>
+                                                        </td>
+                                                        <td>
+
+                                                            @item.WaterCourseNo
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            @item.ImprovementYear
+
+                                                        </td>
+                                                        <td>
+
+                                                            @item.ImprovementType
+
+                                                        </td>
+                                                        <td>
+                                                            <a href="/WaterCourses/DataEntry?Id=@item.Id">Edit</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page content -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="frmAddNewWaterCourse">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Watercourse/Irrigation Scheme in Database</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Select Division</label>
+                                    <select class="form-control" id="dllAddDivision" name="dllAddDivision" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Tehsil</label>
+                                    <select class="form-control" id="dllAddTehsil" name="dllAddTehsil" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Enter Watercourse No.</label>
+                                    <select class="form-control" id="dllAddWatercourse" name="dllAddWatercourse" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Improvement Type</label>
+                                    <select class="form-control" id="dllAddImprovementType" name="dllAddImprovementType" required>
+                                        <option value="">--Select--</option>
+                                        <option value="Regular">Regular</option>
+                                        <option value="Additional">Additional</option>
+                                        <option value="IrrigationScheme">Irrigation Scheme</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Select District	</label>
+                                    <select class="form-control" id="dllAddDistrict" name="dllAddDistrict" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Channel Name</label>
+                                    <select class="form-control" id="dllAddChannelName" name="dllAddChannelName" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Enter Improvement Year</label>
+                                    <select class="form-control" id="dllAddImprovementYear" name="dllAddImprovementYear" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="successfully" class="hide alert alert-success">
+                            <strong id="txtMSG"></strong> .
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="btnAddWCIdentification" type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+
+
+    <script type="text/javascript">
+        var AllFilterData;
+        $(document).ready(function () {
+
+            $('#example4').DataTable({
+                
+            });
+
+            $.ajax({
+                url: '/WaterCourses/LoadAllFilterData',
+                type: "GET",
+                dataType: "JSON",
+                success: function (data) {
+                    AllFilterData = data;
+                    debugger;
+                    $(data.Divisions).each(function () {
+                        //this refers to the current item being iterated over
+                        var option = $('<option />');
+                        option.attr('value', this.Id).text(this.Name);
+                        $('#ddlDistrict').append(option);
+
+                        var option1 = $('<option />');
+                        option1.attr('value', this.Id).text(this.Name);
+                        $('#dllAddDivision').append(option1);
+                    });
+
+                    $(data.FinancialYears).each(function () {
+                        //this refers to the current item being iterated over
+                        var option = $('<option />');
+                        option.attr('value', this.Id).text(this.Year);
+                        $('#ddlImprovementYear').append(option);
+
+                        var option1 = $('<option />');
+                        option1.attr('value', this.Id).text(this.Year);
+                        $('#dllAddImprovementYear').append(option1);
+                    });
+
+                    console.log(data);
+                }
+            });
+
+            $("#ddlDistrict").on("change", onddlDistrictChange);
+            function onddlDistrictChange() {
+                debugger;
+                $('#ddlTehsil').empty();
+                var DistrictId = $('#ddlDistrict').val();
+                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
+
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#ddlTehsil').append(optionSelect);
+
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#ddlTehsil').append(option);
+                });
+            }
+
+            $("#dllAddDivision").on("change", ondllAddDivisionChange);
+            function ondllAddDivisionChange() {
+                debugger;
+                $('#dllAddDistrict').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddDistrict').append(optionSelect);
+
+
+                var DivisionId = $('#dllAddDivision').val();
+                var data_filter = AllFilterData.Districts.filter(element => element.DivisionId == DivisionId);
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#dllAddDistrict').append(option);
+                });
+            }
+
+            $("#dllAddDistrict").on("change", ondllAddDistrictChange);
+            function ondllAddDistrictChange() {
+                debugger;
+                $('#dllAddTehsil').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddTehsil').append(optionSelect);
+
+                var DistrictId = $('#dllAddDistrict').val();
+                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#dllAddTehsil').append(option);
+                });
+            }
+
+            $("#dllAddTehsil").on("change", ondllAddTehsilChange);
+            function ondllAddTehsilChange() {
+                $('#dllAddChannelName').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddChannelName').append(optionSelect);
+
+                var DistrictId = $('#dllAddDistrict').val();
+                var TehsilId = $('#dllAddTehsil').val();
+                if (TehsilId == "") {
+                    return;
+                }
+                $.ajax({
+                    url: '/WaterCourses/GetChannelsByDistAndTehId',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        districtId: DistrictId,
+                        tehsilId: TehsilId
+                    },
+                    success: function (data) {
+                        debugger;
+                        $(data).each(function () {
+                            //this refers to the current item being iterated over
+                            var option = $('<option />');
+                            option.attr('value', this.Id).text(this.ChannelName);
+                            $('#dllAddChannelName').append(option);
+                        });
+                    }
+                });
+            }
+
+            $("#dllAddChannelName").on("change", ondllAddChannelNameChange);
+            function ondllAddChannelNameChange() {
+                $('#dllAddWatercourse').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddWatercourse').append(optionSelect);
+
+                debugger;
+                var DistrictId = $('#dllAddDistrict').val();
+                var TehsilId = $('#dllAddTehsil').val();
+                var ChannelId = $('#dllAddChannelName').val();
+                if (ChannelId == "") {
+                    return;
+                }
+                $.ajax({
+                    url: '/WaterCourses/GetWaterCourses',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        districtId: DistrictId,
+                        tehsilId: TehsilId,
+                        channelId: ChannelId
+                    },
+                    success: function (data) {
+                        debugger;
+                        $(data).each(function () {
+                            //this refers to the current item being iterated over
+                            var option = $('<option />');
+                            option.attr('value', this.Id).text(this.WcNo);
+                            $('#dllAddWatercourse').append(option);
+                        });
+                    }
+                });
+            }
+        });
+
+        $("#btnAddWCIdentification").on("click", onbtnAddWCIdentificationClick);
+        function onbtnAddWCIdentificationClick() {
+            debugger;
+            $("#frmAddNewWaterCourse").validate({
+                errorClass: 'help-block',
+                validClass: 'success',
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+                }
+            });
+            var valid = $("#frmAddNewWaterCourse").valid();
+            if (!valid) {
+                return;
+            }
+
+            var DivisionId = $('#dllAddDivision').val();
+            var DivisionName = $('#dllAddDivision').find(":selected").text();
+
+            var DistrictId = $('#dllAddDistrict').val();
+            var DistrictName = $('#dllAddDistrict').find(":selected").text();
+
+            var TehsilId = $('#dllAddTehsil').val();
+            var TehsilName = $('#dllAddTehsil').find(":selected").text();
+
+            var ChannelId = $('#dllAddChannelName').val();
+            var ChannelName = $('#dllAddChannelName').find(":selected").text();
+
+            var WaterCourseId = $('#dllAddWatercourse').val();
+            var WaterCourseNo = $('#dllAddWatercourse').find(":selected").text();
+
+            var ImprovementYearId = $('#dllAddImprovementYear').val();
+            var ImprovementYear = $('#dllAddImprovementYear').find(":selected").text();
+
+            var ImprovementType = $('#dllAddImprovementType').val();
+
+
+
+            $.ajax({
+                url: '/WaterCourses/AddWatercourseIdentification',
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    DivisionId: DivisionId,
+                    DivisionName: DivisionName,
+                    DistrictId: DistrictId,
+                    DistrictName: DistrictName,
+                    TehsilId: TehsilId,
+                    TehsilName: TehsilName,
+                    ChannelId: ChannelId,
+                    ChannelName: ChannelName,
+                    WaterCourseId: WaterCourseId,
+                    WaterCourseNo: WaterCourseNo,
+                    ImprovementYearId: ImprovementYearId,
+                    ImprovementYear: ImprovementYear,
+                    ImprovementType: ImprovementType
+                },
+                //beforeSend: function () {
+                //    $("body").addClass("loading");
+                //},
+                success: function (data) {
+                    $('#txtMSG').html(data.ResponseMessage);
+                    $('#successfully').removeClass('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    valid = false;
+                }
+                //,
+                //complete: function () {
+                //    $("body").removeClass("loading");
+                //}
+            });
+        }
+
+        $("#frmGetWCListing").validate({
+            errorClass: 'help-block',
+            validClass: 'success',
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+            }
+        });
+
+        function btnGetWCListingClick() {
+            debugger;
+            //var DistrictId = $('#ddlDistrict').val();
+            //var TehsilId = $('#ddlTehsil').val();
+            //var ImprovementType = $('#ddlImprovementType').val();
+            //var ImprovementYearId = $('#ddlImprovementYear').val();
+
+
+            var valid = $("#frmGetWCListing").valid();
+
+            if (valid) {
+                var form = new FormData($("form[name='frmGetWCListing']")[0]);
+                $.ajax({
+                    url: '@Url.Action("Index", "WaterCourses")',
+                    data: form,
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    cache: false,
+                    type: "Post",
+                    dataType: "JSON",
+                    beforeSend: function () {
+                        $("body").addClass("loading");
+                    },
+                    success: function (data) {
+                        debugger;
+                        if (data.length > 0) {
+                            window.location.replace("http://localhost:57441/WaterCourses/Index");
+                        } else {
+                            var table = $('#example4').DataTable();
+                            table.clear().draw();
+                        }
+                        console.log('========================================');
+                        console.log(data);
+                        $('#successfully').removeClass('hide');
+                    },
+                    complete: function () {
+                        $("body").removeClass("loading");
+                    }
+                });
+            }
+        }
+    </script>
+}

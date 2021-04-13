@@ -1,0 +1,170 @@
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Wmsds.Web.dll.config
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Wmsds.Web.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Wmsds.Web.pdb
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csc.exe
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csc.exe.config
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csc.rsp
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csi.exe
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csi.exe.config
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\csi.rsp
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.CSharp.Core.targets
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.Managed.Core.targets
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\Microsoft.Win32.Primitives.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.AppContext.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Collections.Immutable.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Console.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Diagnostics.StackTrace.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Globalization.Calendars.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.IO.Compression.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.IO.Compression.ZipFile.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.IO.FileSystem.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.IO.FileSystem.Primitives.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Net.Http.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Net.Sockets.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Reflection.Metadata.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Encoding.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Primitives.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Text.Encoding.CodePages.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Threading.Tasks.Extensions.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.ValueTuple.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Xml.ReaderWriter.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Xml.XmlDocument.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Xml.XPath.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\System.Xml.XPath.XDocument.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\vbc.exe
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\vbc.exe.config
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\vbc.rsp
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\VBCSCompiler.exe
+Z:\Repositories\WMSDS\Wmsds.Web\bin\roslyn\VBCSCompiler.exe.config
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Antlr3.Runtime.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Microsoft.Web.Infrastructure.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Newtonsoft.Json.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Helpers.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Mvc.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Optimization.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Razor.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.Deployment.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.Razor.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\WebGrease.dll
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Helpers.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Mvc.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Optimization.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.Razor.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.Deployment.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\System.Web.WebPages.Razor.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Newtonsoft.Json.xml
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Antlr3.Runtime.pdb
+Z:\Repositories\WMSDS\Wmsds.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+Z:\Repositories\WMSDS\Wmsds.Web\obj\Debug\Wmsds.Web.csprojAssemblyReference.cache
+Z:\Repositories\WMSDS\Wmsds.Web\obj\Debug\Wmsds.Web.csproj.CoreCompileInputs.cache
+Z:\Repositories\WMSDS\Wmsds.Web\obj\Debug\Wmsds.Web.csproj.CopyComplete
+Z:\Repositories\WMSDS\Wmsds.Web\obj\Debug\Wmsds.Web.dll
+Z:\Repositories\WMSDS\Wmsds.Web\obj\Debug\Wmsds.Web.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Web.dll.config
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Web.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Web.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csc.exe
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csc.exe.config
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csc.rsp
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csi.exe
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csi.exe.config
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\csi.rsp
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.Managed.Core.targets
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.AppContext.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Collections.Immutable.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Console.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Globalization.Calendars.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.IO.Compression.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.IO.FileSystem.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Net.Http.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Net.Sockets.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Reflection.Metadata.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.ValueTuple.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Xml.XmlDocument.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Xml.XPath.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\vbc.exe
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\vbc.exe.config
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\vbc.rsp
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\VBCSCompiler.exe
+D:\WMSDS v1.1\Wmsds.Web\bin\roslyn\VBCSCompiler.exe.config
+D:\WMSDS v1.1\Wmsds.Web\bin\Antlr3.Runtime.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Newtonsoft.Json.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Helpers.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Mvc.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Optimization.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Razor.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.Deployment.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.Razor.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\WebGrease.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Entities.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Entities.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Helpers.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Mvc.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Optimization.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.Razor.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.Deployment.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\System.Web.WebPages.Razor.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\Newtonsoft.Json.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\Antlr3.Runtime.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\WMSDS v1.1\Wmsds.Web\obj\Debug\Wmsds.Web.csprojAssemblyReference.cache
+D:\WMSDS v1.1\Wmsds.Web\obj\Debug\Wmsds.Web.csproj.CoreCompileInputs.cache
+D:\WMSDS v1.1\Wmsds.Web\obj\Debug\Wmsds.Web.csproj.CopyComplete
+D:\WMSDS v1.1\Wmsds.Web\obj\Debug\Wmsds.Web.dll
+D:\WMSDS v1.1\Wmsds.Web\obj\Debug\Wmsds.Web.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\EntityFramework.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\EntityFramework.SqlServer.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\EntityFramework.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\EntityFramework.SqlServer.xml
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Bll.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Dal.dll
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Bll.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Bll.dll.config
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Dal.pdb
+D:\WMSDS v1.1\Wmsds.Web\bin\Wmsds.Dal.dll.config
