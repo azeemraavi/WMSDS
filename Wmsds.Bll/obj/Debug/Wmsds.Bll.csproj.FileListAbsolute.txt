@@ -21,3 +21,20 @@ D:\WMSDS v1.1\Wmsds.Bll\obj\Debug\Wmsds.Bll.csproj.CoreCompileInputs.cache
 D:\WMSDS v1.1\Wmsds.Bll\obj\Debug\Wmsds.Bll.csproj.CopyComplete
 D:\WMSDS v1.1\Wmsds.Bll\obj\Debug\Wmsds.Bll.dll
 D:\WMSDS v1.1\Wmsds.Bll\obj\Debug\Wmsds.Bll.pdb
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Bll.dll.config
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Bll.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Bll.pdb
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\EntityFramework.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\EntityFramework.SqlServer.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Dal.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Entities.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Dal.pdb
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Dal.dll.config
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\Wmsds.Entities.pdb
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\EntityFramework.xml
+D:\WMSDS1\WMSDS\Wmsds.Bll\bin\Debug\EntityFramework.SqlServer.xml
+D:\WMSDS1\WMSDS\Wmsds.Bll\obj\Debug\Wmsds.Bll.csprojAssemblyReference.cache
+D:\WMSDS1\WMSDS\Wmsds.Bll\obj\Debug\Wmsds.Bll.csproj.CoreCompileInputs.cache
+D:\WMSDS1\WMSDS\Wmsds.Bll\obj\Debug\Wmsds.Bll.csproj.CopyComplete
+D:\WMSDS1\WMSDS\Wmsds.Bll\obj\Debug\Wmsds.Bll.dll
+D:\WMSDS1\WMSDS\Wmsds.Bll\obj\Debug\Wmsds.Bll.pdb

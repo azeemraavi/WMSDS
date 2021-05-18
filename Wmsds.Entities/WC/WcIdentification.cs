@@ -25,13 +25,7 @@ namespace Wmsds.Entities.WC
         public int WaterCourseId { get; set; }
         public string WaterCourseNo { get; set; }
 
-        public int ImprovementYearId { get; set; }
-        public string ImprovementYear { get; set; }
-
-        /// <summary>
-        /// e.g. Regular/Additional/Irrigation Scheme
-        /// </summary>
-        public string ImprovementType { get; set; }
+       
 
         public int AdminDistrictId { get; set; }
         public string AdminDistrictName { get; set; }

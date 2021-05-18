@@ -49,8 +49,8 @@
                         <div class="col-md-6">
 
                             <div><b>Watercourse No.:&nbsp;&nbsp;&nbsp; </b> @Model.WcIdentification.WaterCourseNo </div>
-                            <div><b>Improvement Year:&nbsp;&nbsp;&nbsp; </b>  @Model.WcIdentification.ImprovementYear </div>
-                            <div><b>Improvement Type: &nbsp;&nbsp;&nbsp;</b> @Model.WcIdentification.ImprovementType </div>
+                            <div><b>Improvement Year:&nbsp;&nbsp;&nbsp; </b>  @Model.WcIdentificationDetail.ImprovementYear </div>
+                            <div><b>Improvement Type: &nbsp;&nbsp;&nbsp;</b> @Model.WcIdentificationDetail.ImprovementType </div>
 
                         </div>
                     </div>
@@ -91,6 +91,25 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
+
+
+                                            <div class="form-group">
+                                                <label>Improvement Type</label>
+                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Regular">Regular</option>
+                                                    <option value="Addl.">Addl.</option>
+                                                    <option value="IrrigationScheme">Irrigation Scheme</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Improvement Year</label>
+                                                <select class="form-control" id="ddlImprovementYear" name="ddlImprovementYear" required>
+                                                    <option value="">--Select--</option>
+                                                </select>
+                                            </div>
+
                                             <!-- text input -->
                                             <div class="form-group">
                                                 <label for="txtLatitude">Latitude</label>
@@ -105,7 +124,7 @@
                                                 <label>Project Name</label>
                                                 <select class="form-control" id="ddlProjectName" name="ddlProjectName" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="PIPIP">PIPIP</option>
+                                                    <option value="PIPIP-R">PIPIP-R</option>
                                                     <option value="NPIW-II">NPIW-II</option>
                                                     <option value="JIP">JIP</option>
                                                 </select>
@@ -127,14 +146,15 @@
                                             <div class="form-group">
                                                 <label>CCA (Acres)</label>
                                                 @Html.TextBox("txtCCA", Model.WcIdentificationDetail.CCA, new { @class = "form-control", @id = "txtCCA", @placeholder = "", required = "required", type = "number" })
-                                            </div>
+                                            </div>   
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            
                                             <div class="form-group">
                                                 <label>Sanctioned Discharge (LPS)</label>
                                                 @Html.TextBox("txtSanctionedDischarge", Model.WcIdentificationDetail.SanctionedDischargeLPS, new { @class = "form-control", @id = "txtSanctionedDischarge", @placeholder = "", required = "required", type = "number" })
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6">
-
                                             <div class="form-group">
                                                 <label>Design Discharge</label>
                                                 @Html.TextBox("txtDesignDischarge", Model.WcIdentificationDetail.DesignDischargeLPS, new { @class = "form-control", @id = "txtDesignDischarge", @placeholder = "", required = "required", type = "number" })
@@ -447,8 +467,11 @@
     <script src="../content/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js"></script>
     @*<script src="../content/assets/js/pages/smart-wizard/wizard-data.js"></script>*@
 <script type="text/javascript">
-    $(document).ready(function () {
+    
 
+
+    $(document).ready(function () {
+        $("#ddlImprovementType").val('@(Model.WcIdentificationDetail.ImprovementType)').change();
         $("#ddlProjectName").val('@(Model.WcIdentificationDetail.ProjectName)').change();
         $("#ddlMoghaType").val('@(Model.WcIdentificationDetail.MoghaType)').change();
         $("#ddlGroundwaterQuality").val('@(Model.WcIdentificationDetail.GroundwaterQuality)').change();
@@ -462,6 +485,23 @@
 
         $("#ddlFCRApproved").val('@(Model.WcIdentificationDetail.FCRApprovedStatus)').change();
         $("#ddlFCRPCPSegmentSize").val('@(Model.WcIdentificationDetail.FCRPcpSegmentSize)').change();
+
+        $.ajax({
+            url: '/WaterCourses/LoadFinancialYears',
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $(data.FinancialYears).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Year);
+                    $('#ddlImprovementYear').append(option);
+                });
+
+                $("#ddlImprovementYear").val('@(Model.WcIdentificationDetail.ImprovementYearId)');
+            }
+        });
+
 
 
 
@@ -789,6 +829,10 @@
 
             // Set selected theme on page refresh
             $("#theme_selector").change();
-        });
+    });
+
+
+
+
 </script>
 }

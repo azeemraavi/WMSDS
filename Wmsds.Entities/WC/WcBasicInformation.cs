@@ -18,6 +18,17 @@ namespace Wmsds.Entities.WC
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
 
+
+        public int ImprovementYearId { get; set; }
+        public string ImprovementYear { get; set; }
+
+        /// <summary>
+        /// e.g. Regular/Additional/Irrigation Scheme
+        /// </summary>
+        public string ImprovementType { get; set; }
+
+
+
         public string VillageName { get; set; }
         public string UC { get; set; }
         /// <summary>

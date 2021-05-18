@@ -25,17 +25,18 @@ namespace Wmsds.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Index(FormCollection formCollection)
+        public async Task<ActionResult> Index(FormCollection formCollection)
         {
 
             int District = Convert.ToInt16(formCollection["ddlDistrict"]);
             int Tehsil = Convert.ToInt16(formCollection["ddlTehsil"]);
-            string ImprovementType = formCollection["ddlImprovementType"]+"";
-            int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
+            //string ImprovementType = formCollection["ddlImprovementType"]+"";
+            //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
 
             IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(District,Tehsil,0,ImprovementYear);
-            return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
+            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(District,Tehsil,0,0);
+            //return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
+            return View(WcIdentifications);
         }
 
         public async Task<JsonResult> LoadAllFilterData()
@@ -60,7 +61,7 @@ namespace Wmsds.Web.Controllers
 
             return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
         }
-        public async Task<ActionResult> DataEntry(int Id)
+        public async Task<ActionResult> DataEntry(int Id, bool IsNewEntry)
         {
             Wmsds.Web.Models.WcDataEntryDto wcDataEntryDto = new Wmsds.Web.Models.WcDataEntryDto();
 
@@ -77,7 +78,7 @@ namespace Wmsds.Web.Controllers
 
 
             var detailResponse = await waterCourseService.GetIdentificationDetailByMasterId(Id);
-            if (detailResponse.ResponseCode == EnumStatus.Success)
+            if (IsNewEntry == false && detailResponse.ResponseCode == EnumStatus.Success)
             {
                 wcDataEntryDto.WcIdentificationDetail = detailResponse.DataObject;
             }
@@ -105,7 +106,7 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> GetWcListing(WcIdentification model)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(model.DistrictId ,model.TehsilId,model.ChannelId, model.ImprovementYearId);
+            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(model.DistrictId ,model.TehsilId,model.ChannelId);
             return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
         }
 
@@ -136,6 +137,9 @@ namespace Wmsds.Web.Controllers
             {
                 int WcIdentificationId = Convert.ToInt16(formCollection["hdWcIdentificationIdBI"]);
                 int WcIdentificationDetailId = Convert.ToInt16(formCollection["hdWcIdentificationDetailsIdBI"]);
+
+                int ImprovementYearId = Convert.ToInt16(formCollection["ddlImprovementYear"]);
+                string ImprovementType = formCollection["ddlImprovementType"] + "";
 
                 double Latitude = Convert.ToDouble(formCollection["txtLatitude"]);
                 double Longitude = Convert.ToDouble(formCollection["txtLongitude"]);
@@ -170,7 +174,10 @@ namespace Wmsds.Web.Controllers
                 wcIdentificationDetail.WUAChairman = NameOfWUAChairman;
                 wcIdentificationDetail.ChairmanContactNo = ContactOfWUAChairman;
                 wcIdentificationDetail.TotalLengthM = TotalLength;
-                
+                wcIdentificationDetail.ImprovementYearId = ImprovementYearId;
+                wcIdentificationDetail.ImprovementType = ImprovementType;
+
+
 
                 IWaterCourseService waterCourseService = new WaterCourseService();
                 var response = new WmsdsResponse<WcIdentificationDetail>();
@@ -346,6 +353,18 @@ namespace Wmsds.Web.Controllers
             {
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
+        }
+
+        
+        public async Task<JsonResult> LoadFinancialYears()
+        {
+            ICommonService commonService = new CommonService();
+            WcIdentificationDto wcIdentificationDto = new WcIdentificationDto();
+
+            wcIdentificationDto.FinancialYears = new List<Entities.Common.FinancialYear>();
+            wcIdentificationDto.FinancialYears = await commonService.GetAllFinancialYears();
+
+            return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
         }
     }
 }

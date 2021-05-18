@@ -54,34 +54,29 @@ namespace Wmsds.Bll.Watercourse
                 return wmsdResponse;
             }
 
-            if (wcIdentification.ImprovementYearId <= 0 || string.IsNullOrEmpty(wcIdentification.ImprovementYear))
-            {
-                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
-                wmsdResponse.ResponseMessage = "Improvement Year is a required field.";
-                return wmsdResponse;
-            }
-            if (string.IsNullOrEmpty(wcIdentification.ImprovementType))
-            {
-                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
-                wmsdResponse.ResponseMessage = "Improvement Type is a required field.";
-                return wmsdResponse;
-            }
             //Check If WcIdentification Already Exists with Regular Status
-            if (wcIdentification.ImprovementType == EnumWcImprovementType.Regular.ToString() && await IsWcIdentificationAlreadyExist(wcIdentification))
+            //if (wcIdentification.ImprovementType == EnumWcImprovementType.Regular.ToString() && await IsWcIdentificationAlreadyExist(wcIdentification))
+            //{
+            //    wmsdResponse.ResponseCode = EnumStatus.AlreadyExist;
+            //    wmsdResponse.ResponseMessage = "Watercourse already exists.";
+            //    return wmsdResponse;
+            //}
+
+            //if (wcIdentification.ImprovementType.Equals(EnumWcImprovementType.Additional.ToString(), StringComparison.OrdinalIgnoreCase))
+            //{
+            //    if (!await IsWcIdentificationAlreadyExist(wcIdentification))
+            //    {
+            //        wmsdResponse.ResponseCode = EnumStatus.NotFound;
+            //        wmsdResponse.ResponseMessage = "No Watercourse found with Regular Status.";
+            //        return wmsdResponse;
+            //    }
+            //}
+
+            if (await IsWcIdentificationAlreadyExist(wcIdentification))
             {
                 wmsdResponse.ResponseCode = EnumStatus.AlreadyExist;
                 wmsdResponse.ResponseMessage = "Watercourse already exists.";
                 return wmsdResponse;
-            }
-
-            if (wcIdentification.ImprovementType.Equals(EnumWcImprovementType.Additional.ToString(), StringComparison.OrdinalIgnoreCase))
-            {
-                if (!await IsWcIdentificationAlreadyExist(wcIdentification))
-                {
-                    wmsdResponse.ResponseCode = EnumStatus.NotFound;
-                    wmsdResponse.ResponseMessage = "No Watercourse found with Regular Status.";
-                    return wmsdResponse;
-                }
             }
             //Check if status is Addation than there must be a regular water course
             try
@@ -120,17 +115,34 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="channelId"></param>
         /// <param name="improveYearId"></param>
         /// <returns></returns>
-        public async Task<List<WcIdentification>> GetWcIdentifications(int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0)
+        public async Task<List<WcIdentification>> GetWcIdentifications(int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0,string improvementType=null)
         {
             using (var _dbContext = new EntityContext())
             {
                 try
                 {
+
+                    //var wcIdentifications = await (from ep in _dbContext.WcIdentifications
+                    //                        join d in _dbContext.WcIdentificationDetails on ep.Id equals d.WcIdentificationId
+                    //                        where
+                    //                        (ep.DistrictId == 0 || ep.DistrictId == districtId) && (ep.TehsilId == 0 || ep.TehsilId == tehsilId)
+                    //                        && (d.ImprovementYearId == 0 || d.ImprovementYearId == tehsilId)
+                    //                        && (d.ImprovementType == null || d.ImprovementType == improvementType)
+
+                    //                               select new WcIdentification
+                    //                        {
+                    //                            Id = ep.Id,
+                    //                            DivisionName = ep.DivisionName,
+                    //                            DistrictName = ep.DistrictName,
+                    //                            TehsilName = ep.TehsilName
+
+                    //                        }).ToListAsync();
+
                     var wcIdentifications = await _dbContext.WcIdentifications
                                     .Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId)
-                                        .Where(c => improveYearId == 0 || c.ImprovementYearId == improveYearId)
+                                        .Include(x => x.WcIdentificationDetails)
                                         .ToListAsync();
                     return wcIdentifications;
                 }
@@ -138,6 +150,8 @@ namespace Wmsds.Bll.Watercourse
                 {
                     return null;
                 }
+
+                //.Where(c => improveYearId == 0 || c.ImprovementYearId == improveYearId)
             }
         }
 
@@ -199,8 +213,7 @@ namespace Wmsds.Bll.Watercourse
                                     .Where(c => c.DistrictId == wcIdentification.DistrictId)
                                         .Where(c => c.TehsilId == wcIdentification.TehsilId)
                                         .Where(c => c.ChannelId == wcIdentification.ChannelId)
-                                        .Where(c => c.WaterCourseId == wcIdentification.WaterCourseId)
-                                        .Where(c => c.ImprovementType == EnumWcImprovementType.Regular.ToString())
+                                        .Where(c => c.WaterCourseId == wcIdentification.WaterCourseId)                                        
                                         .FirstOrDefaultAsync();
                 return wcIdentificationDb == null ? false : true;
             }
