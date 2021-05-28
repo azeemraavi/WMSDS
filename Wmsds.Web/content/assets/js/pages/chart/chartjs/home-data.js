@@ -420,3 +420,133 @@ $(document).ready(function () {
         }
     });
 });
+
+
+$(document).ready(function () {
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ["Total", "Regular", "Additional", "Un-Improved"],
+        datasets: [{
+            label: 'Improved',
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [
+
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ]
+        }]
+
+    };
+
+    var ctx = document.getElementById("districtWise_WatercourseImprovementStatus").getContext("2d");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Watercourse Improvement Status'
+            }
+        }
+    });
+
+});
+
+$(document).ready(function () {
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ["Total Length", "Earthen", "Lined"],
+        datasets: [{
+            
+            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ]
+        }]
+
+    };
+
+    var ctx = document.getElementById("districtWise_LengthOfImprovedWatercourses").getContext("2d");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Length of Improved Watercourses ( KMs)'
+            }
+        }
+    });
+
+});
+
+
+$(document).ready(function () {
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ["Bahawalnagar", "Chishtian", "Fortabbas", "Haroonabad", "Minchinabad", "Tehsil", "Fortabbas1"],
+        datasets: [{
+            label: 'Improved',
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ]
+        }, {
+                label: 'Un-Improved',
+            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.blue,
+            borderWidth: 1,
+            data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ]
+        }]
+
+    };
+
+    var ctx = document.getElementById("districtWise_TehsilWiseWatercourseImprovement").getContext("2d");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Bar Chart'
+            }
+        }
+    });
+
+});

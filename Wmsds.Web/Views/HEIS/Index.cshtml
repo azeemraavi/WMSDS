@@ -1,0 +1,431 @@
+﻿@using Wmsds.Entities.HEIS;
+@model List<HeisIdentification>
+@{
+    ViewBag.Title = "Index";
+}
+@section styles {
+    <!-- data tables -->
+    <link href="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+}
+<!-- start page content -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">HEIS</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Index</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>SELECT HEIS</header>
+                        <button id="panel-button6"
+                                class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                                data-upgraded=",MaterialButton">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            data-mdl-for="panel-button6">
+                            <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                        </ul>
+                    </div>
+                    <div class="card-body " id="bar-parent5">
+
+                        <form method="post" class="row" name="frmGetWCListing" id="frmGetWCListing" action="@Url.Action("Index", "HEIS")">
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>District </label>
+                                <select id="ddlDistrict" name="ddlDistrict" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>Tehsil </label>
+                                <select id="ddlTehsil" name="ddlTehsil" class="form-control" required>
+                                    <option value="" selected>--Select--</option>
+                                </select>
+                            </div>
+                           
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>  </label>
+                               
+                                <button type="submit" value="Get HEIS Listing" class="form-control btn btn-round btn-primary">Submit</button>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-topline-red">
+                                    <div class="card-head">
+                                        <header>List of Selected Watercourses</header>
+
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="row p-b-20">
+                                            <div class="col-md-6 col-sm-6 col-6">
+                                                <div class="btn-group">
+                                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-info">
+                                                        Add New Scheme <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-6">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-scrollable">
+                                            <table id="example4" class="display" style="width:100%;">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th style="width: 150px !important;"> Farmer Name. </th>
+                                                        <th> Farmer CNIC </th>
+                                                        <th> District </th>
+                                                        <th> Tehsil </th>
+
+                                                        <th> Action </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model)
+                                                    {
+                                                    <tr class="odd gradeX">
+                                                        <td>
+                                                            <a href="#">
+                                                                @item.FarmerName
+                                                            </a>
+                                                        </td>
+                                                        <td>
+
+                                                            @item.FarmerCNIC
+
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-success">
+                                                                @item.DistrictName
+                                                            </span>
+                                                        </td>
+
+                                                        <td>
+                                                            @item.TehsilName
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
+                                                                <i class="fa fa-pencil"></i>
+
+                                                            </a>
+                                                            <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page content -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="frmAddNewWaterCourse">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Watercourse/Irrigation Scheme in Database</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Farmer Name</label>
+                                    @Html.TextBox("txtFarmerName", "", new { @class = "form-control", @id = "txtFarmerName", @placeholder = "", required = "required" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Farmer CNIC</label>
+                                    @Html.TextBox("txtFarmerCNIC", "", new { @class = "form-control", @id = "txtFarmerCNIC", @placeholder = "", required = "required" })
+                                </div>
+                            </div>   
+                            <div class="col-md-6 col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Select District	</label>
+                                    <select class="form-control" id="dllAddDistrict" name="dllAddDistrict" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Tehsil</label>
+                                    <select class="form-control" id="dllAddTehsil" name="dllAddTehsil" required>
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div id="successfully" class="hide alert alert-success">
+                            <strong id="txtMSG"></strong> .
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="btnAddWCIdentification" type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+
+    <!-- data tables -->
+    <script src="~/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        var AllFilterData;
+        $(document).ready(function () {
+
+            $('#example4').DataTable({
+                "pagingType": "full_numbers"
+            });
+
+            $.ajax({
+                url: '/WaterCourses/LoadAllFilterData',
+                type: "GET",
+                dataType: "JSON",
+                success: function (data) {
+                    AllFilterData = data;
+                    debugger;
+                    $(data.Districts).each(function () {
+                        //this refers to the current item being iterated over
+                        var option = $('<option />');
+                        option.attr('value', this.Id).text(this.Name);
+                        $('#ddlDistrict').append(option);
+
+                        var option1 = $('<option />');
+                        option1.attr('value', this.Id).text(this.Name);
+                        $('#dllAddDistrict').append(option1);
+                    });
+
+
+                    $(data.FinancialYears).each(function () {
+                        //this refers to the current item being iterated over
+                        var option = $('<option />');
+                        option.attr('value', this.Id).text(this.Year);
+                        $('#ddlImprovementYear').append(option);
+
+
+                    });
+
+                    console.log(data);
+                }
+            });
+
+            $("#ddlDistrict").on("change", onddlDistrictChange);
+            function onddlDistrictChange() {
+                debugger;
+                $('#ddlTehsil').empty();
+                var DistrictId = $('#ddlDistrict').val();
+                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
+
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#ddlTehsil').append(optionSelect);
+
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#ddlTehsil').append(option);
+                });
+            }
+
+
+            $("#dllAddDistrict").on("change", ondllAddDistrictChange);
+            function ondllAddDistrictChange() {
+                debugger;
+                $('#dllAddTehsil').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddTehsil').append(optionSelect);
+
+                var DistrictId = $('#dllAddDistrict').val();
+                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#dllAddTehsil').append(option);
+                });
+            }
+
+            $("#dllAddTehsil").on("change", ondllAddTehsilChange);
+            function ondllAddTehsilChange() {
+                $('#dllAddChannelName').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddChannelName').append(optionSelect);
+
+                var DistrictId = $('#dllAddDistrict').val();
+                var TehsilId = $('#dllAddTehsil').val();
+                if (TehsilId == "") {
+                    return;
+                }
+                $.ajax({
+                    url: '/WaterCourses/GetChannelsByDistAndTehId',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        districtId: DistrictId,
+                        tehsilId: TehsilId
+                    },
+                    success: function (data) {
+                        debugger;
+                        $(data).each(function () {
+                            //this refers to the current item being iterated over
+                            var option = $('<option />');
+                            option.attr('value', this.Id).text(this.ChannelName);
+                            $('#dllAddChannelName').append(option);
+                        });
+                    }
+                });
+            }
+
+            $("#dllAddChannelName").on("change", ondllAddChannelNameChange);
+            function ondllAddChannelNameChange() {
+                $('#dllAddWatercourse').empty();
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#dllAddWatercourse').append(optionSelect);
+
+                debugger;
+                var DistrictId = $('#dllAddDistrict').val();
+                var TehsilId = $('#dllAddTehsil').val();
+                var ChannelId = $('#dllAddChannelName').val();
+                if (ChannelId == "") {
+                    return;
+                }
+                $.ajax({
+                    url: '/WaterCourses/GetWaterCourses',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        districtId: DistrictId,
+                        tehsilId: TehsilId,
+                        channelId: ChannelId
+                    },
+                    success: function (data) {
+                        debugger;
+                        $(data).each(function () {
+                            //this refers to the current item being iterated over
+                            var option = $('<option />');
+                            option.attr('value', this.Id).text(this.WcNo);
+                            $('#dllAddWatercourse').append(option);
+                        });
+                    }
+                });
+            }
+        });
+
+        $("#btnAddWCIdentification").on("click", onbtnAddWCIdentificationClick);
+        function onbtnAddWCIdentificationClick() {
+            debugger;
+            $("#frmAddNewWaterCourse").validate({
+                errorClass: 'help-block',
+                validClass: 'success',
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+                }
+            });
+            var valid = $("#frmAddNewWaterCourse").valid();
+            if (!valid) {
+                return;
+            }
+
+            var DistrictId = $('#dllAddDistrict').val();
+            var DistrictName = $('#dllAddDistrict').find(":selected").text();
+
+            var TehsilId = $('#dllAddTehsil').val();
+            var TehsilName = $('#dllAddTehsil').find(":selected").text();
+
+            var ChannelId = $('#dllAddChannelName').val();
+            var ChannelName = $('#dllAddChannelName').find(":selected").text();
+
+            var WaterCourseId = $('#dllAddWatercourse').val();
+            var WaterCourseNo = $('#dllAddWatercourse').find(":selected").text();
+
+
+            var ImprovementType = $('#dllAddImprovementType').val();
+
+            $.ajax({
+                url: '/WaterCourses/AddWatercourseIdentification',
+                type: "POST",
+                dataType: "JSON",
+                data: {
+
+                    DistrictId: DistrictId,
+                    DistrictName: DistrictName,
+                    TehsilId: TehsilId,
+                    TehsilName: TehsilName,
+                    ChannelId: ChannelId,
+                    ChannelName: ChannelName,
+                    WaterCourseId: WaterCourseId,
+                    WaterCourseNo: WaterCourseNo
+                },
+                success: function (data) {
+                    $('#txtMSG').html(data.ResponseMessage);
+                    if (data.ResponseMessage == "Watercourse already exists.") {
+                        $('#successfully').removeClass('alert-success');
+                        $('#successfully').addClass('alert-danger');
+                    }
+                    $('#successfully').removeClass('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    valid = false;
+                }
+
+            });
+        }
+
+        $("#frmGetWCListing").validate({
+            errorClass: 'help-block',
+            validClass: 'success',
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+            }
+        });
+
+    </script>
+}

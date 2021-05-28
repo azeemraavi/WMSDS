@@ -43,6 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\WmsdsModel.cs" />
+    <Compile Include="HEIS\HeisBasicInformation.cs" />
+    <Compile Include="HEIS\HeisDesignParameters.cs" />
+    <Compile Include="HEIS\HeisICROne.cs" />
+    <Compile Include="HEIS\HeisICRThree.cs" />
+    <Compile Include="HEIS\HeisICRTwo.cs" />
+    <Compile Include="HEIS\HeisIdentification.cs" />
+    <Compile Include="HEIS\HeisWorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\WcIdentificationDto.cs" />
     <Compile Include="WC\EnumWcImprovementType.cs" />
@@ -55,8 +62,6 @@
     <Compile Include="WC\WcProject.cs" />
     <Compile Include="WmsdsResponse.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HEIS\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
