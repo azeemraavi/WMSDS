@@ -98,6 +98,8 @@ namespace Wmsds.Entities.HEIS
         /// Dripper/Inline Drip/ Micro Sprinkler/Spray Jet/Bubbler/Rain Gun/Mini Sprinkler/ Center Pivot/Linear Move/ Reel
         /// </summary>
         public string SystemClassification { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         #endregion
 
 

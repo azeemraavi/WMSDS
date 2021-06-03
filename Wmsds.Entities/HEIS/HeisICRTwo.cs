@@ -18,7 +18,7 @@ namespace Wmsds.Entities.HEIS
         /// <summary>
         /// Commissioning Verification Date
         /// </summary>
-        public DateTime CommissioningVerificationDate { get; set; }
+        public DateTime? CommissioningVerificationDate { get; set; }
         /// <summary>
         /// Get value from ICR-I (editable)
         /// Total Scheme Cost Verified (Rs.)

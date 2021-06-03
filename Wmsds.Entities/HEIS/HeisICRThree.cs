@@ -22,6 +22,6 @@ namespace Wmsds.Entities.HEIS
         /// <summary>
         /// ICR-III Qualifying Date
         /// </summary>
-        public DateTime ICRIIIQualifyingDate { get; set; }
+        public DateTime? ICRIIIQualifyingDate { get; set; }
     }
 }

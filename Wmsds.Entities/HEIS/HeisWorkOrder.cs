@@ -16,7 +16,7 @@ namespace Wmsds.Entities.HEIS
         /// <summary>
         /// Work Order Issue Date
         /// </summary>
-        public DateTime WorkOrderIssueDate { get; set; }
+        public DateTime? WorkOrderIssueDate { get; set; }
         /// <summary>
         /// Work Order Amount (Rs.)
         /// </summary>

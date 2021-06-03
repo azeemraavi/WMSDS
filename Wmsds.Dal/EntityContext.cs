@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wmsds.Entities.Common;
+using Wmsds.Entities.HEIS;
 using Wmsds.Entities.WC;
 
 namespace Wmsds.Dal
@@ -35,6 +36,13 @@ namespace Wmsds.Dal
         public DbSet<WcIdentification> WcIdentifications { get; set; }
         public DbSet<WcIdentificationDetail> WcIdentificationDetails { get; set; }
 
+        #endregion
+
+        #region HEIS
+        public DbSet<HeisIdentification> HeisIdentifications { get; set; }
+        public DbSet<HeisIdentificationDetail> HeisIdentificationDetails { get; set; }
+        public DbSet<HeisVendor> HeisVendors { get; set; }
+        
         #endregion
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -16,7 +16,7 @@ namespace Wmsds.Entities.HEIS
         /// <summary>
         /// Material Verified Date
         /// </summary>
-        public DateTime MaterialVerifiedDate { get; set; }
+        public DateTime? MaterialVerifiedDate { get; set; }
         /// <summary>
         /// ICR-I Amount Verified (Rs.)
         /// </summary>

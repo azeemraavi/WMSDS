@@ -477,7 +477,7 @@
         $("#ddlGroundwaterQuality").val('@(Model.WcIdentificationDetail.GroundwaterQuality)').change();
 
         $("#ddlDesignApproved").val('@(Model.WcIdentificationDetail.DesignApproved)').change();
-        @*$("#ddlLiningType").val('@(Model.WcIdentificationDetail.LiningType)').change();*@
+        
         $("#ddlPCPSegmentSize").val('@(Model.WcIdentificationDetail.PcpSegmentSize)').change();
 
         $("#ddlICR1").val('@(Model.WcIdentificationDetail.ICR1ApprovedStatus)').change();
@@ -501,8 +501,6 @@
                 $("#ddlImprovementYear").val('@(Model.WcIdentificationDetail.ImprovementYearId)');
             }
         });
-
-
 
 
         $("#frmBasicInformation").validate({

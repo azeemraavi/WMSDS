@@ -20,6 +20,8 @@ namespace Wmsds.Entities.HEIS
 
         public int TehsilId { get; set; }
         public string TehsilName { get; set; }
-        
+
+        public List<HeisIdentificationDetail> HeisIdentificationDetails { get; set; }
+
     }
 }

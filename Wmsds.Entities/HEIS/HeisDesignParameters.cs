@@ -15,7 +15,7 @@ namespace Wmsds.Entities.HEIS
         /// <summary>
         /// Design Approval Date
         /// </summary>
-        public DateTime DesignApprovalDate { get; set; }
+        public DateTime? DesignApprovalDate { get; set; }
         /// <summary>
         /// Total Approved Project Cost 
         /// </summary>

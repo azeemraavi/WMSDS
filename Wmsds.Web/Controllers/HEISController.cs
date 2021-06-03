@@ -11,7 +11,7 @@ using Wmsds.Entities.Common;
 using System.Net;
 using Wmsds.Bll.Watercourse;
 using Wmsds.Entities;
-using Wmsds.Web.Models;
+using Wmsds.Entities.HEIS;
 
 namespace Wmsds.Web.Controllers
 {
@@ -19,9 +19,9 @@ namespace Wmsds.Web.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications();
-            return View(WcIdentifications);
+            IHeisService heisCourseService = new HeisService();
+            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications();
+            return View(HeisIdentifications);
         }
 
         [HttpPost]
@@ -33,10 +33,9 @@ namespace Wmsds.Web.Controllers
             //string ImprovementType = formCollection["ddlImprovementType"]+"";
             //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
 
-            IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(District, Tehsil, 0, 0);
-            //return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
-            return View(WcIdentifications);
+            IHeisService heisCourseService = new HeisService();
+            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(0, 0, "","");
+            return View(HeisIdentifications);
         }
 
         public async Task<JsonResult> LoadAllFilterData()
@@ -103,20 +102,20 @@ namespace Wmsds.Web.Controllers
             return Json(WaterCourses, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetWcListing(WcIdentification model)
+        public async Task<JsonResult> GetHeisListing(HeisIdentification model)
         {
-            IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(model.DistrictId, model.TehsilId, model.ChannelId);
-            return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
+            IHeisService heisCourseService = new HeisService();
+            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(model.DistrictId, model.TehsilId, model.FarmerName, model.FarmerCNIC);
+            return Json(HeisIdentifications, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddWatercourseIdentification(WcIdentification model)
+        public async Task<ActionResult> AddHeisIdentification(HeisIdentification model)
         {
             try
             {
-                model.CreatedAt = DateTime.Now;
-                IWaterCourseService waterCourseService = new WaterCourseService();
+                //model.CreatedAt = DateTime.Now;
+                IHeisService heisCourseService = new HeisService();
                 var response = await waterCourseService.AddIdentification(model);
                 if (response.ResponseCode == Entities.EnumStatus.Success)
                 {

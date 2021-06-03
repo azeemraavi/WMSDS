@@ -54,6 +54,8 @@
     <Compile Include="Common\CommonService.cs" />
     <Compile Include="Common\ICommonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Watercourse\HeisService.cs" />
+    <Compile Include="Watercourse\IHeisService.cs" />
     <Compile Include="Watercourse\IWaterCourseService.cs" />
     <Compile Include="Watercourse\WaterCourseService.cs" />
   </ItemGroup>
