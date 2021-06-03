@@ -116,7 +116,7 @@ namespace Wmsds.Web.Controllers
             {
                 //model.CreatedAt = DateTime.Now;
                 IHeisService heisCourseService = new HeisService();
-                var response = await waterCourseService.AddIdentification(model);
+                var response = await heisCourseService.AddHeisIdentification(model);
                 if (response.ResponseCode == Entities.EnumStatus.Success)
                 {
 
@@ -199,100 +199,8 @@ namespace Wmsds.Web.Controllers
             }
         }
 
-        public async Task<ActionResult> AddUpdateDesignParameters(FormCollection formCollection)
-        {
-            try
-            {
-                int WcIdentificationId = Convert.ToInt16(formCollection["hdWcIdentificationIdDP"]);
-                int WcIdentificationDetailId = Convert.ToInt16(formCollection["hdWcIdentificationDetailsIdDP"]);
-
-                string DesignApproved = formCollection["ddlDesignApproved"] + "".Replace("--Select--", "");
-                decimal TSAmount = Convert.ToDecimal(formCollection["txtTSAmount"]);
-                decimal LabourShareEarthenWorks = Convert.ToDecimal(formCollection["txtLabourShareEarthenWorks"]);
-                decimal LabourShareMasonryWorks = Convert.ToDecimal(formCollection["txtLabourShareMasonryWorks"]);
-                string LiningType = formCollection["ddlLiningType"] + "".Replace("--Select--", "");
-                decimal EarthenLength = Convert.ToDecimal(formCollection["txtEarthenLength"]);
-                decimal LiningLength = Convert.ToDecimal(formCollection["txtLiningLength"]);
-                string PCPSegmentSize = formCollection["ddlPCPSegmentSize"] + "".Replace("--Select--", "");
-                int PCPSegment = Convert.ToInt16(formCollection["txtPCPSegment"]);
-                int Nakkas = Convert.ToInt16(formCollection["txtNakkas"]);
-                int Culverts = Convert.ToInt16(formCollection["txtCulverts"]);
-                int BuffaloWallow = Convert.ToInt16(formCollection["txtBuffaloWallow"]);
-                int DistributionBox = Convert.ToInt16(formCollection["txtDistributionBox"]);
-                int WaterStorageTank = Convert.ToInt16(formCollection["txtWaterStorageTank"]);
-                int DropStructure = Convert.ToInt16(formCollection["txtDropStructure"]);
-                int Others = Convert.ToInt16(formCollection["txtOthers"]);
-
-                WcIdentificationDetail wcIdentificationDetail = new WcIdentificationDetail();
-                wcIdentificationDetail.WcIdentificationId = WcIdentificationId;
-                wcIdentificationDetail.Id = WcIdentificationDetailId;
-                wcIdentificationDetail.DesignApproved = DesignApproved;
-                wcIdentificationDetail.MaterialCost = TSAmount;
-                wcIdentificationDetail.EarthenWorks = LabourShareEarthenWorks;
-                wcIdentificationDetail.MasonryWorks = LabourShareMasonryWorks;
-                //wcIdentificationDetail.LiningType = LiningType;
-                wcIdentificationDetail.EarthenLengthM = EarthenLength;
-                wcIdentificationDetail.LiningLengthM = LiningLength;
-                wcIdentificationDetail.PcpSegmentSize = PCPSegmentSize;
-                wcIdentificationDetail.PcpSegment = PCPSegment;
-                wcIdentificationDetail.Nakkas = Nakkas;
-                wcIdentificationDetail.Culverts = Culverts;
-                wcIdentificationDetail.BuffaloWallow = BuffaloWallow;
-                wcIdentificationDetail.DistributionBox = DistributionBox;
-                wcIdentificationDetail.WaterStorageTank = WaterStorageTank;
-                wcIdentificationDetail.DropStructure = DropStructure;
-                wcIdentificationDetail.Others = Others;
-
-                IWaterCourseService waterCourseService = new WaterCourseService();
-                var response = await waterCourseService.AddUpdateDesignParameters(wcIdentificationDetail);
-                if (response.ResponseCode == Entities.EnumStatus.Success)
-                {
-
-                }
-
-                return Json(new { FormId = 0, HttpStatusCode = (int)HttpStatusCode.OK });
-            }
-            catch (Exception)
-            {
-                return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
-            }
-        }
-
-        public async Task<ActionResult> AddUpdateICR1AndICR2(FormCollection formCollection)
-        {
-            try
-            {
-                int WcIdentificationId = Convert.ToInt16(formCollection["hdWcIdentificationIdICR"]);
-                int WcIdentificationDetailId = Convert.ToInt16(formCollection["hdWcIdentificationDetailsIdICR"]);
-
-                string ICR1Approved = formCollection["ddlICR1"] + "".Replace("--Select--", "");
-                decimal ICR1ReleasedAmount = Convert.ToDecimal(formCollection["txtICR1ReleasedAmount"]);
-                string ICR2Approved = formCollection["ddlICR2"] + "".Replace("--Select--", "");
-                decimal ICR2ReleasedAmount = Convert.ToDecimal(formCollection["txtICR2ReleasedAmount"]);
-
-                WcIdentificationDetail wcIdentificationDetail = new WcIdentificationDetail();
-                wcIdentificationDetail.WcIdentificationId = WcIdentificationId;
-                wcIdentificationDetail.Id = WcIdentificationDetailId;
-                wcIdentificationDetail.ICR1ApprovedStatus = ICR1Approved;
-                wcIdentificationDetail.ICR1ReleasedAmount = ICR1ReleasedAmount;
-                wcIdentificationDetail.ICR2ApprovedStatus = ICR2Approved;
-                wcIdentificationDetail.ICR2ReleasedAmount = ICR2ReleasedAmount;
-
-                IWaterCourseService waterCourseService = new WaterCourseService();
-                var response = await waterCourseService.AddUpdateICR1AndICR2(wcIdentificationDetail);
-                if (response.ResponseCode == Entities.EnumStatus.Success)
-                {
-
-                }
-
-                return Json(new { FormId = 0, HttpStatusCode = (int)HttpStatusCode.OK });
-            }
-            catch (Exception)
-            {
-                return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
-            }
-        }
-
+        
+       
         public async Task<ActionResult> AddUpdateFCR(FormCollection formCollection)
         {
             try

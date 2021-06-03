@@ -426,8 +426,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\WaterCourses\DataEntry.cshtml" />
     <Content Include="Views\WaterCourses\Index.cshtml" />
-    <Content Include="Views\HEIS\DataEntry.cshtml" />
     <Content Include="Views\HEIS\Index.cshtml" />
+    <Content Include="Views\HEIS\DataEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
