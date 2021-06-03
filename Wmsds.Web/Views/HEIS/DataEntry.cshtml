@@ -88,109 +88,189 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
-
-
-                                            <div class="form-group">
-                                                <label>Improvement Type</label>
-                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
-                                                    <option value="">--Select--</option>
-                                                    <option value="Regular">Regular</option>
-                                                    <option value="Addl.">Addl.</option>
-                                                    <option value="IrrigationScheme">Irrigation Scheme</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Improvement Year</label>
-                                                <select class="form-control" id="ddlImprovementYear" name="ddlImprovementYear" required>
-                                                    <option value="">--Select--</option>
-                                                </select>
-                                            </div>
-
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label for="txtLatitude">Latitude</label>
-                                                @Html.TextBox("txtLatitude", Model.HeisIdentificationDetail.Latitude, new { @class = "form-control", @id = "txtLatitude", @placeholder = "", required = "required", type = "number" })
+                                                <label>Latitude</label>
+                                                @Html.TextBox("txtLatitude", Model.HeisIdentificationDetail.Latitude,
+                                               new { @class = "form-control", @id = "txtLatitude", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
                                                 <label>Longitude </label>
-                                                @Html.TextBox("txtLongitude", Model.HeisIdentificationDetail.Longitude, new { @class = "form-control", @id = "txtLongitude", @placeholder = "", required = "required", type = "number" })
+                                                @Html.TextBox("txtLongitude", Model.HeisIdentificationDetail.Longitude, new
+                                                {
+                                                    @class = "form-control"
+                                               ,
+                                                    @id = "txtLongitude",
+                                                    @placeholder = "",
+                                                    required = "required",
+                                               type = "number"
+                                           })
+
                                             </div>
-                                            <!-- select -->
                                             <div class="form-group">
-                                                <label>Project Name</label>
-                                                <select class="form-control" id="ddlProjectName" name="ddlProjectName" required>
+                                                <label>Installation Type</label>
+                                                <select id="ddlInstallationType" name="ddlInstallationType" class="form-control" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="PIPIP-R">PIPIP-R</option>
-                                                    <option value="NPIW-II">NPIW-II</option>
-                                                    <option value="JIP">JIP</option>
+                                                    <option value="Regular">Regular</option>
+                                                    <option value="Extension">Extension</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Village Name</label>
-                                                @Html.TextBox("txtVillageName", Model.HeisIdentificationDetail.VillageName, new { @class = "form-control", @id = "txtVillageName", @placeholder = "", required = "required" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label>UC</label>
-                                                @Html.TextBox("txtUC", Model.HeisIdentificationDetail.UC, new { @class = "form-control", @id = "txtUC", @placeholder = "", required = "required" })
+                                                <label>Fiscal Year</label>
+                                                <select id="ddlFiscalYear" name="ddlFiscalYear" class="form-control" required>
+                                                    <option value="">--Select--</option>
 
+                                                </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label>GCA (Acres)</label>
-                                                @Html.TextBox("txtGCA", Model.HeisIdentificationDetail.GCA, new { @class = "form-control", @id = "txtGCA", @placeholder = "", required = "required", type = "number" })
 
-                                            </div>
                                             <div class="form-group">
-                                                <label>CCA (Acres)</label>
-                                                @Html.TextBox("txtCCA", Model.HeisIdentificationDetail.CCA, new { @class = "form-control", @id = "txtCCA", @placeholder = "", required = "required", type = "number" })
+                                                <label>System Type</label>
+                                                <select id="ddlSystemType" name="ddlSystemType" class="form-control" required>
+                                                    <option value="">--Select--</option>
+
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>SSC Name</label>
+                                                <select id="ddlSSCName" name="ddlSSCName" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Project Name</label>
+                                                <select id="ddlProjectName" name="ddlProjectName" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="PIPIP">PIPIP</option>
+                                                </select>
                                             </div>
 
                                         </div>
                                         <div class="col-md-6 col-sm-6">
 
                                             <div class="form-group">
-                                                <label>Sanctioned Discharge (LPS)</label>
-                                                @Html.TextBox("txtSanctionedDischarge", Model.HeisIdentificationDetail.SanctionedDischargeLPS, new { @class = "form-control", @id = "txtSanctionedDischarge", @placeholder = "", required = "required", type = "number" })
+                                                <label>Village Name/Number</label>
+                                                @Html.TextBox("txtVillageName", Model.HeisIdentificationDetail.VillageName,
+                                               new
+                                                    {
+                                                        @class = "form-control",
+                                                        @id = "txtVillageName",
+                                                        @placeholder = "",
+                                                   required = "required",
+                                                        type = "number"
+                                                    })
                                             </div>
                                             <div class="form-group">
-                                                <label>Design Discharge</label>
-                                                @Html.TextBox("txtDesignDischarge", Model.HeisIdentificationDetail.DesignDischargeLPS, new { @class = "form-control", @id = "txtDesignDischarge", @placeholder = "", required = "required", type = "number" })
+                                                <label>Contact number</label>
+                                                @Html.TextBox("txtContactNumber", Model.HeisIdentificationDetail.ContactNumber, new { @class = "form-control", @id = "txtDesignDischarge", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>Mogha Type</label>
-                                                <select id="ddlMoghaType" name="ddlMoghaType" required class="form-control">
+                                                <label>Soil type</label>
+                                                <select id="ddlSoiltype" name="ddlSoiltype" required class="form-control">
                                                     <option value="">--Select--</option>
-                                                    <option value="AOSM">AOSM</option>
-                                                    <option value="Scratchily">Scratchily</option>
-                                                    <option value="Pipe">Pipe</option>
-                                                    <option value="Open Flume">Open Flume</option>
+                                                    <option value="Loam">Loam</option>
+                                                    <option value="Sandy">Sandy</option>
+                                                    <option value="Clay">Clay</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Groundwater Quality</label>
-                                                <select class="form-control" id="ddlGroundwaterQuality" name="ddlGroundwaterQuality" required>
+                                                <label>Scheme Area (Acres)</label>
+                                                @Html.TextBox("txtSchemeArea", Model.HeisIdentificationDetail.SchemeArea, new
+                                                {
+                                                    @class = "form-control",
+                                               @id = "txtSchemeArea",
+                                                    @placeholder = "",
+                                                    required = "required",
+                                                    type = "number"
+                                                })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Water Source</label>
+                                                <select class="form-control" id="ddlWaterSource" name="ddlWaterSource" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="Loom">Loom</option>
-                                                    <option value="Fresh">Fresh</option>
-                                                    <option value="Saline">Saline</option>
+                                                    <option value="Tubewell">Tubewell</option>
+                                                    <option value="Canal">Canal</option>
+                                                    <option value="Canal+Tubewell">Canal+Tubewell</option>
+                                                    <option value="Others">Others</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Name of WUA Chairman</label>
-                                                @Html.TextBox("txtNameOfWUAChairman", Model.HeisIdentificationDetail.WUAChairman, new { @class = "form-control", @id = "txtNameOfWUAChairman", @placeholder = "", required = "required" })
+                                                <label>Water Quality</label>
+                                                <select class="form-control" id="ddlWaterQuality" name="ddlWaterQuality" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Fit">Fit</option>
+                                                    <option value="Unfit">Unfit</option>
+                                                    <option value="Marginally Fit">Marginally Fit</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Contact # WUA Chairman</label>
-                                                @Html.TextBox("txtContactOfWUAChairman", Model.HeisIdentificationDetail.ChairmanContactNo, new { @class = "form-control", @id = "txtContactOfWUAChairman", @placeholder = "", required = "required" })
+                                                <label>Power Source</label>
+                                                <select class="form-control" id="ddlPowerSource" name="ddlPowerSource" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Electric Motor">Electric Motor</option>
+                                                    <option value="Diesel Engine">Diesel Engine</option>
+                                                    <option value="Solar">Solar</option>
+                                                    <option value="Tractor PTO">Tractor PTO</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>No. of Beneficiaries</label>
-                                                @Html.TextBox("txtNoOfBeneficiaries", Model.HeisIdentificationDetail.NoOfBeneficiaries, new { @class = "form-control", @id = "txtNoOfBeneficiaries", @placeholder = "", required = "required", type = "number" })
+                                                <label>Crop Category</label>
+                                                <select class="form-control" id="ddlCropCategory" name="ddlCropCategory" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Row Crops">Row Crops</option>
+                                                    <option value="Field Crops">Field Crops</option>
+                                                    <option value="Orchard">Orchard</option>
+                                                    <option value="Vegetables">Vegetables</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Total Length (M)</label>
-                                                @Html.TextBox("txtTotalLength", Model.HeisIdentificationDetail.TotalLengthM, new { @class = "form-control", @id = "txtTotalLength", @placeholder = "", required = "required", type = "number" })
+                                                <label>Crop Name</label>
+                                                <select class="form-control" id="ddlCropCategory" name="ddlCropCategory" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Row Crops">Drop down from concerned Crop Category (attached)</option>
+
+                                                </select>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label>Plants per Acre (Nos.)</label>
+                                                @Html.TextBox("txtPlansPerAcre", Model.HeisIdentificationDetail.PlansPerAcre, new
+                                                {
+                                                    @class = "form-control",
+                                               @id = "txtPlansPerAcre",
+                                                    @placeholder = "",
+                                                    required = "required",
+                                               type = "number"
+                                           })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>System Classification</label>
+                                                <select class="form-control" id="ddlSystemClassification" name="ddlSystemClassification" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Dripper">Dripper</option>
+                                                    <option value="Inline Drip">Inline Drip</option>
+                                                    <option value="Micro Sprinkler">Micro Sprinkler</option>
+                                                    <option value="Spray Jet">Spray Jet</option>
+                                                    <option value="Bubbler">Bubbler</option>
+                                                    <option value="Rain Gun">Rain Gun</option>
+                                                    <option value="Mini Sprinkler">Mini Sprinkler</option>
+                                                    <option value="Center Pivot">Center Pivot</option>
+                                                    <option value="Linear Move">Linear Move</option>
+                                                    <option value="Reel">Reel</option>
+
+                                                </select>
+                                            </div>
+                                            @*Design Parameters*@
+                                        <div class="form-group">
+                                            <label>Design approved</label>
+                                            <select id="ddlWorkOrderIssued" name="ddlWorkOrderIssued" class="form-control" required>
+                                                <option value="">--Select--</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="Yes">No</option>
+                                            </select>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -207,47 +287,54 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
-                                                <label>FCR approved</label>
-                                                <select class="form-control" id="ddlFCRApproved" name="ddlFCRApproved" required>
+                                                <label>Work Order Issued</label>
+                                                <select id="ddlWorkOrderIssued" name="ddlWorkOrderIssued" class="form-control" required>
                                                     <option value="">--Select--</option>
-                                                    <option>Yes</option>
-                                                    <option>No</option>
-                                                    <option>Offered</option>
-
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="Yes">No</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Lined length (m)</label>
-
-                                                @Html.TextBox("txtFCRLinedlength", Model.HeisIdentificationDetail.FCRLinedLength, new { @class = "form-control", @id = "txtFCRLinedlength", required = "required", type = "number" })
-
+                                                <label for="txtWorkOrderIssueDate">Latitude</label>
+                                                @Html.TextBox("txtWorkOrderIssueDate", Model.HeisIdentificationDetail.WorkOrderIssueDate,
+                                               new
+                                                    {
+                                                        @class = "form-control",
+                                                        @id = "txtWorkOrderIssueDate",
+                                                        @placeholder = "",
+                                                        required = "required"
+                                                })
                                             </div>
                                             <div class="form-group">
-                                                <label>Lined (%)</label>
-                                                @Html.TextBox("txtFCRLined", Model.HeisIdentificationDetail.LinedPercentage, new { @class = "form-control", @id = "txtFCRLined", required = "required", type = "number" })
+                                                <label>Work Order Amount (Rs.) </label>
+                                                @Html.TextBox("txtWorkOrderAmount", Model.HeisIdentificationDetail.WorkOrderAmount,
+                                               new { @class = "form-control", @id = "txtWorkOrderAmount", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>Total cost of civil works verified (Rs.)</label>
-                                                @Html.TextBox("txtFCRTotalCostOfCivilWorksVerified", Model.HeisIdentificationDetail.TotalCostOfCivilWrkVerfied, new { @class = "form-control", @id = "txtFCRTotalCostOfCivilWorksVerified", required = "required", type = "number" })
+                                                <label>Work Order Amount (Rs.) </label>
+                                                @Html.TextBox("txtWorkOrderAmount", Model.HeisIdentificationDetail.WorkOrderAmount,
+                                               new { @class = "form-control", @id = "txtWorkOrderAmount", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>Labour share verified (Earthen Works) (Rs.)</label>
-                                                @Html.TextBox("txtFCRLabourShareVerifiedEarthen", Model.HeisIdentificationDetail.FCREarthenWorks, new { @class = "form-control", @id = "txtFCRLabourShareVerifiedEarthen", required = "required", type = "number" })
+                                                <label>Estimated Govt. Share (Rs.) </label>
+                                                @Html.TextBox("txtEstimatedGovtShare", Model.HeisIdentificationDetail.EstimatedGovtShare,
+                                               new { @class = "form-control", @id = "txtEstimatedGovtShare", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>Labour share verified (Masonry Works) (Rs.)</label>
-                                                @Html.TextBox("txtFCRLabourShareVerifiedMasonry", Model.HeisIdentificationDetail.FCRMasonryWorks, new { @class = "form-control", @id = "txtFCRLabourShareVerifiedMasonry", required = "required", type = "number" })
+                                                <label>Estimated Famer Share (Rs.) </label>
+                                                @Html.TextBox("txtEstimatedFamerShare", Model.HeisIdentificationDetail.EstimatedFamerShare,
+                                               new { @class = "form-control", @id = "txtEstimatedFamerShare", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>Total scheme cost (Rs.)</label>
-                                                //SUM of all above
-                                                @Html.TextBox("txtFCRTotalSchemeCost", Model.HeisIdentificationDetail.TotalSchemeCost, new { @class = "form-control", @id = "txtFCRTotalSchemeCost", required = "required", type = "number" })
+                                                <label>Farmer Share in Cash (Rs.) </label>
+                                                @Html.TextBox("txtFarmerShareInCash", Model.HeisIdentificationDetail.FarmerShareInCash,
+                                               new { @class = "form-control", @id = "txtFarmerShareInCash", @placeholder = "", required = "required", type = "number" })
                                             </div>
                                             <div class="form-group">
-                                                <label>PCP Segment No</label>
-                                                @Html.TextBox("txtFCRPCPSegmentNo", Model.HeisIdentificationDetail.FCRPcpSegment, new { @class = "form-control", @id = "txtFCRPCPSegmentNo", required = "required", type = "number" })
+                                                <label>Farmer Share in Kind (Rs.) </label>
+                                                @Html.TextBox("txtFarmerShareInKind", Model.HeisIdentificationDetail.FarmerShareInKind,
+                                               new { @class = "form-control", @id = "txtFarmerShareInKind", @placeholder = "", required = "required", type = "number" })
                                             </div>
-
                                         </div>
                                         <div class="col-md-6 col-sm-6">
 
