@@ -263,14 +263,49 @@
                                                 </select>
                                             </div>
                                             @*Design Parameters*@
-                                        <div class="form-group">
-                                            <label>Design approved</label>
-                                            <select id="ddlWorkOrderIssued" name="ddlWorkOrderIssued" class="form-control" required>
-                                                <option value="">--Select--</option>
-                                                <option value="Yes">Yes</option>
-                                                <option value="Yes">No</option>
-                                            </select>
-                                        </div>
+                                            <div class="form-group">
+                                                <label>Design approved</label>
+                                                <select id="ddlWorkOrderIssued" name="ddlWorkOrderIssued" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="Yes">No</option>
+                                                    <option value="Offered">Offered</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Design Approval Date </label>
+                                                @Html.TextBox("txtDesignApprovalDate", Model.HeisIdentificationDetail.DesignApprovalDate,
+                                               new { @class = "form-control", @id = "txtDesignApprovalDate", @placeholder = "", required = "required" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Total Approved Project Cost (Rs.) </label>
+                                                @Html.TextBox("txtTotalApprovedProjectCost", Model.HeisIdentificationDetail.TotalApprovedProjectCost,
+                                               new { @class = "form-control", @id = "txtTotalApprovedProjectCost", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label> Total Dynamic Head (meter)</label>
+                                                @Html.TextBox("txtTotalDynamicHead", Model.HeisIdentificationDetail.TotalDynamicHead,
+                                               new { @class = "form-control", @id = "txtTotalDynamicHead", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Pump Type</label>
+                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Centrifugal">Centrifugal</option>
+                                                    <option value="Submersible">Submersible</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Pump Flow Rate (LPS) </label>
+                                                @Html.TextBox("txtPumpFlowRate", Model.HeisIdentificationDetail.PumpFlowRate,
+                                               new { @class = "form-control", @id = "txtPumpFlowRate", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Power Source Efficiency (%) </label>
+                                                @Html.TextBox("txtPowerSourceEfficiency", Model.HeisIdentificationDetail.PowerSourceEfficiency,
+                                               new { @class = "form-control", @id = "txtPowerSourceEfficiency", @placeholder = "", required = "required", type = "number" })
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -337,7 +372,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-
+                                            <!-- Material Verification (ICR-I) -->
                                             <div class="form-group">
                                                 <label>PCP Segment size</label>
                                                 <select class="form-control" id="ddlFCRPCPSegmentSize" name="ddlFCRPCPSegmentSize" required>
