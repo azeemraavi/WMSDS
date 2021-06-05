@@ -135,6 +135,48 @@
                                                 <label>SSC Name</label>
                                                 <select id="ddlSSCName" name="ddlSSCName" class="form-control" required>
                                                     <option value="">--Select--</option>
+                                                    <option value="4B Fertilizers">4B Fertilizers</option>
+                                                    <option value="Aaban Nano Technologies">Aaban Nano Technologies</option>
+                                                    <option value="Agri. Engineering Services">Agri. Engineering Services</option>
+                                                    <option value="Agroten Traders">Agroten Traders</option>
+                                                    <option value="Al-Ghazi Tractors Ltd.">Al-Ghazi Tractors Ltd.</option>
+                                                    <option value="Ali Akbar">Ali Akbar</option>
+                                                    <option value="Alpha Pipes">Alpha Pipes</option>
+                                                    <option value="Anchor Commodities">Anchor Commodities</option>
+                                                    <option value="Drip Irrigation System Co.">Drip Irrigation System Co.</option>
+                                                    <option value="Eminent Engineering ">Eminent Engineering </option>
+                                                    <option value="Falcon Traders">Falcon Traders</option>
+                                                    <option value="Farm Dynamics">Farm Dynamics</option>
+                                                    <option value="Haji Sons">Haji Sons</option>
+                                                    <option value="HydroMech">HydroMech</option>
+                                                    <option value="Innovators Engineering Co.">Innovators Engineering Co.</option>
+                                                    <option value="Jaffar Brothers Ltd.">Jaffar Brothers Ltd.</option>
+                                                    <option value="Manzoor Alam& Sons">Manzoor Alam& Sons</option>
+                                                    <option value="Micro Drip">Micro Drip</option>
+                                                    <option value="Mishaq Enterprises">Mishaq Enterprises</option>
+                                                    <option value="New Tech">New Tech</option>
+                                                    <option value="Orbit Links">Orbit Links</option>
+                                                    <option value="Polo Aabyari">Polo Aabyari</option>
+                                                    <option value="Royal Construction Co.">Royal Construction Co.</option>
+                                                    <option value="Shad Abad">Shad Abad</option>
+                                                    <option value="Sun International">Sun International</option>
+                                                    <option value="Uni Drip">Uni Drip</option>
+                                                    <option value="Valley Irrigation">Valley Irrigation</option>
+                                                    <option value="Water CON">Water CON</option>
+                                                    <option value="Zarkaasht (Dadex)">Zarkaasht (Dadex)</option>
+                                                    <option value="Everest Plastics">Everest Plastics</option>
+                                                    <option value="Royal Irrigation Systems">Royal Irrigation Systems</option>
+                                                    <option value="Natural Resources Management Technologies">Natural Resources Management Technologies</option>
+                                                    <option value="Agrex Enterprises">Agrex Enterprises</option>
+                                                    <option value="Haji Sons International">Haji Sons International</option>
+                                                    <option value="Pak-Belgium">Pak-Belgium</option>
+                                                    <option value="Sohail Ch & Co">Sohail Ch & Co</option>
+                                                    <option value="M/s Alhmmdali Intl Trade Co">M/s Alhmmdali Intl Trade Co</option>
+                                                    <option value="M/s Festoon Engineering Works">M/s Festoon Engineering Works</option>
+                                                    <option value="Alflah Irrigation & Landscape">Alflah Irrigation & Landscape</option>
+                                                    <option value="M/s Jaffar Agro Services">M/s Jaffar Agro Services</option>
+                                                    <option value="M/s Multi Trades International">M/s Multi Trades International</option>
+
                                                 </select>
                                             </div>
 
@@ -373,53 +415,83 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <!-- Material Verification (ICR-I) -->
+
                                             <div class="form-group">
-                                                <label>PCP Segment size</label>
-                                                <select class="form-control" id="ddlFCRPCPSegmentSize" name="ddlFCRPCPSegmentSize" required>
+                                                <label>Material Verified</label>
+                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="6a">6a</option>
-                                                    <option value="7a">7a</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Nakkas (Nos.)</label>
-                                                @Html.TextBox("txtFCRNakkas", Model.HeisIdentificationDetail.FCRNakkas, new { @class = "form-control", @id = "txtFCRNakkas", required = "required", type = "number" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Culverts (Nos.)</label>
-                                                @Html.TextBox("txtFCRCulverts", Model.HeisIdentificationDetail.FCRCulverts, new { @class = "form-control", @id = "txtFCRCulverts", required = "required", type = "number" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Buffalo Wallow (Nos.)</label>
-                                                @Html.TextBox("txtFCRBuffaloWallow", Model.HeisIdentificationDetail.FCRBuffaloWallow, new { @class = "form-control", @id = "txtFCRBuffaloWallow", required = "required", type = "number" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Distribution Box (Nos.)</label>
-                                                @Html.TextBox("txtFCRDistributionBox", Model.HeisIdentificationDetail.FCRDistributionBox, new { @class = "form-control", @id = "txtFCRDistributionBox", required = "required", type = "number" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Water Storage Tank (Nos.)</label>
-                                                @Html.TextBox("txtFCRWaterStorageTank", Model.HeisIdentificationDetail.FCRWaterStorageTank, new { @class = "form-control", @id = "txtFCRWaterStorageTank", required = "required", type = "number" })
+                                                <label>Material Verified Date</label>
+                                                @Html.TextBox("txtMaterialVerifiedDate", Model.HeisIdentificationDetail.MaterialVerifiedDate,
+                                               new { @class = "form-control", @id = "txtMaterialVerifiedDate", required = "required" })
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Drop Structure (Nos.)</label>
-                                                @Html.TextBox("txtFCRDropStructure", Model.HeisIdentificationDetail.FCRDropStructure, new { @class = "form-control", @id = "txtFCRDropStructure", required = "required", type = "number" })
+                                                <label>ICR-I Amount Verified (Rs.)</label>
+                                                @Html.TextBox("txtICRIAmountVerified", Model.HeisIdentificationDetail.ICRIAmountVerified,
+                                               new { @class = "form-control", @id = "ICRIAmountVerified", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Commissioning Verification</label>
+                                                <select id="ddlCommissioningVerification" name="ddlCommissioningVerification" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
+                                                    <option value="Deferred">Deferred</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ICR-I Amount Verified (Rs.)</label>
+                                                @Html.TextBox("txtICRIAmountVerified", Model.HeisIdentificationDetail.ICRIAmountVerified,
+                                               new { @class = "form-control", @id = "ICRIAmountVerified", required = "required", type = "number" })
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Others (Nos.)</label>
-                                                @Html.TextBox("txtFCROthers", Model.HeisIdentificationDetail.FCROthers, new { @class = "form-control", @id = "txtFCROthers", required = "required", type = "number" })
+                                                <label>Commissioning Verification Date</label>
+                                                @Html.TextBox("txtCommissioningVerificationDate", Model.HeisIdentificationDetail.CommissioningVerificationDate,
+                                               new { @class = "form-control", @id = "txtFCRDropStructure", required = "required" })
                                             </div>
+
+                                            <div class="form-group">
+                                                <label> Total Scheme Cost Verified (Rs.)</label>
+                                                @Html.TextBox("txtTotalSchemeCostVerified", Model.HeisIdentificationDetail.TotalSchemeCostVerified,
+                                               new { @class = "form-control", @id = "txtTotalSchemeCostVerified", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>ICR-II Amount Verified (Rs.) </label>
+                                                @Html.TextBox("txtICRIIAmountVerified", Model.HeisIdentificationDetail.ICRIIAmountVerified,
+                                               new { @class = "form-control", @id = "txtICRIIAmountVerified", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ICR-III Verification</label>
+                                                <select id="ddlCommissioningVerification" name="ddlCommissioningVerification" class="form-control" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Offered">Offered</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label> Total Amount Verified (Rs.)</label>
+                                                @Html.TextBox("txtTotalAmountVerified", Model.HeisIdentificationDetail.TotalAmountVerified,
+                                               new { @class = "form-control", @id = "txtTotalAmountVerified", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>ICR-III Qualifying Date </label>
+                                                @Html.TextBox("txtICRIIIQualifyingDate", Model.HeisIdentificationDetail.ICRIIIQualifyingDate,
+                                               new { @class = "form-control", @id = "txtICRIIIQualifyingDate", @placeholder = "", required = "required", type = "number" })
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -431,7 +503,6 @@
         </div>
     </div>
 </div>
-
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="../content/assets/js/pages/validation/form-validation.js"></script>
