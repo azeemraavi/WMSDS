@@ -334,7 +334,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Pump Type</label>
-                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
+                                                <select id="ddlPumpType" name="ddlPumpType" class="form-control" required>
                                                     <option value="">--Select--</option>
                                                     <option value="Centrifugal">Centrifugal</option>
                                                     <option value="Submersible">Submersible</option>
@@ -359,8 +359,8 @@
 
                     <div id="step-2" class="">
                         <form id="frmWorksExecuted" name="frmWorksExecuted">
-                            <input type="hidden" id="hdHeisIdentificationIdFCR" name="hdHeisIdentificationIdFCR" value="@Model.HeisIdentification.Id">
-                            <input type="hidden" id="hdHeisIdentificationDetailsIdFCR" name="hdHeisIdentificationDetailsIdFCR" value="@Model.HeisIdentificationDetail.Id">
+                            <input type="hidden" id="hdHeisIdentificationIdWorksExecuted" name="hdHeisIdentificationIdWorksExecuted" value="@Model.HeisIdentification.Id">
+                            <input type="hidden" id="hdHeisIdentificationDetailsIdWorksExecuted" name="hdHeisIdentificationDetailsIdWorksExecuted" value="@Model.HeisIdentificationDetail.Id">
                             <fieldset>
                                 <div class="form-body">
                                     <div class="row">
@@ -381,11 +381,7 @@
                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Work Order Amount (Rs.) </label>
-                                                @Html.TextBox("txtWorkOrderAmount", Model.HeisIdentificationDetail.WorkOrderAmount,
-                                               new { @class = "form-control", @id = "txtWorkOrderAmount", @placeholder = "", required = "required", type = "number" })
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <label>Work Order Amount (Rs.) </label>
                                                 @Html.TextBox("txtWorkOrderAmount", Model.HeisIdentificationDetail.WorkOrderAmount,
@@ -417,7 +413,7 @@
 
                                             <div class="form-group">
                                                 <label>Material Verified</label>
-                                                <select id="ddlImprovementType" name="ddlImprovementType" class="form-control" required>
+                                                <select id="ddlMaterialVerified" name="ddlMaterialVerified" class="form-control" required>
                                                     <option value="">--Select--</option>
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
@@ -449,11 +445,7 @@
                                                     <option value="Deferred">Deferred</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label>ICR-I Amount Verified (Rs.)</label>
-                                                @Html.TextBox("txtICRIAmountVerified", Model.HeisIdentificationDetail.ICRIAmountVerified,
-                                               new { @class = "form-control", @id = "ICRIAmountVerified", required = "required", type = "number" })
-                                            </div>
+                                            
 
                                             <div class="form-group">
                                                 <label>Commissioning Verification Date</label>
@@ -478,7 +470,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>ICR-III Verification</label>
-                                                <select id="ddlCommissioningVerification" name="ddlCommissioningVerification" class="form-control" required>
+                                                <select id="ddlICRIIIVerification" name="ddlICRIIIVerification" class="form-control" required>
                                                     <option value="">--Select--</option>
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
@@ -524,7 +516,22 @@
 
 
     $(document).ready(function () {
-        @*$("#ddlImprovementType").val('@(Model.HeisIdentificationDetail.ImprovementType)').change();*@
+        $("#ddlInstallationType").val('@(Model.HeisIdentificationDetail.InstallationType)').change();
+        $("#ddlFiscalYear").val('@(Model.HeisIdentificationDetail.FiscalYear)').change();
+        $("#ddlSystemType").val('@(Model.HeisIdentificationDetail.SystemType)').change();
+        $("#ddlSSCName").val('@(Model.HeisIdentificationDetail.SSCName)').change();
+        $("#ddlProjectName").val('@(Model.HeisIdentificationDetail.ProjectName)').change();
+        $("#ddlWaterSource").val('@(Model.HeisIdentificationDetail.WaterSource)').change();
+        $("#ddlWaterQuality").val('@(Model.HeisIdentificationDetail.WaterQuality)').change();
+        $("#ddlPowerSource").val('@(Model.HeisIdentificationDetail.PowerSource)').change();
+        $("#ddlCropCategory").val('@(Model.HeisIdentificationDetail.CropCategory)').change();
+        $("#ddlCropName").val('@(Model.HeisIdentificationDetail.CropName)').change();
+        $("#ddlSystemClassification").val('@(Model.HeisIdentificationDetail.SystemClassification)').change();
+        $("#ddlWorkOrderIssued").val('@(Model.HeisIdentificationDetail.WorkOrderIssued)').change();
+        $("#ddlPumpType").val('@(Model.HeisIdentificationDetail.PumpType)').change();
+        $("#ddlMaterialVerified").val('@(Model.HeisIdentificationDetail.MaterialVerified)').change();
+        $("#ddlCommissioningVerification").val('@(Model.HeisIdentificationDetail.CommissioningVerification)').change();
+        $("#ddlICRIIIVerification").val('@(Model.HeisIdentificationDetail.ICRIIIVerification)').change();
 
         var date = new Date();
         date.setDate(date.getDate() - 1);
@@ -532,7 +539,7 @@
             pickTime: false,
             minView: 2,
             startDate: date,
-            format: 'mm/dd/yyyy',
+            format: 'dd/mm/yyyy',
             autoclose: true,
         });
 
@@ -562,6 +569,64 @@
 
         }
 
+        $("#frmBasicInformation").validate({
+            errorClass: 'help-block',
+            validClass: 'success',
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+            },
+            rules: {
+                txtLatitude: {
+                    required: true,
+                    // Using the normalizer to trim the value of the element
+                    // before validating it.
+                    //
+                    // The value of `this` inside the `normalizer` is the corresponding
+                    // DOMElement. In this example, `this` references the `username` element.
+                    normalizer: function (value) {
+                        return $.trim(value);
+                    }
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                txtLatitude: "Please enter Latitude"
+            },
+        });
+
+        $("#frmWorksExecuted").validate({
+            errorClass: 'help-block',
+            validClass: 'success',
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
+            },
+            rules: {
+                txtTSAmount: {
+                    required: true,
+                    // Using the normalizer to trim the value of the element
+                    // before validating it.
+                    //
+                    // The value of `this` inside the `normalizer` is the corresponding
+                    // DOMElement. In this example, `this` references the `username` element.
+                    normalizer: function (value) {
+                        return $.trim(value);
+                    }
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                txtTSAmount: "Please enter TSAmount"
+            },
+        });
+
         $.ajax({
             url: '/HEIS/LoadFinancialYears',
             type: "GET",
@@ -570,7 +635,7 @@
                 $(data.FinancialYears).each(function () {
                     //this refers to the current item being iterated over
                     var option = $('<option />');
-                    option.attr('value', this.Id).text(this.Year);
+                    option.attr('value', this.Year).text(this.Year);
                     $('#ddlFiscalYear').append(option);
                 });
 
@@ -644,7 +709,7 @@
                     if (valid) {
                         var form = new FormData($("form[name='frmBasicInformation']")[0]);
                         $.ajax({
-                                url: '@Url.Action("AddUpdateWatercourseDetails", "WaterCourses")',
+                                url: '@Url.Action("AddUpdateHEISDetails", "HEIS")',
                                 data: form,
                                 headers: { 'x-my-custom-header': 'some value' },
                                 type: 'POST',
@@ -675,47 +740,14 @@
                     }
 
                     return valid;
-                } else if (stepNumber == 1) {
-                    var valid = $("#frmDesignParameters").valid();
-                    if (valid) {
-                        if (valid) {
-                            var form = new FormData($("form[name='frmDesignParameters']")[0]);
-                        $.ajax({
-                                url: '@Url.Action("AddUpdateDesignParameters", "WaterCourses")',
-                                data: form,
-                                headers: { 'x-my-custom-header': 'some value' },
-                                type: 'POST',
-                                contentType: false,
-                                processData: false,
-                                async: false,
-                                cache: false,
-                                timeout: 30000,
-                                success: function (data) {
-                                    debugger;
-                                    if (data.ResponseCode == 1000) {
-
-                                    } else {
-
-                                    }
-                                        console.log(data);
-                                    },
-                                error: function (xhr, ajaxOptions, thrownError) {
-                                    valid = false;
-                                    alert(xhr.status);
-                                    alert(thrownError);
-                                }
-                            });
-                    }
-                    }
-                    return valid;
                 }
                 else if (stepNumber == 2) {
-                    var valid = $("#frmICR1and2").valid();
+                    var valid = $("#frmWorksExecuted").valid();
                     if (valid) {
                         if (valid) {
-                            var form = new FormData($("form[name='frmICR1and2']")[0]);
+                            var form = new FormData($("form[name='frmWorksExecuted']")[0]);
                         $.ajax({
-                                url: '@Url.Action("AddUpdateICR1AndICR2", "WaterCourses")',
+                                url: '@Url.Action("AddUpdateWorksExecuted", "HEIS")',
                                 data: form,
                                 headers: { 'x-my-custom-header': 'some value' },
                                 type: 'POST',

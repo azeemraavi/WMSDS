@@ -12,6 +12,7 @@ using System.Net;
 using Wmsds.Bll.Watercourse;
 using Wmsds.Entities;
 using Wmsds.Entities.HEIS;
+using System.Globalization;
 
 namespace Wmsds.Web.Controllers
 {
@@ -158,19 +159,6 @@ namespace Wmsds.Web.Controllers
             }
             return View(heisDataEntryDto);
         }
-
-        public async Task<JsonResult> GetChannelsByDistAndTehId(int districtId, int tehsilId)
-        {
-            ICommonService commonService = new CommonService();
-            List<Channel> Channels = await commonService.GetChannelsByDistAndTehId(districtId, tehsilId);
-            return Json(Channels, JsonRequestBehavior.AllowGet);
-        }
-        public async Task<JsonResult> GetWaterCourses(int districtId, int tehsilId, int channelId)
-        {
-            ICommonService commonService = new CommonService();
-            List<WaterCourse> WaterCourses = await commonService.GetWaterCourses(districtId, tehsilId, channelId);
-            return Json(WaterCourses, JsonRequestBehavior.AllowGet);
-        }
         public async Task<JsonResult> GetHeisListing(HeisIdentification model)
         {
             IHeisService heisCourseService = new HeisService();
@@ -198,122 +186,138 @@ namespace Wmsds.Web.Controllers
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
         }
-        public async Task<ActionResult> AddUpdateWatercourseDetails(FormCollection formCollection)
+        public async Task<ActionResult> AddUpdateHEISDetails(FormCollection formCollection)
         {
             try
             {
-                int WcIdentificationId = Convert.ToInt16(formCollection["hdWcIdentificationIdBI"]);
-                int WcIdentificationDetailId = Convert.ToInt16(formCollection["hdWcIdentificationDetailsIdBI"]);
-
-                int ImprovementYearId = Convert.ToInt16(formCollection["ddlImprovementYear"]);
-                string ImprovementType = formCollection["ddlImprovementType"] + "";
+                int HeisIdentificationId = Convert.ToInt16(formCollection["hdHeisIdentificationIdBI"]);
+                int HeisIdentificationDetailId = Convert.ToInt16(formCollection["hdHeisIdentificationDetailsIdBI"]);
 
                 double Latitude = Convert.ToDouble(formCollection["txtLatitude"]);
                 double Longitude = Convert.ToDouble(formCollection["txtLongitude"]);
+                string InstallationType = formCollection["ddlInstallationType"] + "".Replace("--Select--", "");
+                string FiscalYear = formCollection["ddlFiscalYear"] + "".Replace("--Select--", "");
+                string SystemType = formCollection["ddlSystemType"] + "".Replace("--Select--", "");
+                string SSCName = formCollection["ddlSSCName"] + "".Replace("--Select--", "");
                 string ProjectName = formCollection["ddlProjectName"] + "".Replace("--Select--", "");
-                string VillageName = formCollection["txtVillageName"] + "";
-                string UC = formCollection["txtUC"] + "";
-                decimal GCA = Convert.ToDecimal(formCollection["txtGCA"]);
-                decimal CCA = Convert.ToDecimal(formCollection["txtCCA"]);
-                decimal SanctionedDischarge = Convert.ToDecimal(formCollection["txtSanctionedDischarge"]);
-                decimal DesignDischarge = Convert.ToDecimal(formCollection["txtDesignDischarge"]);
-                string MoghaType = formCollection["ddlMoghaType"] + "".Replace("--Select--", "");
-                string GroundwaterQuality = formCollection["ddlGroundwaterQuality"] + "".Replace("--Select--", "");
-                string NameOfWUAChairman = formCollection["txtNameOfWUAChairman"] + "";
-                string ContactOfWUAChairman = formCollection["txtContactOfWUAChairman"] + "";
-                int NoOfBeneficiaries = Convert.ToInt16(formCollection["txtNoOfBeneficiaries"]);
-                decimal TotalLength = Convert.ToDecimal(formCollection["txtTotalLength"]);
+                string VillageName = formCollection["txtVillageName"];
+                string ContactNumber = formCollection["txtContactNumber"];
+                int SchemeArea = Convert.ToInt16(formCollection["txtSchemeArea"]);
+                string WaterSource = formCollection["ddlWaterSource"] + "".Replace("--Select--", "");
+                string WaterQuality = formCollection["ddlWaterQuality"] + "".Replace("--Select--", "");
+                string PowerSource = formCollection["ddlPowerSource"] + "".Replace("--Select--", "");
+                string CropCategory = formCollection["ddlCropCategory"] + "".Replace("--Select--", "");
+                string CropName = formCollection["ddlCropName"] + "".Replace("--Select--", "");
+                int PlansPerAcre = Convert.ToInt16(formCollection["txtPlansPerAcre"]);
+                string SystemClassification = formCollection["ddlSystemClassification"] + "".Replace("--Select--", "");
+                string WorkOrderIssued = formCollection["ddlWorkOrderIssued"] + "".Replace("--Select--", "");
+                DateTime DesignApprovalDate = DateTime.ParseExact(formCollection["txtDesignApprovalDate"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                int TotalApprovedProjectCost = Convert.ToInt16(formCollection["txtTotalApprovedProjectCost"]);
+                int TotalDynamicHead = Convert.ToInt16(formCollection["txtTotalDynamicHead"]);
+                string PumpType = formCollection["ddlPumpType"] + "".Replace("--Select--", "");
+                int PumpFlowRate = Convert.ToInt16(formCollection["txtPumpFlowRate"]);
+                int PowerSourceEfficiency = Convert.ToInt16(formCollection["txtPowerSourceEfficiency"]);
 
-                WcIdentificationDetail wcIdentificationDetail = new WcIdentificationDetail();
-                wcIdentificationDetail.WcIdentificationId = WcIdentificationId;
-                wcIdentificationDetail.Id = WcIdentificationDetailId;
-                wcIdentificationDetail.Latitude = Latitude;
-                wcIdentificationDetail.Longitude = Longitude;
-                wcIdentificationDetail.ProjectName = ProjectName;
-                wcIdentificationDetail.VillageName = VillageName;
-                wcIdentificationDetail.UC = UC;
-                wcIdentificationDetail.GCA = GCA;
-                wcIdentificationDetail.CCA = CCA;
-                wcIdentificationDetail.SanctionedDischargeLPS = SanctionedDischarge;
-                wcIdentificationDetail.DesignDischargeLPS = DesignDischarge;
-                wcIdentificationDetail.MoghaType = MoghaType;
-                wcIdentificationDetail.GroundwaterQuality = GroundwaterQuality;
-                wcIdentificationDetail.WUAChairman = NameOfWUAChairman;
-                wcIdentificationDetail.ChairmanContactNo = ContactOfWUAChairman;
-                wcIdentificationDetail.TotalLengthM = TotalLength;
-                wcIdentificationDetail.ImprovementYearId = ImprovementYearId;
-                wcIdentificationDetail.ImprovementType = ImprovementType;
+                HeisIdentificationDetail heisIdentificationDetail = new HeisIdentificationDetail();
+                heisIdentificationDetail.HeisIdentificationId = HeisIdentificationId;
+                heisIdentificationDetail.Id = HeisIdentificationDetailId;
+
+                heisIdentificationDetail.Latitude = Latitude;
+                heisIdentificationDetail.Longitude = Longitude;
+                heisIdentificationDetail.InstallationType = InstallationType;
+                heisIdentificationDetail.FiscalYear = FiscalYear;
+                heisIdentificationDetail.SystemType = SystemType;
+                heisIdentificationDetail.SSCName = SSCName;
+                heisIdentificationDetail.ProjectName = ProjectName;
+                heisIdentificationDetail.VillageName = VillageName;
+                heisIdentificationDetail.ContactNumber = ContactNumber;
+                heisIdentificationDetail.SchemeArea = SchemeArea;
+                heisIdentificationDetail.WaterSource = WaterSource;
+                heisIdentificationDetail.WaterQuality = WaterQuality;
+                heisIdentificationDetail.PowerSource = PowerSource;
+                heisIdentificationDetail.CropCategory = CropCategory;
+                heisIdentificationDetail.CropName = CropName;
+                heisIdentificationDetail.PlansPerAcre = PlansPerAcre;
+                heisIdentificationDetail.SystemClassification = SystemClassification;
+                heisIdentificationDetail.WorkOrderIssued = WorkOrderIssued;
+                heisIdentificationDetail.DesignApprovalDate = DesignApprovalDate;
+                heisIdentificationDetail.TotalApprovedProjectCost = TotalApprovedProjectCost;
+                heisIdentificationDetail.TotalDynamicHead = TotalDynamicHead;
+                heisIdentificationDetail.PumpType = PumpType;
+                heisIdentificationDetail.PumpFlowRate = PumpFlowRate;
+                heisIdentificationDetail.PowerSourceEfficiency = PowerSourceEfficiency;
 
 
-
-                IWaterCourseService waterCourseService = new WaterCourseService();
-                var response = new WmsdsResponse<WcIdentificationDetail>();
+                IHeisService heisCourseService = new HeisService();
+                var response = new WmsdsResponse<HeisIdentificationDetail>();
                 var responseUpdate = new WmsdsResponse<int>();
-                if (WcIdentificationDetailId == 0)
+                if (HeisIdentificationDetailId == 0)
                 {
-                    response = await waterCourseService.AddBasicInformation(wcIdentificationDetail);
+                    response = await heisCourseService.AddHeisBasicInformation(heisIdentificationDetail);
                     return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    responseUpdate = await waterCourseService.UpdateBasicInformation(wcIdentificationDetail);
+                    responseUpdate = await heisCourseService.UpdateHeisBasicInformation(heisIdentificationDetail);
                     return Json(responseUpdate, JsonRequestBehavior.AllowGet);
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
         }
-        public async Task<ActionResult> AddUpdateFCR(FormCollection formCollection)
+        public async Task<ActionResult> AddUpdateWorksExecuted(FormCollection formCollection)
         {
             try
             {
-                int WcIdentificationId = Convert.ToInt16(formCollection["hdWcIdentificationIdFCR"] + "");
-                int WcIdentificationDetailId = Convert.ToInt16(formCollection["hdWcIdentificationDetailsIdFCR"] + "");
+                int HeisIdentificationId = Convert.ToInt16(formCollection["hdHeisIdentificationIdWorksExecuted"] + "");
+                int HeisIdentificationDetailId = Convert.ToInt16(formCollection["hdHeisIdentificationDetailsIdWorksExecuted"] + "");
 
-                string FCRApproved = formCollection["ddlFCRApproved"] + "".Replace("--Select--", "");
-                decimal FCRLinedlength = Convert.ToDecimal(formCollection["txtFCRLinedlength"]);
-                decimal FCRLined = Convert.ToDecimal(formCollection["txtFCRLined"]);
-                int FCRTotalCostOfCivilWorksVerified = Convert.ToInt16(formCollection["txtFCRTotalCostOfCivilWorksVerified"]);
-                int FCRLabourShareVerifiedEarthen = Convert.ToInt16(formCollection["txtFCRLabourShareVerifiedEarthen"]);
-                int FCRLabourShareVerifiedMasonry = Convert.ToInt16(formCollection["txtFCRLabourShareVerifiedMasonry"]);
-                int FCRTotalSchemeCost = Convert.ToInt16(formCollection["txtFCRTotalSchemeCost"]);
-                string FCRPCPSegmentSize = formCollection["ddlFCRPCPSegmentSize"] + "".Replace("--Select--", "");
+                string WorkOrderIssued = formCollection["ddlWorkOrderIssued"] + "".Replace("--Select--", "");
+                DateTime WorkOrderIssueDate = DateTime.ParseExact(formCollection["txtWorkOrderIssueDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                decimal WorkOrderAmount = Convert.ToDecimal(formCollection["txtWorkOrderAmount"]);
+                decimal EstimatedGovtShare = Convert.ToDecimal(formCollection["txtEstimatedGovtShare"]);
+                decimal EstimatedFamerShare = Convert.ToDecimal(formCollection["txtEstimatedFamerShare"]);
+                decimal FarmerShareInCash = Convert.ToDecimal(formCollection["txtFarmerShareInCash"]);
+                decimal FarmerShareInKind = Convert.ToDecimal(formCollection["txtFarmerShareInKind"]);
+                string MaterialVerified = formCollection["ddlMaterialVerified"] + "".Replace("--Select--", "");
+                DateTime MaterialVerifiedDate = DateTime.ParseExact(formCollection["txtMaterialVerifiedDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                int ICRIAmountVerified = Convert.ToInt16(formCollection["txtICRIAmountVerified"]);
+                string CommissioningVerification = formCollection["ddlCommissioningVerification"] + "".Replace("--Select--", "");
+                DateTime CommissioningVerificationDate = DateTime.ParseExact(formCollection["txtCommissioningVerificationDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                int TotalSchemeCostVerified = Convert.ToInt16(formCollection["txtTotalSchemeCostVerified"]);
+                int ICRIIAmountVerified = Convert.ToInt16(formCollection["txtICRIIAmountVerified"]);
+                string ICRIIIVerification = formCollection["ddlICRIIIVerification"] + "".Replace("--Select--", "");
+                int TotalAmountVerified = Convert.ToInt16(formCollection["txtTotalAmountVerified"]);
+                DateTime ICRIIIQualifyingDate = DateTime.ParseExact(formCollection["txtICRIIIQualifyingDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-                int FCRPCPSegmentNo = Convert.ToInt16(formCollection["txtFCRPCPSegmentNo"]);
-                int FCRNakkas = Convert.ToInt16(formCollection["txtFCRNakkas"]);
-                int FCRCulverts = Convert.ToInt16(formCollection["txtFCRCulverts"]);
-                int FCRBuffaloWallow = Convert.ToInt16(formCollection["txtFCRBuffaloWallow"]);
-                int FCRDistributionBox = Convert.ToInt16(formCollection["txtFCRDistributionBox"]);
-                int FCRWaterStorageTank = Convert.ToInt16(formCollection["txtFCRWaterStorageTank"]);
-                int FCRDropStructure = Convert.ToInt16(formCollection["txtFCRDropStructure"]);
-                int FCROthers = Convert.ToInt16(formCollection["txtFCROthers"]);
+                HeisIdentificationDetail heisIdentificationDetail = new HeisIdentificationDetail();
 
-                WcIdentificationDetail wcIdentificationDetail = new WcIdentificationDetail();
-                wcIdentificationDetail.WcIdentificationId = WcIdentificationId;
-                wcIdentificationDetail.Id = WcIdentificationDetailId;
-                wcIdentificationDetail.FCRApprovedStatus = FCRApproved;
-                wcIdentificationDetail.FCRLinedLength = FCRLinedlength;
-                wcIdentificationDetail.LinedPercentage = FCRLined;
-                wcIdentificationDetail.TotalCostOfCivilWrkVerfied = FCRTotalCostOfCivilWorksVerified;
-                wcIdentificationDetail.FCREarthenWorks = FCRLabourShareVerifiedEarthen;
-                wcIdentificationDetail.FCRMasonryWorks = FCRLabourShareVerifiedMasonry;
-                wcIdentificationDetail.TotalSchemeCost = FCRTotalSchemeCost;
-                wcIdentificationDetail.FCRPcpSegmentSize = FCRPCPSegmentSize;
-                wcIdentificationDetail.FCRPcpSegment = FCRPCPSegmentNo;
-                wcIdentificationDetail.FCRNakkas = FCRNakkas;
-                wcIdentificationDetail.FCRCulverts = FCRCulverts;
-                wcIdentificationDetail.FCRBuffaloWallow = FCRBuffaloWallow;
-                wcIdentificationDetail.FCRDistributionBox = FCRDistributionBox;
-                wcIdentificationDetail.FCRWaterStorageTank = FCRWaterStorageTank;
-                wcIdentificationDetail.FCRDropStructure = FCRDropStructure;
-                wcIdentificationDetail.FCROthers = FCROthers;
+                heisIdentificationDetail.HeisIdentificationId = HeisIdentificationId;
+                heisIdentificationDetail.Id = HeisIdentificationDetailId;
+                heisIdentificationDetail.WorkOrderIssued = WorkOrderIssued;
+                heisIdentificationDetail.WorkOrderIssueDate = WorkOrderIssueDate;
+                heisIdentificationDetail.WorkOrderAmount = WorkOrderAmount;
+                heisIdentificationDetail.EstimatedGovtShare = EstimatedGovtShare;
+                heisIdentificationDetail.EstimatedFamerShare = EstimatedFamerShare;
+                heisIdentificationDetail.FarmerShareInCash = FarmerShareInCash;
+                heisIdentificationDetail.FarmerShareInKind = FarmerShareInKind;
+                heisIdentificationDetail.MaterialVerified = MaterialVerified;
+                heisIdentificationDetail.MaterialVerifiedDate = MaterialVerifiedDate;
+                heisIdentificationDetail.ICRIAmountVerified = ICRIAmountVerified;
+                heisIdentificationDetail.CommissioningVerification = CommissioningVerification;
+                heisIdentificationDetail.CommissioningVerificationDate = CommissioningVerificationDate;
+                heisIdentificationDetail.TotalSchemeCostVerified = TotalSchemeCostVerified;
+                heisIdentificationDetail.ICRIIAmountVerified = ICRIIAmountVerified;
+                heisIdentificationDetail.ICRIIIVerification = ICRIIIVerification;
+                heisIdentificationDetail.TotalAmountVerified = TotalAmountVerified;
+                heisIdentificationDetail.ICRIIIQualifyingDate = ICRIIIQualifyingDate;
+                
 
-
-                IWaterCourseService waterCourseService = new WaterCourseService();
-                var response = await waterCourseService.AddUpdateFCR(wcIdentificationDetail);
+                IHeisService heisService = new HeisService();
+                var response = await heisService.AddWorksExecuted(heisIdentificationDetail);
                 if (response.ResponseCode == Entities.EnumStatus.Success)
                 {
 
@@ -321,7 +325,7 @@ namespace Wmsds.Web.Controllers
 
                 return Json(new { FormId = 0, HttpStatusCode = (int)HttpStatusCode.OK });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
