@@ -60,32 +60,103 @@ namespace Wmsds.Web.Controllers
 
             return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> LoaCropNameByCategory(string CategoryName)
+        {
+            List<string> cropNames = new List<string>();
+            if (CategoryName == "Row Crops")
+            {
+                cropNames.Add("Cotton");
+                cropNames.Add("Maize");
+                cropNames.Add("Sugarcane");
+                cropNames.Add("Sugar Beat");
+                cropNames.Add("Water Melon");
+                cropNames.Add("Sunflower");
+                cropNames.Add("Tobacco");
+                cropNames.Add("Strawberry");
+                cropNames.Add("Flowers");
+                cropNames.Add("Nursery");
+                cropNames.Add("Other Row Crops");
+            }
+            else if (CategoryName == "Field Crops") //
+            {
+                cropNames.Add("Wheat");
+                cropNames.Add("Fodder");
+                cropNames.Add("Gram");
+                cropNames.Add("Peanuts");
+                cropNames.Add("Other Field Crop");
+            }
+            else if (CategoryName == "Orchard") //
+            {
+                cropNames.Add("Citrus");
+                cropNames.Add("Mango");
+                cropNames.Add("Guava");
+                cropNames.Add("Berries");
+                cropNames.Add("Olive");
+                cropNames.Add("Dates");
+                cropNames.Add("Lichi");
+                cropNames.Add("Grapes");
+                cropNames.Add("Banana");
+                cropNames.Add("Apicot");
+                cropNames.Add("Almond");
+                cropNames.Add("Pomegranate");
+                cropNames.Add("Loquat");
+                cropNames.Add("Jojoba");
+                cropNames.Add("Papaya");
+                cropNames.Add("Jatropha");
+                cropNames.Add("Karonda");
+                cropNames.Add("Peach");
+                cropNames.Add("Palm");
+                cropNames.Add("Other Orchards");
+
+            }
+            else if (CategoryName == "Vegetables") //
+            {
+                cropNames.Add("Cucumber");
+                cropNames.Add("Capsicum");
+                cropNames.Add("Tomato");
+                cropNames.Add("Chillies");
+                cropNames.Add("Potato");
+                cropNames.Add("Cauliflower");
+                cropNames.Add("Bitter Gourd");
+                cropNames.Add("Brinjal");
+                cropNames.Add("Carrot");
+                cropNames.Add("Lady finger");
+                cropNames.Add("Onion");
+                cropNames.Add("Pumpkin");
+                cropNames.Add("Other vegetables");
+
+            }
+
+            return Json(cropNames, JsonRequestBehavior.AllowGet);
+        }
+
         public async Task<ActionResult> DataEntry(int Id, bool IsNewEntry)
         {
-            Wmsds.Web.Models.WcDataEntryDto wcDataEntryDto = new Wmsds.Web.Models.WcDataEntryDto();
+            Wmsds.Web.Models.HEISDataEntryDto heisDataEntryDto = new Wmsds.Web.Models.HEISDataEntryDto();
 
-            IWaterCourseService waterCourseService = new WaterCourseService();
-            var responce = await waterCourseService.GetIdentificationById(Id);
+            IHeisService heisCourseService = new HeisService();
+            var responce = await heisCourseService.GetHeisIdentificationById(Id);
             if (responce.ResponseCode == EnumStatus.Success)
             {
-                wcDataEntryDto.WcIdentification = responce.DataObject;
+                heisDataEntryDto.HeisIdentification = responce.DataObject;
             }
             else
             {
-                wcDataEntryDto.WcIdentification = new WcIdentification();
+                heisDataEntryDto.HeisIdentification = new HeisIdentification();
             }
 
 
-            var detailResponse = await waterCourseService.GetIdentificationDetailByMasterId(Id);
+            var detailResponse = await heisCourseService.GetHeisIdentificationDetailByMasterId(Id);
             if (IsNewEntry == false && detailResponse.ResponseCode == EnumStatus.Success)
             {
-                wcDataEntryDto.WcIdentificationDetail = detailResponse.DataObject;
+                heisDataEntryDto.HeisIdentificationDetail = detailResponse.DataObject;
             }
             else
             {
-                wcDataEntryDto.WcIdentificationDetail = new WcIdentificationDetail();
+                heisDataEntryDto.HeisIdentificationDetail = new HeisIdentificationDetail();
             }
-            return View(wcDataEntryDto);
+            return View(heisDataEntryDto);
         }
 
         public async Task<JsonResult> GetChannelsByDistAndTehId(int districtId, int tehsilId)
@@ -94,14 +165,12 @@ namespace Wmsds.Web.Controllers
             List<Channel> Channels = await commonService.GetChannelsByDistAndTehId(districtId, tehsilId);
             return Json(Channels, JsonRequestBehavior.AllowGet);
         }
-
         public async Task<JsonResult> GetWaterCourses(int districtId, int tehsilId, int channelId)
         {
             ICommonService commonService = new CommonService();
             List<WaterCourse> WaterCourses = await commonService.GetWaterCourses(districtId, tehsilId, channelId);
             return Json(WaterCourses, JsonRequestBehavior.AllowGet);
         }
-
         public async Task<JsonResult> GetHeisListing(HeisIdentification model)
         {
             IHeisService heisCourseService = new HeisService();
@@ -129,7 +198,6 @@ namespace Wmsds.Web.Controllers
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
         }
-
         public async Task<ActionResult> AddUpdateWatercourseDetails(FormCollection formCollection)
         {
             try
@@ -198,9 +266,6 @@ namespace Wmsds.Web.Controllers
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
         }
-
-        
-       
         public async Task<ActionResult> AddUpdateFCR(FormCollection formCollection)
         {
             try
@@ -261,8 +326,6 @@ namespace Wmsds.Web.Controllers
                 return Json(new { FormId = 0, HttpStatusCode = HttpStatusCode.NotImplemented });
             }
         }
-
-
         public async Task<JsonResult> LoadFinancialYears()
         {
             ICommonService commonService = new CommonService();

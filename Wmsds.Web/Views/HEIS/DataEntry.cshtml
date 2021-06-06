@@ -7,7 +7,6 @@
     <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
     <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
     <link href="../content/assets/css/pages/smart-wizard/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-
 }
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -44,13 +43,13 @@
                                 </b> @Model.HeisIdentification.FarmerName
                             </div>
                             <div><b>Farmer CNIC: &nbsp;&nbsp;&nbsp;</b> @Model.HeisIdentification.FarmerCNIC</div>
-                            
+
                         </div>
                         <div class="col-md-6">
 
                             <div><b>District:&nbsp;&nbsp;&nbsp; </b> @Model.HeisIdentification.DistrictName </div>
                             <div><b>Tehsil:&nbsp;&nbsp;&nbsp; </b>  @Model.HeisIdentification.TehsilName </div>
-                            
+
                         </div>
                     </div>
 
@@ -65,7 +64,6 @@
                     <select id="theme_selector" class="form-control">
                         <option value="arrows" selected>arrows</option>
                         <option value="default">default</option>
-
                         <option value="circles">circles</option>
                         <option value="dots">dots</option>
                     </select>
@@ -127,7 +125,8 @@
                                                 <label>System Type</label>
                                                 <select id="ddlSystemType" name="ddlSystemType" class="form-control" required>
                                                     <option value="">--Select--</option>
-
+                                                    <option value="Drip">Drip</option>
+                                                    <option value="Sprinkler">Sprinkler</option>
                                                 </select>
                                             </div>
 
@@ -188,9 +187,6 @@
                                                 </select>
                                             </div>
 
-                                        </div>
-                                        <div class="col-md-6 col-sm-6">
-
                                             <div class="form-group">
                                                 <label>Village Name/Number</label>
                                                 @Html.TextBox("txtVillageName", Model.HeisIdentificationDetail.VillageName,
@@ -199,8 +195,7 @@
                                                         @class = "form-control",
                                                         @id = "txtVillageName",
                                                         @placeholder = "",
-                                                   required = "required",
-                                                        type = "number"
+                                                   required = "required"
                                                     })
                                             </div>
                                             <div class="form-group">
@@ -246,6 +241,10 @@
                                                     <option value="Marginally Fit">Marginally Fit</option>
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+
+
                                             <div class="form-group">
                                                 <label>Power Source</label>
                                                 <select class="form-control" id="ddlPowerSource" name="ddlPowerSource" required>
@@ -269,9 +268,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Crop Name</label>
-                                                <select class="form-control" id="ddlCropCategory" name="ddlCropCategory" required>
+                                                <select class="form-control" id="ddlCropName" name="ddlCropName" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="Row Crops">Drop down from concerned Crop Category (attached)</option>
+
 
                                                 </select>
                                             </div>
@@ -316,8 +315,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Design Approval Date </label>
-                                                @Html.TextBox("txtDesignApprovalDate", Model.HeisIdentificationDetail.DesignApprovalDate,
-                                               new { @class = "form-control", @id = "txtDesignApprovalDate", @placeholder = "", required = "required" })
+                                                <div class="input-group date form_datetime">
+                                                    @Html.TextBox("txtDesignApprovalDate", Model.HeisIdentificationDetail.DesignApprovalDate,
+                                                   new { @class = "form-control", @id = "txtDesignApprovalDate", required = "required", @size = "16", @readonly = "readonly" })
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -354,9 +356,9 @@
                             </fieldset>
                         </form>
                     </div>
-                    
+
                     <div id="step-2" class="">
-                        <form id="frmFCR" name="frmFCR">
+                        <form id="frmWorksExecuted" name="frmWorksExecuted">
                             <input type="hidden" id="hdHeisIdentificationIdFCR" name="hdHeisIdentificationIdFCR" value="@Model.HeisIdentification.Id">
                             <input type="hidden" id="hdHeisIdentificationDetailsIdFCR" name="hdHeisIdentificationDetailsIdFCR" value="@Model.HeisIdentificationDetail.Id">
                             <fieldset>
@@ -372,15 +374,12 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="txtWorkOrderIssueDate">Latitude</label>
-                                                @Html.TextBox("txtWorkOrderIssueDate", Model.HeisIdentificationDetail.WorkOrderIssueDate,
-                                               new
-                                                    {
-                                                        @class = "form-control",
-                                                        @id = "txtWorkOrderIssueDate",
-                                                        @placeholder = "",
-                                                        required = "required"
-                                                })
+                                                <label for="txtWorkOrderIssueDate">Work Order Issue Date</label>
+                                                <div class="input-group date form_datetime">
+                                                    @Html.TextBox("txtWorkOrderIssueDate", Model.HeisIdentificationDetail.WorkOrderIssueDate,
+                                                   new { @class = "form-control", @id = "txtWorkOrderIssueDate", required = "required", @size = "16", @readonly = "readonly" })
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Work Order Amount (Rs.) </label>
@@ -428,8 +427,11 @@
 
                                             <div class="form-group">
                                                 <label>Material Verified Date</label>
-                                                @Html.TextBox("txtMaterialVerifiedDate", Model.HeisIdentificationDetail.MaterialVerifiedDate,
-                                               new { @class = "form-control", @id = "txtMaterialVerifiedDate", required = "required" })
+                                                <div class="input-group date form_datetime">
+                                                    @Html.TextBox("txtMaterialVerifiedDate", Model.HeisIdentificationDetail.MaterialVerifiedDate,
+                                                   new { @class = "form-control", @id = "txtMaterialVerifiedDate", required = "required", @size = "16", @readonly = "readonly" })
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -455,8 +457,12 @@
 
                                             <div class="form-group">
                                                 <label>Commissioning Verification Date</label>
-                                                @Html.TextBox("txtCommissioningVerificationDate", Model.HeisIdentificationDetail.CommissioningVerificationDate,
-                                               new { @class = "form-control", @id = "txtFCRDropStructure", required = "required" })
+
+                                                <div class="input-group date form_datetime">
+                                                    @Html.TextBox("txtCommissioningVerificationDate", Model.HeisIdentificationDetail.CommissioningVerificationDate,
+                                                   new { @class = "form-control", @id = "txtCommissioningVerificationDate", required = "required", @size = "16", @readonly = "readonly" })
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -488,8 +494,11 @@
 
                                             <div class="form-group">
                                                 <label>ICR-III Qualifying Date </label>
-                                                @Html.TextBox("txtICRIIIQualifyingDate", Model.HeisIdentificationDetail.ICRIIIQualifyingDate,
-                                               new { @class = "form-control", @id = "txtICRIIIQualifyingDate", @placeholder = "", required = "required", type = "number" })
+                                                <div class="input-group date form_datetime">
+                                                    @Html.TextBox("txtICRIIIQualifyingDate", Model.HeisIdentificationDetail.ICRIIIQualifyingDate,
+                                                   new { @class = "form-control", @id = "txtICRIIIQualifyingDate", required = "required", @size = "16", @readonly = "readonly" })
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -508,29 +517,53 @@
     <script src="../content/assets/js/pages/validation/form-validation.js"></script>
     <!-- Include SmartWizard JavaScript source -->
     <script src="../content/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js"></script>
-    @*<script src="../content/assets/js/pages/smart-wizard/wizard-data.js"></script>*@
+    <script src="../content/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
     <script type="text/javascript">
 
 
 
     $(document).ready(function () {
-        $("#ddlImprovementType").val('@(Model.HeisIdentificationDetail.ImprovementType)').change();
-        $("#ddlProjectName").val('@(Model.HeisIdentificationDetail.ProjectName)').change();
-        $("#ddlMoghaType").val('@(Model.HeisIdentificationDetail.MoghaType)').change();
-        $("#ddlGroundwaterQuality").val('@(Model.HeisIdentificationDetail.GroundwaterQuality)').change();
+        @*$("#ddlImprovementType").val('@(Model.HeisIdentificationDetail.ImprovementType)').change();*@
 
-        $("#ddlDesignApproved").val('@(Model.HeisIdentificationDetail.DesignApproved)').change();
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+        $('.form_datetime').datetimepicker({
+            pickTime: false,
+            minView: 2,
+            startDate: date,
+            format: 'mm/dd/yyyy',
+            autoclose: true,
+        });
 
-        $("#ddlPCPSegmentSize").val('@(Model.HeisIdentificationDetail.PcpSegmentSize)').change();
+        $("#ddlCropCategory").on("change", onddlCropCategoryChange);
+        function onddlCropCategoryChange() {
+            debugger;
+            $('#ddlCropName').empty();
+            var optionSelect = $('<option />');
+            optionSelect.attr('value', "").text("--Select--");
+            $('#ddlCropName').append(optionSelect);
+            var CategoryName = $('#ddlCropCategory').val();
+            $.ajax({
+                url: '/HEIS/LoaCropNameByCategory',
+                type: "GET",
+                data: { CategoryName: CategoryName},
+                dataType: "JSON",
+                success: function (data) {
+                    debugger;
+                    $(data).each(function (index, item ) {
+                        //this refers to the current item being iterated over
+                        var option = $('<option />');
+                        option.attr('value', item).text(item);
+                        $('#ddlCropName').append(option);
+                    });
+                }
+            });
 
-        $("#ddlICR1").val('@(Model.HeisIdentificationDetail.ICR1ApprovedStatus)').change();
-        $("#ddlICR2").val('@(Model.HeisIdentificationDetail.ICR2ApprovedStatus)').change();
-
-        $("#ddlFCRApproved").val('@(Model.HeisIdentificationDetail.FCRApprovedStatus)').change();
-        $("#ddlFCRPCPSegmentSize").val('@(Model.HeisIdentificationDetail.FCRPcpSegmentSize)').change();
+        }
 
         $.ajax({
-            url: '/WaterCourses/LoadFinancialYears',
+            url: '/HEIS/LoadFinancialYears',
             type: "GET",
             dataType: "JSON",
             success: function (data) {
@@ -538,128 +571,11 @@
                     //this refers to the current item being iterated over
                     var option = $('<option />');
                     option.attr('value', this.Id).text(this.Year);
-                    $('#ddlImprovementYear').append(option);
+                    $('#ddlFiscalYear').append(option);
                 });
 
-                $("#ddlImprovementYear").val('@(Model.HeisIdentificationDetail.ImprovementYearId)');
+                @*$("#ddlImprovementYear").val('@(Model.HeisIdentificationDetail.ImprovementYearId)');*@
             }
-        });
-
-
-        $("#frmBasicInformation").validate({
-                errorClass: 'help-block',
-                validClass: 'success',
-                errorElement: "span",
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
-                },
-                rules: {
-                    txtLatitude: {
-                        required: true,
-                        // Using the normalizer to trim the value of the element
-                        // before validating it.
-                        //
-                        // The value of `this` inside the `normalizer` is the corresponding
-                        // DOMElement. In this example, `this` references the `username` element.
-                        normalizer: function (value) {
-                            return $.trim(value);
-                        }
-                    }
-                },
-                // Specify validation error messages
-                messages: {
-                    txtLatitude: "Please enter Latitude"
-                },
-            });
-
-            $("#frmDesignParameters").validate({
-                errorClass: 'help-block',
-                validClass: 'success',
-                errorElement: "span",
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
-                },
-                rules: {
-                    txtTSAmount: {
-                        required: true,
-                        // Using the normalizer to trim the value of the element
-                        // before validating it.
-                        //
-                        // The value of `this` inside the `normalizer` is the corresponding
-                        // DOMElement. In this example, `this` references the `username` element.
-                        normalizer: function (value) {
-                            return $.trim(value);
-                        }
-                    }
-                },
-                // Specify validation error messages
-                messages: {
-                    txtTSAmount: "Please enter TSAmount"
-                },
-            });
-
-            $("#frmICR1and2").validate({
-                errorClass: 'help-block',
-                validClass: 'success',
-                errorElement: "span",
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
-                },
-                rules: {
-                    txtICR1ReleasedAmount: {
-                        required: true,
-                        // Using the normalizer to trim the value of the element
-                        // before validating it.
-                        //
-                        // The value of `this` inside the `normalizer` is the corresponding
-                        // DOMElement. In this example, `this` references the `username` element.
-                        normalizer: function (value) {
-                            return $.trim(value);
-                        }
-                    }
-                },
-                // Specify validation error messages
-                messages: {
-                    txtICR1ReleasedAmount: "Please enter Released Amount"
-                },
-            });
-
-        $("#frmFCR").validate({
-            errorClass: 'help-block',
-            validClass: 'success',
-            errorElement: "span",
-            highlight: function (element, errorClass, validClass) {
-                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
-            },
-            rules: {
-                txtFCRLined: {
-                    required: true,
-                    // Using the normalizer to trim the value of the element
-                    // before validating it.
-                    //
-                    // The value of `this` inside the `normalizer` is the corresponding
-                    // DOMElement. In this example, `this` references the `username` element.
-                    normalizer: function (value) {
-                        return $.trim(value);
-                    }
-                }
-            },
-            // Specify validation error messages
-            messages: {
-                txtFCRLined: "Please enter FCR Lined"
-            },
         });
 
             // Step show event

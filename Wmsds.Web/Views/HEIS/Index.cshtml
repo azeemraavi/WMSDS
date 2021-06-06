@@ -27,7 +27,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>SELECT HEIS</header>
+                        <header>HEIS</header>
                         <button id="panel-button6"
                                 class="mdl-button mdl-js-button mdl-button--icon pull-right"
                                 data-upgraded=",MaterialButton">
@@ -75,7 +75,7 @@
                                             <div class="col-md-6 col-sm-6 col-6">
                                                 <div class="btn-group">
                                                     <button data-toggle="modal" data-target="#exampleModal" class="btn btn-info">
-                                                        Add New Scheme <i class="fa fa-plus"></i>
+                                                        Add Identification <i class="fa fa-plus"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -150,9 +150,9 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="frmAddNewWaterCourse">
+                <form id="frmAddHeisIdentification">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add New Watercourse/Irrigation Scheme in Database</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add New HEIS Identification</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Farmer CNIC</label>
-                                    @Html.TextBox("txtFarmerCNIC", "", new { @class = "form-control", @id = "txtFarmerCNIC", @placeholder = "", required = "required" })
+                                    @Html.TextBox("txtFarmerCNIC", "", new { @class = "form-control", @id = "txtFarmerCNIC", @placeholder = "", required = "required", type = "number" })
                                 </div>
                             </div>   
                             <div class="col-md-6 col-sm-6">
@@ -282,79 +282,12 @@
                     $('#dllAddTehsil').append(option);
                 });
             }
-
-            $("#dllAddTehsil").on("change", ondllAddTehsilChange);
-            function ondllAddTehsilChange() {
-                $('#dllAddChannelName').empty();
-                var optionSelect = $('<option />');
-                optionSelect.attr('value', "").text("--Select--");
-                $('#dllAddChannelName').append(optionSelect);
-
-                var DistrictId = $('#dllAddDistrict').val();
-                var TehsilId = $('#dllAddTehsil').val();
-                if (TehsilId == "") {
-                    return;
-                }
-                $.ajax({
-                    url: '/WaterCourses/GetChannelsByDistAndTehId',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        districtId: DistrictId,
-                        tehsilId: TehsilId
-                    },
-                    success: function (data) {
-                        debugger;
-                        $(data).each(function () {
-                            //this refers to the current item being iterated over
-                            var option = $('<option />');
-                            option.attr('value', this.Id).text(this.ChannelName);
-                            $('#dllAddChannelName').append(option);
-                        });
-                    }
-                });
-            }
-
-            $("#dllAddChannelName").on("change", ondllAddChannelNameChange);
-            function ondllAddChannelNameChange() {
-                $('#dllAddWatercourse').empty();
-                var optionSelect = $('<option />');
-                optionSelect.attr('value', "").text("--Select--");
-                $('#dllAddWatercourse').append(optionSelect);
-
-                debugger;
-                var DistrictId = $('#dllAddDistrict').val();
-                var TehsilId = $('#dllAddTehsil').val();
-                var ChannelId = $('#dllAddChannelName').val();
-                if (ChannelId == "") {
-                    return;
-                }
-                $.ajax({
-                    url: '/WaterCourses/GetWaterCourses',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        districtId: DistrictId,
-                        tehsilId: TehsilId,
-                        channelId: ChannelId
-                    },
-                    success: function (data) {
-                        debugger;
-                        $(data).each(function () {
-                            //this refers to the current item being iterated over
-                            var option = $('<option />');
-                            option.attr('value', this.Id).text(this.WcNo);
-                            $('#dllAddWatercourse').append(option);
-                        });
-                    }
-                });
-            }
         });
 
         $("#btnAddWCIdentification").on("click", onbtnAddWCIdentificationClick);
         function onbtnAddWCIdentificationClick() {
             debugger;
-            $("#frmAddNewWaterCourse").validate({
+            $("#frmAddHeisIdentification").validate({
                 errorClass: 'help-block',
                 validClass: 'success',
                 errorElement: "span",
@@ -365,7 +298,7 @@
                     $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
                 }
             });
-            var valid = $("#frmAddNewWaterCourse").valid();
+            var valid = $("#frmAddHeisIdentification").valid();
             if (!valid) {
                 return;
             }
@@ -376,29 +309,20 @@
             var TehsilId = $('#dllAddTehsil').val();
             var TehsilName = $('#dllAddTehsil').find(":selected").text();
 
-            var ChannelId = $('#dllAddChannelName').val();
-            var ChannelName = $('#dllAddChannelName').find(":selected").text();
-
-            var WaterCourseId = $('#dllAddWatercourse').val();
-            var WaterCourseNo = $('#dllAddWatercourse').find(":selected").text();
-
-
-            var ImprovementType = $('#dllAddImprovementType').val();
+            var FarmerName = $('#txtFarmerName').val();
+            var FarmerCNIC = $('#txtFarmerCNIC').val();
 
             $.ajax({
-                url: '/WaterCourses/AddWatercourseIdentification',
+                url: '/HEIS/AddHeisIdentification',
                 type: "POST",
                 dataType: "JSON",
                 data: {
-
+                    FarmerName: FarmerName,
+                    FarmerCNIC: FarmerCNIC,
                     DistrictId: DistrictId,
                     DistrictName: DistrictName,
                     TehsilId: TehsilId,
-                    TehsilName: TehsilName,
-                    ChannelId: ChannelId,
-                    ChannelName: ChannelName,
-                    WaterCourseId: WaterCourseId,
-                    WaterCourseNo: WaterCourseNo
+                    TehsilName: TehsilName
                 },
                 success: function (data) {
                     $('#txtMSG').html(data.ResponseMessage);
