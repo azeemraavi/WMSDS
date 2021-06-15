@@ -21,7 +21,7 @@ namespace Wmsds.Web.Controllers
         public async Task<ActionResult> Index()
         {
             IHeisService heisCourseService = new HeisService();
-            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications();
+            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(0,0,null,null);
             return View(HeisIdentifications);
         }
 
@@ -276,23 +276,57 @@ namespace Wmsds.Web.Controllers
                 int HeisIdentificationDetailId = Convert.ToInt16(formCollection["hdHeisIdentificationDetailsIdWorksExecuted"] + "");
 
                 string WorkOrderIssued = formCollection["ddlWorkOrderIssued"] + "".Replace("--Select--", "");
-                DateTime WorkOrderIssueDate = DateTime.ParseExact(formCollection["txtWorkOrderIssueDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                DateTime WorkOrderIssueDate = DateTime.Now;
+                try
+                {
+                    WorkOrderIssueDate = DateTime.ParseExact(formCollection["txtWorkOrderIssueDate"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                catch (Exception)
+                {
+
+                   
+                }
                 decimal WorkOrderAmount = Convert.ToDecimal(formCollection["txtWorkOrderAmount"]);
                 decimal EstimatedGovtShare = Convert.ToDecimal(formCollection["txtEstimatedGovtShare"]);
                 decimal EstimatedFamerShare = Convert.ToDecimal(formCollection["txtEstimatedFamerShare"]);
                 decimal FarmerShareInCash = Convert.ToDecimal(formCollection["txtFarmerShareInCash"]);
                 decimal FarmerShareInKind = Convert.ToDecimal(formCollection["txtFarmerShareInKind"]);
                 string MaterialVerified = formCollection["ddlMaterialVerified"] + "".Replace("--Select--", "");
-                DateTime MaterialVerifiedDate = DateTime.ParseExact(formCollection["txtMaterialVerifiedDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                DateTime MaterialVerifiedDate = DateTime.Now;
+                try
+                {
+                    MaterialVerifiedDate = DateTime.ParseExact(formCollection["txtMaterialVerifiedDate"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                catch (Exception)
+                {
+
+                   
+                }
                 int ICRIAmountVerified = Convert.ToInt16(formCollection["txtICRIAmountVerified"]);
                 string CommissioningVerification = formCollection["ddlCommissioningVerification"] + "".Replace("--Select--", "");
-                DateTime CommissioningVerificationDate = DateTime.ParseExact(formCollection["txtCommissioningVerificationDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                DateTime CommissioningVerificationDate = DateTime.Now;
+                try
+                {
+                     CommissioningVerificationDate = DateTime.ParseExact(formCollection["txtCommissioningVerificationDate"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                catch (Exception)
+                {
+
+                    
+                }
                 int TotalSchemeCostVerified = Convert.ToInt16(formCollection["txtTotalSchemeCostVerified"]);
                 int ICRIIAmountVerified = Convert.ToInt16(formCollection["txtICRIIAmountVerified"]);
                 string ICRIIIVerification = formCollection["ddlICRIIIVerification"] + "".Replace("--Select--", "");
                 int TotalAmountVerified = Convert.ToInt16(formCollection["txtTotalAmountVerified"]);
-                DateTime ICRIIIQualifyingDate = DateTime.ParseExact(formCollection["txtICRIIIQualifyingDate"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                DateTime ICRIIIQualifyingDate = DateTime.Now;
+                try
+                {
+                    ICRIIIQualifyingDate = DateTime.ParseExact(formCollection["txtICRIIIQualifyingDate"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
+                }
+                catch (Exception)
+                {
+                }
                 HeisIdentificationDetail heisIdentificationDetail = new HeisIdentificationDetail();
 
                 heisIdentificationDetail.HeisIdentificationId = HeisIdentificationId;

@@ -9,11 +9,9 @@ $(document).ready(function() {
     data: {
         datasets: [{
             data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                
+                18302,
+                18080,
+                222
             ],
             backgroundColor: [
                 window.chartColors.red,
@@ -22,13 +20,13 @@ $(document).ready(function() {
                 window.chartColors.green,
                 
             ],
-            label: 'Status of 58,879 Watercourses'
+            label: 'Status of 18,302 Watercourses'
         }],
         labels: [
             "Total",
-            "Regular",
-            "Additional",
-            "Un-improved",
+            "Un-Improved",
+            "Improved"
+            
            
         ]
     },
@@ -107,17 +105,17 @@ $(document).ready(function()
 $(document).ready(function () {
     var color = Chart.helpers.color;
     var barChartData = {
-        labels: ["Total", "Regular", "Additional", "Un-improved"],
+        labels: ["Total", "Reg.", "Add", "Un-imp"],
         datasets: [{
             type: 'bar',
             label: 'Watercourse Improvement Status',
             backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
             borderColor: window.chartColors.red,
             data: [
-                58879,
-                49531,
-                6793,
-                9348
+                18302,
+                68,
+                154,
+                18080
             ]
         } ]
     };
@@ -146,7 +144,7 @@ $(document).ready(function () {
             backgroundColor: color(window.chartColors.green).alpha(0.2).rgbString(),
             borderColor: window.chartColors.green,
             data: [
-                255.169, 175.881, 49.288
+                1004454.00, 527526.90, 341314.70
             ]
         }]
     };
@@ -175,7 +173,7 @@ $(document).ready(function () {
             backgroundColor: color(window.chartColors.green).alpha(0.2).rgbString(),
             borderColor: window.chartColors.green,
             data: [
-                58.314, 37.428, 20.886
+                923602644.36, 773052609.00, 341314.70
             ]
         }]
     };
@@ -419,134 +417,4 @@ $(document).ready(function () {
             },
         }
     });
-});
-
-
-$(document).ready(function () {
-    var color = Chart.helpers.color;
-    var barChartData = {
-        labels: ["Total", "Regular", "Additional", "Un-Improved"],
-        datasets: [{
-            label: 'Improved',
-            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-            borderColor: window.chartColors.red,
-            borderWidth: 1,
-            data: [
-
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }]
-
-    };
-
-    var ctx = document.getElementById("districtWise_WatercourseImprovementStatus").getContext("2d");
-    window.myBar = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Watercourse Improvement Status'
-            }
-        }
-    });
-
-});
-
-$(document).ready(function () {
-    var color = Chart.helpers.color;
-    var barChartData = {
-        labels: ["Total Length", "Earthen", "Lined"],
-        datasets: [{
-            
-            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-            borderColor: window.chartColors.red,
-            borderWidth: 1,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }]
-
-    };
-
-    var ctx = document.getElementById("districtWise_LengthOfImprovedWatercourses").getContext("2d");
-    window.myBar = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Length of Improved Watercourses ( KMs)'
-            }
-        }
-    });
-
-});
-
-
-$(document).ready(function () {
-    var color = Chart.helpers.color;
-    var barChartData = {
-        labels: ["Bahawalnagar", "Chishtian", "Fortabbas", "Haroonabad", "Minchinabad", "Tehsil", "Fortabbas1"],
-        datasets: [{
-            label: 'Improved',
-            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-            borderColor: window.chartColors.red,
-            borderWidth: 1,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-                label: 'Un-Improved',
-            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-            borderColor: window.chartColors.blue,
-            borderWidth: 1,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }]
-
-    };
-
-    var ctx = document.getElementById("districtWise_TehsilWiseWatercourseImprovement").getContext("2d");
-    window.myBar = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Bar Chart'
-            }
-        }
-    });
-
 });

@@ -123,10 +123,10 @@ namespace Wmsds.Bll.Watercourse
             using (var _dbContext = new EntityContext())
             {
                 var wcIdentifications = await _dbContext.HeisIdentifications
-                                .Where(c => districtId == 0 || c.DistrictId == districtId)
-                                    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
-                                    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
-                                    .Where(c => byName == null || c.FarmerName.Contains(byName))
+                                //.Where(c => districtId == 0 || c.DistrictId == districtId)
+                                //    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                                //    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
+                                //    .Where(c => byName == null || c.FarmerName.Contains(byName))
                                     .Include(x => x.HeisIdentificationDetails)
                                     .ToListAsync();
                 return wcIdentifications;
