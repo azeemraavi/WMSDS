@@ -20,8 +20,8 @@ namespace Wmsds.Web.Controllers
         public async Task<ActionResult> Index()
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications();
-            return View(WcIdentifications);
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications();//List<WcIdentification> WcIdentifications
+            return View(wmsdsResponse.Collections);//WcIdentifications);
         }
 
         [HttpPost]
@@ -34,9 +34,9 @@ namespace Wmsds.Web.Controllers
             //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
 
             IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(District,Tehsil,0,0);
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications(District,Tehsil,0,0);
             //return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
-            return View(WcIdentifications);
+            return View(wmsdsResponse.Collections);//WcIdentifications);
         }
 
         public async Task<JsonResult> LoadAllFilterData()

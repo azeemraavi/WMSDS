@@ -21,8 +21,8 @@ namespace Wmsds.Web.Controllers
         public async Task<ActionResult> Index()
         {
             IHeisService heisCourseService = new HeisService();
-            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(0,0,null,null);
-            return View(HeisIdentifications);
+            var wmsdsResponse = await heisCourseService.GetHeisIdentifications(1,0,0,null,null);
+            return View(wmsdsResponse.Collections);
         }
 
         [HttpPost]
@@ -35,8 +35,8 @@ namespace Wmsds.Web.Controllers
             //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
 
             IHeisService heisCourseService = new HeisService();
-            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(0, 0, "","");
-            return View(HeisIdentifications);
+            var wmsdsResponse = await heisCourseService.GetHeisIdentifications(1,0, 0, "","");
+            return View(wmsdsResponse.Collections);
         }
 
         public async Task<JsonResult> LoadAllFilterData()
@@ -162,8 +162,8 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> GetHeisListing(HeisIdentification model)
         {
             IHeisService heisCourseService = new HeisService();
-            List<HeisIdentification> HeisIdentifications = await heisCourseService.GetHeisIdentifications(model.DistrictId, model.TehsilId, model.FarmerName, model.FarmerCNIC);
-            return Json(HeisIdentifications, JsonRequestBehavior.AllowGet);
+            var wmsdsResponse = await heisCourseService.GetHeisIdentifications(1,model.DistrictId, model.TehsilId, model.FarmerName, model.FarmerCNIC);
+            return Json(wmsdsResponse.Collections, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

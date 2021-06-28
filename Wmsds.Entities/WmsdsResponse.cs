@@ -12,6 +12,10 @@ namespace Wmsds.Entities
         public string ResponseMessage { get; set; }
         public T DataObject { get; set; }
         public List<T> Collections { get; set; }
+
+        public int TotalRecords { get; set; }
+        public int PageCount { get; set; }
+        public int CurrentPageIndex { get; set; }
     }
     public enum EnumStatus
     {

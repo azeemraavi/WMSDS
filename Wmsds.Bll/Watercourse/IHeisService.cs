@@ -17,7 +17,7 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="heisIdentificationId"></param>
         /// <returns></returns>
         Task<WmsdsResponse<HeisIdentification>> GetHeisIdentificationById(int heisIdentificationId);
-        Task<List<HeisIdentification>> GetHeisIdentifications(int districtId = 0, int tehsilId = 0,string byName=null,string byCnic=null);
+        Task<WmsdsResponse<HeisIdentification>> GetHeisIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0,string byName=null,string byCnic=null);
 
         Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailById(int heisIdentifictionDetailId);
         Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailByMasterId(int heisMasterIdentificationId);

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wmsds.Dal;
 using Wmsds.Entities;
+using Wmsds.Entities.ViewModels;
 using Wmsds.Entities.WC;
 
 namespace Wmsds.Bll.Watercourse
@@ -115,8 +116,9 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="channelId"></param>
         /// <param name="improveYearId"></param>
         /// <returns></returns>
-        public async Task<List<WcIdentification>> GetWcIdentifications(int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0,string improvementType=null)
+        public async Task<WmsdsResponse<WcIdentification>> GetWcIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0,string improvementType=null)
         {
+            var wcIdentificationOut = new WmsdsResponse<WcIdentification>();
             using (var _dbContext = new EntityContext())
             {
                 try
@@ -138,13 +140,26 @@ namespace Wmsds.Bll.Watercourse
 
                     //                        }).ToListAsync();
 
-                    var wcIdentifications = await _dbContext.WcIdentifications
+                    int maxRows = 20;
+
+                    wcIdentificationOut.Collections = await _dbContext.WcIdentifications
                                     .Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId)
                                         .Include(x => x.WcIdentificationDetails)
-                                        .ToListAsync();
-                    return wcIdentifications;
+                                          .Skip((currentPageIndex - 1) * maxRows)
+                              .Take(maxRows).ToListAsync();
+
+                    int rowCount = await _dbContext.WcIdentifications
+                                    .Where(c => districtId == 0 || c.DistrictId == districtId)
+                                        .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                                        .Where(c => channelId == 0 || c.ChannelId == channelId).CountAsync();
+                   
+                    wcIdentificationOut.TotalRecords = rowCount;
+                    double pageCount = (double)((decimal)rowCount / Convert.ToDecimal(maxRows));
+                    wcIdentificationOut.PageCount = (int)Math.Ceiling(pageCount);
+                    wcIdentificationOut.CurrentPageIndex = currentPageIndex;
+                    return wcIdentificationOut;
                 }
                 catch (Exception ex)
                 {

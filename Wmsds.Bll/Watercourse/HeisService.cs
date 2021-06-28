@@ -118,18 +118,34 @@ namespace Wmsds.Bll.Watercourse
                 }
             }
         }
-        public async Task<List<HeisIdentification>> GetHeisIdentifications(int districtId = 0, int tehsilId = 0, string byName = null, string byCnic = null)
+        public async Task<WmsdsResponse<HeisIdentification>> GetHeisIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0, string byName = null, string byCnic = null)
         {
+            var heisIdentificationOut = new WmsdsResponse<HeisIdentification>();
             using (var _dbContext = new EntityContext())
             {
+                int maxRows = 20;
                 var wcIdentifications = await _dbContext.HeisIdentifications
-                                //.Where(c => districtId == 0 || c.DistrictId == districtId)
-                                //    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
-                                //    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
-                                //    .Where(c => byName == null || c.FarmerName.Contains(byName))
+                                .Where(c => districtId == 0 || c.DistrictId == districtId)
+                                    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                                    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
+                                    .Where(c => byName == null || c.FarmerName.Contains(byName))
                                     .Include(x => x.HeisIdentificationDetails)
-                                    .ToListAsync();
-                return wcIdentifications;
+                                    .Skip((currentPageIndex - 1) * maxRows)
+                              .Take(maxRows).ToListAsync();
+
+                int rowCount = await _dbContext.HeisIdentifications
+                                  .Where(c => districtId == 0 || c.DistrictId == districtId)
+                                    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                                    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
+                                    .Where(c => byName == null || c.FarmerName.Contains(byName))
+                                    .CountAsync();
+
+                heisIdentificationOut.TotalRecords = rowCount;
+                double pageCount = (double)((decimal)rowCount / Convert.ToDecimal(maxRows));
+                heisIdentificationOut.PageCount = (int)Math.Ceiling(pageCount);
+                heisIdentificationOut.CurrentPageIndex = currentPageIndex;
+                return heisIdentificationOut;
+                
             }
         }
         public async Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailById(int heisIdentifictionDetailId)
