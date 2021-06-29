@@ -252,20 +252,33 @@
         <!-- start Payment Details -->
         <div class="row">
             <div class="col-md-12 col-sm-12">
+                
                 <div class="card  card-box">
                     <div class="card-head">
                         <header>
                             District wise Overview
                         </header>
+                        
                     </div>
                     <div class="card-body row ">
+                        <div class="col-md-12" >
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2" style="float: right;">
+                                <label>District </label>
+                                <select id="ddlDistrict" name="ddlDistrict" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-4 col-sm-12 col-12">
+                            <canvas id="districtWise_UnImprovementStatus"></canvas>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-12">
                             <canvas id="districtWise_WatercourseImprovementStatus"></canvas>
                         </div>
-                        <div class="col-md-4 col-sm-12 col-12">
+                        <div class="col-md-6 col-sm-12 col-12">
                             <canvas id="districtWise_LengthOfImprovedWatercourses"></canvas>
                         </div>
-                        <div class="col-md-4 col-sm-12 col-12">
+                        <div class="col-md-6 col-sm-12 col-12">
                             <canvas id="districtWise_TehsilWiseWatercourseImprovement"></canvas>
                         </div>
                     </div>
@@ -280,5 +293,5 @@
     <!-- chart js -->
     <script src="../content/assets/plugins/chart-js/Chart.bundle.js"></script>
     <script src="../content/assets/plugins/chart-js/utils.js"></script>
-    <script src="../content/assets/js/pages/chart/chartjs/home-data.js"></script>
+    <script src="../content/assets/js/heis-charts.js"></script>
 }

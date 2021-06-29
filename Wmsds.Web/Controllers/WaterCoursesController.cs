@@ -106,8 +106,8 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> GetWcListing(WcIdentification model)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            List<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(model.DistrictId ,model.TehsilId,model.ChannelId);
-            return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
+            WmsdsResponse<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(1,model.DistrictId ,model.TehsilId,model.ChannelId,0,null);
+            return Json(WcIdentifications.Collections, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

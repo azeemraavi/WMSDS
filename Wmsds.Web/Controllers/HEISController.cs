@@ -13,6 +13,7 @@ using Wmsds.Bll.Watercourse;
 using Wmsds.Entities;
 using Wmsds.Entities.HEIS;
 using System.Globalization;
+using Wmsds.Bll.Dashboard;
 
 namespace Wmsds.Web.Controllers
 {
@@ -373,6 +374,50 @@ namespace Wmsds.Web.Controllers
             wcIdentificationDto.FinancialYears = await commonService.GetAllFinancialYears();
 
             return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
+        }
+
+        //Charts
+        public async Task<JsonResult> GetStatusOfWatercourses()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetStatusOfWatercourses();
+            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetWcImprovementStatus()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetWcImprovementStatus();
+            return Json(wmsdsResponse.Collections, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetLengthOfImprovedWc()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetLengthOfImprovedWc();
+            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetImplicationFinancial()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetImplicationFinancial();
+            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
+        }
+
+        //GetDistrictWiseWcImprStatus
+        public async Task<JsonResult> GetYearWiseWcImprStatus()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetYearWiseWcImprStatus();
+            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetDistrictWiseOverview(int districtId)
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetDistrictWiseOverview(districtId);
+            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
         }
     }
 }
