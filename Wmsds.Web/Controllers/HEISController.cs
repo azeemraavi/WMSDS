@@ -19,6 +19,13 @@ namespace Wmsds.Web.Controllers
 {
     public class HEISController : Controller
     {
+        public async Task<ActionResult> Dashboard()
+        {
+            ICommonService commonService = new CommonService();
+            var res = await commonService.GetAllDistricts();
+            return View();
+        }
+
         public async Task<ActionResult> Index()
         {
             IHeisService heisCourseService = new HeisService();
@@ -405,7 +412,7 @@ namespace Wmsds.Web.Controllers
             return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
         }
 
-        //GetDistrictWiseWcImprStatus
+        //GetYearWiseWcImprStatus
         public async Task<JsonResult> GetYearWiseWcImprStatus()
         {
             IDashboardService dashboardService = new DashboardService();
@@ -413,6 +420,7 @@ namespace Wmsds.Web.Controllers
             return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
         }
 
+        //GetDistrictWiseOverview
         public async Task<JsonResult> GetDistrictWiseOverview(int districtId)
         {
             IDashboardService dashboardService = new DashboardService();

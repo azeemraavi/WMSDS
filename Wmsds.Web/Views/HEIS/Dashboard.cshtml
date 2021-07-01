@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "HEIS Dashboard";
+}<!-- start page content -->
+
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">HEIS Dashboard</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">HEIS Dashboard</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>Overview</header>
+                        <div class="tools">
+                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <img src="~/content/assets/img/map.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>
+                            HEIS Cropping Trend
+
+                        </header>
+                        <div class="tools">
+                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <canvas id="pie_HEISCroppingTrend"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Chart end -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>
+                            Drip-Sprinkler Installation Ratio
+                        </header>
+                        <div class="tools">
+                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <canvas id="chartjs_DripSprinklerInstallationRatio"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+                <div class="card card-box">
+                    <div class="card-head">
+                        <header>
+                            Financial Implication (Rs. Million)
+                        </header>
+                        <div class="tools">
+                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <canvas id="chartjs_FinancialImplication"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <!-- Quick Mail start -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-box">
+                    <div class="card-head">
+                        <header>District Wise Heis Installation Status</header>
+                        <button id="demo_menu-lower-right"
+                                class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                                data-upgraded=",MaterialButton">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            data-mdl-for="demo_menu-lower-right">
+                            <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                        </ul>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <canvas id="canvas_DistrictWiseHeisInstallationStatus"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Quick Mail end -->
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-box">
+                    <div class="card-head">
+                        <header>Year Wise WaterCource Improvement Trend</header>
+                        <button id="panel-button8"
+                                class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                                data-upgraded=",MaterialButton">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            data-mdl-for="panel-button8">
+                            <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                            <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                        </ul>
+                    </div>
+                    <div class="card-body no-padding height-9">
+                        <div class="row">
+                            <canvas id="canvas_YearWiseWaterCourceImprovementStatus"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- start Payment Details -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <div class="card  card-box">
+                    <div class="card-head">
+                        <header>
+                            District wise Overview
+                        </header>
+
+                    </div>
+                    <div class="card-body row ">
+                        <div class="col-md-12">
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2" style="float: right;">
+                                <label>District </label>
+                                <select id="ddlDistrict" name="ddlDistrict" class="form-control" required>
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-12">
+                            <canvas id="districtWise_UnImprovementStatus"></canvas>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-12">
+                            <canvas id="districtWise_WatercourseImprovementStatus"></canvas>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-12">
+                            <canvas id="districtWise_LengthOfImprovedWatercourses"></canvas>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-12">
+                            <canvas id="districtWise_TehsilWiseWatercourseImprovement"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Payment Details -->
+    </div>
+</div>
+<!-- end page content -->
+@section scripts{
+    <!-- chart js -->
+    <script src="../content/assets/plugins/chart-js/Chart.bundle.js"></script>
+    <script src="../content/assets/plugins/chart-js/utils.js"></script>
+    <script src="../content/assets/js/heis-dashboard.js"></script>
+}

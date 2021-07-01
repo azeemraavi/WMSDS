@@ -30,205 +30,100 @@ $(document).ready(function () {
         loadDistrictWiseCharts(DistrictId);
     }
 
-
-
-    $.ajax({
-        url: '/HEIS/GetStatusOfWatercourses',
-        type: "GET",
-        dataType: "JSON",
-        success: function (DataObject) {
-            //debugger;
-            console.log(DataObject);
-            var config = {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: [
-                            DataObject.TotalWaterCourse,
-                            DataObject.ImprovedWaterCourse,
-                            DataObject.UnImprovedWaterCourse
-                        ],
-                        backgroundColor: [
-                            window.chartColors.red,
-                            window.chartColors.orange,
-                            window.chartColors.yellow,
-                            window.chartColors.green,
-                        ],
-                        label: 'Status of Watercourses'
-                    }],
-                    labels: [
-                        "Total",
-                        "Improved",
-                        "Un-Improved"
-                    ]
-                },
-                options: {
-                    responsive: true
-                }
-            };
-            var ctx = document.getElementById("chartjs_pie").getContext("2d");
-            window.myPie = new Chart(ctx, config);
+   
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [
+                    11596,
+                    43031,
+                    21
+                ],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                ],
+                label: 'HEIS CROPPING TREND'
+            }],
+            labels: [
+                "Row Crops",
+                "Orchard",
+                "Vegetables"
+            ]
+        },
+        options: {
+            responsive: true
         }
-    });
+    };
+    var ctx = document.getElementById("pie_HEISCroppingTrend").getContext("2d");
+    window.myPie = new Chart(ctx, config);
+
+    //chartjs_DripSprinklerInstallationRatio
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [
+                    14000,
+                    56000
+                ],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.green,
+                ],
+                label: 'Drip-Sprinkler Installation Ratio'
+            }],
+            labels: [
+                "Sprinkler",
+                "Drip"
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+    var ctx = document.getElementById("chartjs_DripSprinklerInstallationRatio").getContext("2d");
+    window.myPie = new Chart(ctx, config);
 });
 
-$(document).ready(function() 
-{
-	var color = Chart.helpers.color;
+
+
+
+
+//chartjs_FinancialImplication
+$(document).ready(function () {
+    var color = Chart.helpers.color;
     var barChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Total Cost", "Govt Assistance", "Farmer Contr."],
         datasets: [{
             type: 'bar',
-            label: 'Watercourse Improvement Status',
-            backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
-            borderColor: window.chartColors.red,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-            type: 'line',
-            label: 'Dataset 2',
-            backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
-            borderColor: window.chartColors.blue,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-            type: 'bar',
-            label: 'Dataset 3',
-            backgroundColor: color(window.chartColors.green).alpha(0.2).rgbString(),
+            label: 'Financial Implication (Rs. Million)',
+            backgroundColor: [
+                window.chartColors.red,
+
+                window.chartColors.yellow,
+                window.chartColors.green,
+
+            ],
             borderColor: window.chartColors.green,
             data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
+                58.314, 37.428, 20.886
             ]
         }]
     };
 
-        var ctx = document.getElementById("canvas1").getContext("2d");
-        window.myBar = new Chart(ctx, {
-            type: 'bar',
-            data: barChartData,
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Overview of Watercourse'
-                },
-            }
-        });
-});
-
-//Watercourse Improvement Status
-//chartjs_WatercourseImprovementStatus
-$(document).ready(function () {
-    var color = Chart.helpers.color;
-    $.ajax({
-        url: '/HEIS/GetWcImprovementStatus',
-        type: "GET",
-        dataType: "JSON",
-        success: function (DataObject) {
-            //debugger;
-            console.log(DataObject);
-            var barChartData = {
-                labels: ["Total", "Regu", "Add", "Un-imp"],
-                datasets: [{
-                    type: 'bar',
-                    label: 'Watercourse Improvement Status',
-                    backgroundColor: [
-                        window.chartColors.red,
-                        window.chartColors.orange,
-                        window.chartColors.yellow,
-                        window.chartColors.green,
-
-                    ],
-                    borderColor: window.chartColors.red,
-                    data: [
-                        18302,
-                        DataObject[2].y,
-                        DataObject[1].y,
-                        18080
-                    ]
-                }]
-            };
-
-            var ctx = document.getElementById("chartjs_WatercourseImprovementStatus").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: ''
-                    },
-                }
-            });
-
-        }
-    });
-
-    
-});
-
-//chartjs_LengthOfImprovedWatercourses
-$(document).ready(function () {
-    var color = Chart.helpers.color;
-    $.ajax({
-        url: '/HEIS/GetLengthOfImprovedWc',
-        type: "GET",
-        dataType: "JSON",
-        success: function (DataObject) {
-            
-            console.log(DataObject);
-            var barChartData = {
-                labels: ["Total Length", "Earthen", "Lined"],
-                datasets: [{
-                    type: 'bar',
-                    label: 'Length of Improved Watercourses (000 KMs)',
-                    backgroundColor: [
-                        window.chartColors.red,
-                        
-                        window.chartColors.yellow,
-                        window.chartColors.green,
-
-                    ],
-                    borderColor: window.chartColors.green,
-                    data: [
-                        DataObject.TotalLength, DataObject.Earthen, DataObject.Lined
-                    ]
-                }]
-            };
-
-            var ctx = document.getElementById("chartjs_LengthOfImprovedWatercourses").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: ''
-                    },
-                }
-            });
+    var ctx = document.getElementById("chartjs_FinancialImplication").getContext("2d");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: ''
+            },
         }
     });
 });
@@ -276,7 +171,7 @@ $(document).ready(function () {
     
 });
 
-//canvas_DistrictWiseWaterCourceImprovementStatus
+//canvas_DistrictWiseHeisInstallationStatus
 $(document).ready(function () {
     var color = Chart.helpers.color;
     var barChartData = {
@@ -318,55 +213,9 @@ $(document).ready(function () {
             "Sargodha"],
         datasets: [{
             type: 'bar',
-            label: 'Regular',
+            label: 'Number of HEIS sites',
             backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
             borderColor: window.chartColors.red,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-                type: 'bar',
-            label: 'Addtional',
-            backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
-            borderColor: window.chartColors.blue,
             data: [
                 randomScalingFactor(),
                 randomScalingFactor(),
@@ -411,7 +260,7 @@ $(document).ready(function () {
         }]
     };
 
-    var ctx = document.getElementById("canvas_DistrictWiseWaterCourceImprovementStatus").getContext("2d");
+    var ctx = document.getElementById("canvas_DistrictWiseHeisInstallationStatus").getContext("2d");
     window.myBar = new Chart(ctx, {
         type: 'bar',
         data: barChartData,
@@ -419,7 +268,7 @@ $(document).ready(function () {
             responsive: true,
             title: {
                 display: true,
-                text: 'DistrictWise WaterCource Improvement Status'
+                text: 'District Wise Heis Installation Status'
             },
         }
     });

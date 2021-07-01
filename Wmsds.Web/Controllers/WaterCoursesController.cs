@@ -366,5 +366,14 @@ namespace Wmsds.Web.Controllers
 
             return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> LoadAllDistricts()
+        {
+            ICommonService commonService = new CommonService();
+            WcIdentificationDto wcIdentificationDto = new WcIdentificationDto();
+            wcIdentificationDto.Districts = new List<Entities.Common.District>();
+            wcIdentificationDto.Districts = await commonService.GetAllDistricts();
+            return Json(wcIdentificationDto, JsonRequestBehavior.AllowGet);
+        }
     }
 }

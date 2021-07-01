@@ -199,6 +199,7 @@
     <Content Include="content\assets\img\image-gallery\thumb\thumb-9.jpg" />
     <Content Include="content\assets\img\invoice_logo.png" />
     <Content Include="content\assets\img\logo.png" />
+    <Content Include="content\assets\img\map.png" />
     <Content Include="content\assets\img\mega-img1.jpg" />
     <Content Include="content\assets\img\mega-img2.jpg" />
     <Content Include="content\assets\img\mega-img3.jpg" />
@@ -238,6 +239,7 @@
     <Content Include="content\assets\img\user\usrbig9.jpg" />
     <Content Include="content\assets\js\app.js" />
     <Content Include="content\assets\js\heis-charts.js" />
+    <Content Include="content\assets\js\heis-dashboard.js" />
     <Content Include="content\assets\js\layout.js" />
     <Content Include="content\assets\js\pages\calendar\calendar.min.js" />
     <Content Include="content\assets\js\pages\chart\chartjs\chartjs-data.js" />
@@ -429,6 +431,7 @@
     <Content Include="Views\WaterCourses\Index.cshtml" />
     <Content Include="Views\HEIS\Index.cshtml" />
     <Content Include="Views\HEIS\DataEntry.cshtml" />
+    <Content Include="Views\HEIS\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
