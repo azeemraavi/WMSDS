@@ -56,7 +56,7 @@ namespace Wmsds.Entities.ViewModels
     public class TehsilWiseDto
     {
         public string Tehsil { get; set; }
-        public string ImprovementType { get; set; }
-        public int Value { get; set; }
+        public int ImprovedWaterCourse { get; set; }
+        public int UnImprovedWaterCourse { get; set; }
     }
 }

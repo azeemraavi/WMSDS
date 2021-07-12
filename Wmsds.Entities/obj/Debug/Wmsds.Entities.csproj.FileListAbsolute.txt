@@ -15,3 +15,4 @@ D:\WMSDS1\WMSDS\Wmsds.Entities\bin\Debug\Wmsds.Entities.pdb
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csproj.CoreCompileInputs.cache
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.dll
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.pdb
+D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csprojAssemblyReference.cache

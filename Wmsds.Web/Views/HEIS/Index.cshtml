@@ -98,87 +98,89 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (var item in Model)
+                                                    @if (Model!=null)
                                                     {
-                                                        if (item.HeisIdentificationDetails.Count > 0)
+                                                        foreach (var item in Model)
                                                         {
-                                                            foreach (var subItem in item.HeisIdentificationDetails)
+                                                            if (item.HeisIdentificationDetails.Count > 0)
+                                                            {
+                                                                foreach (var subItem in item.HeisIdentificationDetails)
+                                                                {
+                                                                    <tr class="odd gradeX">
+                                                                        <td>
+                                                                            <a href="#">
+                                                                                @item.FarmerCNIC
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            @item.FarmerCNIC
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="label label-sm label-success">
+                                                                                @item.DistrictName
+                                                                            </span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @item.TehsilName
+                                                                        </td>
+                                                                        <td>
+                                                                            @subItem.VillageName
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            @subItem.ContactNumber
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
+                                                                                <i class="fa fa-pencil"></i>
+
+                                                                            </a>
+                                                                            <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
+                                                                                <i class="fa fa-plus"></i>
+                                                                            </a>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                            else
                                                             {
                                                                 <tr class="odd gradeX">
                                                                     <td>
                                                                         <a href="#">
-                                                                            @item.FarmerCNIC
+                                                                            @item.FarmerName
                                                                         </a>
                                                                     </td>
                                                                     <td>
+
                                                                         @item.FarmerCNIC
+
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-success">
+                                                                        <a href="#">
                                                                             @item.DistrictName
-                                                                        </span>
+                                                                        </a>
                                                                     </td>
-
                                                                     <td>
+
                                                                         @item.TehsilName
-                                                                    </td>
-                                                                    <td>
-                                                                        @subItem.VillageName
-                                                                    </td>
-
-                                                                    <td>
-
-                                                                        @subItem.ContactNumber
 
                                                                     </td>
                                                                     <td>
-                                                                        <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
-                                                                            <i class="fa fa-pencil"></i>
+                                                                    </td>
 
-                                                                        </a>
-                                                                        <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
-                                                                            <i class="fa fa-plus"></i>
-                                                                        </a>
-
+                                                                    <td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=true">Add</a>
                                                                     </td>
                                                                 </tr>
                                                             }
+
                                                         }
-                                                        else
-                                                        {
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        <a href="#">
-                                                            @item.FarmerName
-                                                        </a>
-                                                    </td>
-                                                    <td>
-
-                                                        @item.FarmerCNIC
-
-                                                    </td>
-                                                    <td>
-                                                        <a href="#">
-                                                            @item.DistrictName
-                                                        </a>
-                                                    </td>
-                                                    <td>
-
-                                                        @item.TehsilName
-
-                                                    </td>
-                                                    <td>
-                                                        
-                                                    </td>
-
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/HEIS/DataEntry?Id=@item.Id&IsNewEntry=true">Add</a>
-                                                    </td>
-                                                </tr>
-                                                        }
-
                                                     }
                                                 </tbody>
                                             </table>

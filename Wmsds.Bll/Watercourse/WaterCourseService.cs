@@ -147,6 +147,7 @@ namespace Wmsds.Bll.Watercourse
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId)
                                         .Include(x => x.WcIdentificationDetails)
+                                        .OrderBy(x=>x.Id)
                                           .Skip((currentPageIndex - 1) * maxRows)
                               .Take(maxRows).ToListAsync();
 

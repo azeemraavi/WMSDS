@@ -116,6 +116,7 @@ namespace Wmsds.Bll.Dashboard
 
                 using (var dbContext = new EntityContext())
                 {
+                    //TODO: discuss about farmer share
                     var totalGovtShare = await dbContext.WcIdentificationDetails.SumAsync(x => x.TotalCostOfCivilWrkVerfied);//Govt
                     var linedTotalLen = await dbContext.WcIdentificationDetails.SumAsync(x => x.LiningLengthM);
 
@@ -254,16 +255,34 @@ namespace Wmsds.Bll.Dashboard
                                               from wd in dbContext.WcIdentificationDetails
                                               where wc.Id == wd.WcIdentificationId
                                               && wc.DistrictId == districtId
-                                              group wd by new { wc.TehsilName, wd.ImprovementType } into g
-                                              select new TehsilWiseDto
+                                              group wd by new { wc.TehsilName, wc.TehsilId } into g
+                                              select new
                                               {
                                                   Tehsil = g.Key.TehsilName,
-                                                  ImprovementType = g.Key.ImprovementType,
-                                                  Value = g.Count(x => x.WcIdentificationId != 0)
+                                                  TehsilId = g.Key.TehsilId
                                               }).ToListAsync();
 
 
-                    wmsdResponse.DataObject.TehsilWiseDtos = tehsilWiseData;
+                    
+                    wmsdResponse.DataObject.TehsilWiseDtos = new List<TehsilWiseDto>();
+                    foreach (var tehsilWise in tehsilWiseData)
+                    {
+                        var tehsilWiseDto = new TehsilWiseDto();
+                        var tehsilWiseCount = await (from wc in dbContext.WcIdentifications
+                                                     from wd in dbContext.WcIdentificationDetails
+                                                     where wc.Id == wd.WcIdentificationId
+                                                     && wc.DistrictId == districtId
+                                                     && wc.TehsilId==tehsilWise.TehsilId
+                                                     select wc.Id).CountAsync();
+
+                        var totalWcCourseThWise = await dbContext.WaterCourses
+                            .Where(wc => wc.DistrictId == districtId && wc.TehsilId == tehsilWise.TehsilId).CountAsync();
+                        tehsilWiseDto.ImprovedWaterCourse = tehsilWiseCount;
+                        tehsilWiseDto.UnImprovedWaterCourse = totalWcCourseThWise - tehsilWiseCount;
+                        tehsilWiseDto.Tehsil = tehsilWise.Tehsil;
+                        wmsdResponse.DataObject.TehsilWiseDtos.Add(tehsilWiseDto);
+                    }
+                    
 
                     wmsdResponse.ResponseCode = EnumStatus.Success;
                     wmsdResponse.ResponseMessage = "Success";

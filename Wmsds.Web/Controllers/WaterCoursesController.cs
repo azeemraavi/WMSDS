@@ -17,11 +17,15 @@ namespace Wmsds.Web.Controllers
 {
     public class WaterCoursesController : Controller
     {
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            var wmsdsResponse = await waterCourseService.GetWcIdentifications();//List<WcIdentification> WcIdentifications
-            return View(wmsdsResponse.Collections);//WcIdentifications);
+            int currentPage = 1;
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications(currentPage,0,0,0,0,null);
+            var pager = new Pager(wmsdsResponse.TotalRecords, currentPage);
+
+            wmsdsResponse.Pager = pager;
+            return View(wmsdsResponse);
         }
 
         [HttpPost]
@@ -30,13 +34,14 @@ namespace Wmsds.Web.Controllers
 
             int District = Convert.ToInt16(formCollection["ddlDistrict"]);
             int Tehsil = Convert.ToInt16(formCollection["ddlTehsil"]);
-            //string ImprovementType = formCollection["ddlImprovementType"]+"";
-            //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
-
+            int currentPage = Convert.ToInt16(formCollection["currentPageIndex"]);
+            
             IWaterCourseService waterCourseService = new WaterCourseService();
-            var wmsdsResponse = await waterCourseService.GetWcIdentifications(District,Tehsil,0,0);
-            //return Json(WcIdentifications, JsonRequestBehavior.AllowGet);
-            return View(wmsdsResponse.Collections);//WcIdentifications);
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications(currentPage, District, Tehsil,0,0,null);
+            var pager = new Pager(wmsdsResponse.TotalRecords, currentPage);
+
+            wmsdsResponse.Pager = pager;
+            return View(wmsdsResponse);
         }
 
         public async Task<JsonResult> LoadAllFilterData()

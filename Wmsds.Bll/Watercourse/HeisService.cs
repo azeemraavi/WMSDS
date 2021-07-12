@@ -124,12 +124,13 @@ namespace Wmsds.Bll.Watercourse
             using (var _dbContext = new EntityContext())
             {
                 int maxRows = 20;
-                var wcIdentifications = await _dbContext.HeisIdentifications
+                heisIdentificationOut.Collections = await _dbContext.HeisIdentifications
                                 .Where(c => districtId == 0 || c.DistrictId == districtId)
                                     .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                     .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
                                     .Where(c => byName == null || c.FarmerName.Contains(byName))
                                     .Include(x => x.HeisIdentificationDetails)
+                                    .OrderBy(x => x.Id)
                                     .Skip((currentPageIndex - 1) * maxRows)
                               .Take(maxRows).ToListAsync();
 
@@ -139,6 +140,7 @@ namespace Wmsds.Bll.Watercourse
                                     .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
                                     .Where(c => byName == null || c.FarmerName.Contains(byName))
                                     .CountAsync();
+                
 
                 heisIdentificationOut.TotalRecords = rowCount;
                 double pageCount = (double)((decimal)rowCount / Convert.ToDecimal(maxRows));

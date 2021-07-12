@@ -36,14 +36,11 @@ namespace Wmsds.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(FormCollection formCollection)
         {
-
             int District = Convert.ToInt16(formCollection["ddlDistrict"]);
             int Tehsil = Convert.ToInt16(formCollection["ddlTehsil"]);
-            //string ImprovementType = formCollection["ddlImprovementType"]+"";
-            //int ImprovementYear = Convert.ToInt16(formCollection["ddlImprovementYear"]);
-
+            int currentPage = Convert.ToInt16(formCollection["hdCurrentPage"]);
             IHeisService heisCourseService = new HeisService();
-            var wmsdsResponse = await heisCourseService.GetHeisIdentifications(1,0, 0, "","");
+            var wmsdsResponse = await heisCourseService.GetHeisIdentifications(currentPage, 0, 0, "", "");
             return View(wmsdsResponse.Collections);
         }
 
