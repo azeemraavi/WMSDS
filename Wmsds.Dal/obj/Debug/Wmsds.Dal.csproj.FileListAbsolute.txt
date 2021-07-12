@@ -38,3 +38,16 @@ D:\WMSDS1\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CoreCompileInputs.cache
 D:\WMSDS1\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
 D:\WMSDS1\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
 D:\WMSDS1\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb
+E:\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll.config
+E:\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll
+E:\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Dal.pdb
+E:\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.dll
+E:\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.dll
+E:\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Entities.dll
+E:\WMSDS\Wmsds.Dal\bin\Debug\Wmsds.Entities.pdb
+E:\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.xml
+E:\WMSDS\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.xml
+E:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csprojAssemblyReference.cache
+E:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
+E:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
+E:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb

@@ -108,145 +108,145 @@
                                         </div>
                                         @using (Html.BeginForm("Index", "WaterCourses", FormMethod.Post, new { name = "tableform" }))
                                         {
-                                    <div class="table-scrollable">
-                                        <input type="hidden" id="currentPageIndex" name="currentPageIndex" value="@(Model.Pager.CurrentPage)" />
-                                        <table id="example42" class="display" style="width:100%;">
-                                            <thead>
-                                                <tr>
+                                            <div class="table-scrollable">
+                                                <input type="hidden" id="currentPageIndex" name="currentPageIndex" value="@(Model.Pager.CurrentPage)" />
+                                                <table id="example42" class="display" style="width:100%;">
+                                                    <thead>
+                                                        <tr>
 
-                                                    <th style="width: 150px !important;"> District. </th>
-                                                    <th> Tehsil </th>
-                                                    <th> Channel </th>
+                                                            <th style="width: 150px !important;"> District. </th>
+                                                            <th> Tehsil </th>
+                                                            <th> Channel </th>
 
-                                                    <th> Impr Type </th>
-                                                    <th> Impr Year </th>
-                                                    <th> WaterCourseNo </th>
-                                                    <th> Action </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in Model.Collections)
-                                                {
-                                                    if (item.WcIdentificationDetails.Count > 0)
-                                                    {
-                                                        foreach (var subItem in item.WcIdentificationDetails)
-                                                        {
-                                                            <tr class="odd gradeX">
-                                                                <td>
-                                                                    <a href="#">
-                                                                        @item.DistrictName
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-
-                                                                    @item.TehsilName
-
-                                                                </td>
-                                                                <td>
-                                                                    <span class="label label-sm label-success">
-                                                                        @item.ChannelName
-                                                                    </span>
-                                                                </td>
-
-                                                                <td>
-                                                                    @subItem.ImprovementType
-                                                                </td>
-                                                                <td>
-                                                                    @subItem.ImprovementYear
-                                                                </td>
-
-                                                                <td>
-
-                                                                    @item.WaterCourseNo
-
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
-                                                                        <i class="fa fa-pencil"></i>
-
-                                                                    </a>
-                                                                    <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
-                                                                        <i class="fa fa-plus"></i>
-                                                                    </a>
-
-                                                                </td>
-                                                            </tr>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        <tr class="odd gradeX">
-                                                            <td>
-                                                                <a href="#">
-                                                                    @item.DistrictName
-                                                                </a>
-                                                            </td>
-                                                            <td>
-
-                                                                @item.TehsilName
-
-                                                            </td>
-                                                            <td>
-                                                                <span class="label label-sm label-success">
-                                                                    @item.ChannelName
-                                                                </span>
-                                                            </td>
-
-                                                            <td>
-                                                            </td>
-                                                            <td>
-                                                            </td>
-
-                                                            <td>
-
-                                                                @item.WaterCourseNo
-
-                                                            </td>
-                                                            <td>
-                                                                <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true">Add</a>
-                                                            </td>
+                                                            <th> Impr Type </th>
+                                                            <th> Impr Year </th>
+                                                            <th> WaterCourseNo </th>
+                                                            <th> Action </th>
                                                         </tr>
-                                                    }
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model.Collections)
+                                                        {
+                                                            if (item.WcIdentificationDetails.Count > 0)
+                                                            {
+                                                                foreach (var subItem in item.WcIdentificationDetails)
+                                                                {
+                                                                    <tr class="odd gradeX">
+                                                                        <td>
+                                                                            <a href="#">
+                                                                                @item.DistrictName
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
 
-                                                }
-                                            </tbody>
-                                        </table>
-                                        <!-- Paging -->
-                                        <!-- pager -->
-                                        @if (Model.Pager.EndPage > 1)
-                                        {
-                                            <ul class="pagination">
-                                                @if (Model.Pager.CurrentPage > 1)
+                                                                            @item.TehsilName
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="label label-sm label-success">
+                                                                                @item.ChannelName
+                                                                            </span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @subItem.ImprovementType
+                                                                        </td>
+                                                                        <td>
+                                                                            @subItem.ImprovementYear
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            @item.WaterCourseNo
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
+                                                                                <i class="fa fa-pencil"></i>
+
+                                                                            </a>
+                                                                            <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
+                                                                                <i class="fa fa-plus"></i>
+                                                                            </a>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr class="odd gradeX">
+                                                                    <td>
+                                                                        <a href="#">
+                                                                            @item.DistrictName
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+
+                                                                        @item.TehsilName
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="label label-sm label-success">
+                                                                            @item.ChannelName
+                                                                        </span>
+                                                                    </td>
+
+                                                                    <td>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+
+                                                                    <td>
+
+                                                                        @item.WaterCourseNo
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true">Add</a>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- Paging -->
+                                                <!-- pager -->
+                                                @if (Model.Pager.EndPage > 1)
                                                 {
-                                                    <li>
-                                                        <a href="~/WaterCourses/Index">First</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:PagerClick(@(Model.Pager.CurrentPage - 1));">Previous</a>
-                                                       
-                                                    </li>
+                                                    <ul class="pagination">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li>
+                                                                <a href="~/WcListing/Index">First</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:PagerClick(@(Model.Pager.CurrentPage - 1));">Previous</a>
+
+                                                            </li>
+                                                        }
+
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                                <a href="javascript:PagerClick(@page);">@page</a>
+                                                            </li>
+                                                        }
+
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li>
+                                                                <a href="javascript:PagerClick(@(Model.Pager.CurrentPage + 1));">Next</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:PagerClick(@(Model.Pager.TotalPages))">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
                                                 }
 
-                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-                                                {
-                                                    <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                                                        <a href="javascript:PagerClick(@page);">@page</a>
-                                                    </li>
-                                                }
-
-                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                                                {
-                                                    <li>
-                                                        <a href="javascript:PagerClick(@(Model.Pager.CurrentPage + 1));">Next</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:PagerClick(@(Model.Pager.TotalPages))">Last</a>
-                                                    </li>
-                                                }
-                                            </ul>
-                                        }
-                                        
-                                    </div>
+                                            </div>
                                         }
                                     </div>
                                 </div>
@@ -316,12 +316,9 @@
     </div>
 </div>
 @section scripts {
-
     <!-- data tables -->
     <script src="~/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js"></script>
-
-
     <script type="text/javascript">
 
         function PagerClick(index) {

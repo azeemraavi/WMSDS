@@ -16,3 +16,8 @@ D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csproj.CoreCompileInputs
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.dll
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.pdb
 D:\WMSDS1\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csprojAssemblyReference.cache
+E:\WMSDS\Wmsds.Entities\bin\Debug\Wmsds.Entities.dll
+E:\WMSDS\Wmsds.Entities\bin\Debug\Wmsds.Entities.pdb
+E:\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.csprojAssemblyReference.cache
+E:\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.dll
+E:\WMSDS\Wmsds.Entities\obj\Debug\Wmsds.Entities.pdb

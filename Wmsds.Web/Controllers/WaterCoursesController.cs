@@ -17,6 +17,87 @@ namespace Wmsds.Web.Controllers
 {
     public class WaterCoursesController : Controller
     {
+        //WcListing
+        public async Task<ActionResult> WcListing(int? page)
+        {
+            IWaterCourseService waterCourseService = new WaterCourseService();
+            int currentPage = 1;
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications(currentPage, 0, 0, 0, 0, null);
+            var pager = new Pager(wmsdsResponse.TotalRecords, currentPage);
+
+            wmsdsResponse.Pager = pager;
+            return View(wmsdsResponse);
+        }
+
+        //public async Task<JsonResult> CustomServerSideSearchAction(DataTableAjaxPostModel model)
+        //{
+            
+        //    // action inside a standard controller
+        //    int filteredResultsCount;
+        //    int totalResultsCount;
+
+        //    var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
+
+        //    var result = new List<WcIdentification>(res.Count);
+        //    foreach (var s in res)
+        //    {
+        //        // simple remapping adding extra info to found dataset
+        //        result.Add(new YourCustomSearchClass
+        //        {
+        //            EmployerId = User.ClaimsUserId(),
+        //            Id = s.Id,
+        //            Pin = s.Pin,
+        //            Firstname = s.Firstname,
+        //            Lastname = s.Lastname,
+        //            RegistrationStatusId = DoSomethingToGetIt(s.Id),
+        //            Address3 = s.Address3,
+        //            Address4 = s.Address4
+        //        });
+        //    };
+
+        //    return Json(new
+        //    {
+        //        // this is what datatables wants sending back
+        //        draw = model.draw,
+        //        recordsTotal = totalResultsCount,
+        //        recordsFiltered = filteredResultsCount,
+        //        data = result
+        //    });
+        //}
+
+        //public async Task<WmsdsResponse<WcIdentification>> YourCustomSearchFunc(DataTableAjaxPostModel model, out int filteredResultsCount, out int totalResultsCount)
+        //{
+        //    IWaterCourseService waterCourseService = new WaterCourseService();
+        //    int currentPage = 1;
+        //    var wmsdsResponse = await waterCourseService.GetWcIdentifications(currentPage, 0, 0, 0, 0, null);
+
+
+        //    var searchBy = (model.search != null) ? model.search.value : null;
+        //    var take = model.length;
+        //    var skip = model.start;
+
+        //    string sortBy = "";
+        //    bool sortDir = true;
+
+        //    if (model.order != null)
+        //    {
+        //        // in this example we just default sort on the 1st column
+        //        sortBy = model.columns[model.order[0].column].data;
+        //        sortDir = model.order[0].dir.ToLower() == "asc";
+        //    }
+
+        //    // search the dbase taking into consideration table sorting and paging
+        //    var result = GetDataFromDbase(searchBy, take, skip, sortBy, sortDir, out filteredResultsCount, out totalResultsCount);
+        //    if (result == null)
+        //    {
+        //        // empty collection...
+        //        return new List<YourCustomSearchClass>();
+        //    }
+        //    return result;
+        //}
+
+
+
         public async Task<ActionResult> Index(int? page)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
