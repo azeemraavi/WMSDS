@@ -73,7 +73,7 @@
                 </div>
             </form>
             <br />
-           
+
             <!-- SmartWizard html -->
             <div id="smartwizard">
                 <ul>
@@ -146,11 +146,11 @@
                                             <div class="form-group">
                                                 <label>CCA (Acres)</label>
                                                 @Html.TextBox("txtCCA", Model.WcIdentificationDetail.CCA, new { @class = "form-control", @id = "txtCCA", @placeholder = "", required = "required", type = "number" })
-                                            </div>   
+                                            </div>
 
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            
+
                                             <div class="form-group">
                                                 <label>Sanctioned Discharge (LPS)</label>
                                                 @Html.TextBox("txtSanctionedDischarge", Model.WcIdentificationDetail.SanctionedDischargeLPS, new { @class = "form-control", @id = "txtSanctionedDischarge", @placeholder = "", required = "required", type = "number" })
@@ -184,7 +184,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Contact # WUA Chairman</label>
-                                                @Html.TextBox("txtContactOfWUAChairman", Model.WcIdentificationDetail.ChairmanContactNo, new { @class = "form-control", @id = "txtContactOfWUAChairman", @placeholder = "", required = "required" })
+                                                @Html.TextBox("txtContactOfWUAChairman", Model.WcIdentificationDetail.ChairmanContactNo, new { @class = "form-control", @id = "txtContactOfWUAChairman", @placeholder = "", required = "required", @inputFormat = "9999-9999999" })
                                             </div>
                                             <div class="form-group">
                                                 <label>No. of Beneficiaries</label>
@@ -465,10 +465,13 @@
     <script src="../content/assets/js/pages/validation/form-validation.js"></script>
     <!-- Include SmartWizard JavaScript source -->
     <script src="../content/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js"></script>
-    @*<script src="../content/assets/js/pages/smart-wizard/wizard-data.js"></script>*@
-<script type="text/javascript">
-    
 
+    @*<script src="~/content/assets/js/masking/inputmask.js"></script>*@
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
+    <script type="text/javascript">
+
+        $('#txtContactOfWUAChairman').inputmask("9999-9999999");
 
     $(document).ready(function () {
         $("#ddlImprovementType").val('@(Model.WcIdentificationDetail.ImprovementType)').change();
@@ -477,7 +480,7 @@
         $("#ddlGroundwaterQuality").val('@(Model.WcIdentificationDetail.GroundwaterQuality)').change();
 
         $("#ddlDesignApproved").val('@(Model.WcIdentificationDetail.DesignApproved)').change();
-        
+
         $("#ddlPCPSegmentSize").val('@(Model.WcIdentificationDetail.PcpSegmentSize)').change();
 
         $("#ddlICR1").val('@(Model.WcIdentificationDetail.ICR1ApprovedStatus)').change();
@@ -834,5 +837,5 @@
 
 
 
-</script>
+    </script>
 }

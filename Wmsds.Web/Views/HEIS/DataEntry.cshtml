@@ -183,7 +183,7 @@
                                                 <label>Project Name</label>
                                                 <select id="ddlProjectName" name="ddlProjectName" class="form-control" required>
                                                     <option value="">--Select--</option>
-                                                    <option value="PIPIP">PIPIP</option>
+                                                    <option selected value="PIPIP">PIPIP</option>
                                                 </select>
                                             </div>
 
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Contact number</label>
-                                                @Html.TextBox("txtContactNumber", Model.HeisIdentificationDetail.ContactNumber, new { @class = "form-control", @id = "txtDesignDischarge", @placeholder = "", required = "required", type = "number" })
+                                                @Html.TextBox("txtContactNumber", Model.HeisIdentificationDetail.ContactNumber, new { @class = "form-control", @id = "txtContactNumber", @placeholder = "", required = "required" })
                                             </div>
                                             <div class="form-group">
                                                 <label>Soil type</label>
@@ -381,7 +381,7 @@
                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label>Work Order Amount (Rs.) </label>
                                                 @Html.TextBox("txtWorkOrderAmount", Model.HeisIdentificationDetail.WorkOrderAmount,
@@ -445,7 +445,7 @@
                                                     <option value="Deferred">Deferred</option>
                                                 </select>
                                             </div>
-                                            
+
 
                                             <div class="form-group">
                                                 <label>Commissioning Verification Date</label>
@@ -510,9 +510,10 @@
     <!-- Include SmartWizard JavaScript source -->
     <script src="../content/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js"></script>
     <script src="../content/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
     <script type="text/javascript">
-
+        $('#txtContactNumber').inputmask("9999-9999999");
 
 
     $(document).ready(function () {
@@ -739,7 +740,7 @@
                 }
                 else if (stepNumber == 1) {
                     alert('Finished');
-                } 
+                }
             });
 
             // Smart Wizard

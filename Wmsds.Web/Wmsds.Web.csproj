@@ -239,6 +239,11 @@
     <Content Include="content\assets\img\user\usrbig8.jpg" />
     <Content Include="content\assets\img\user\usrbig9.jpg" />
     <Content Include="content\assets\js\app.js" />
+    <Content Include="content\assets\js\masking\bindings\inputmask.binding.js" />
+    <Content Include="content\assets\js\masking\inputmask.js" />
+    <Content Include="content\assets\js\masking\inputmask.min.js" />
+    <Content Include="content\assets\js\masking\jquery.inputmask.js" />
+    <Content Include="content\assets\js\masking\jquery.inputmask.min.js" />
     <Content Include="content\assets\js\heis-charts.js" />
     <Content Include="content\assets\js\heis-dashboard.js" />
     <Content Include="content\assets\js\layout.js" />
@@ -401,6 +406,7 @@
     <Content Include="content\fonts\material-design-icons\iconfont\MaterialIcons-Regular.ttf" />
     <Content Include="content\fonts\material-design-icons\iconfont\MaterialIcons-Regular.woff" />
     <Content Include="content\fonts\material-design-icons\iconfont\MaterialIcons-Regular.woff2" />
+    <Content Include="Scripts\ASPSnippets_Pager.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

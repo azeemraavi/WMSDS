@@ -1,34 +1,31 @@
-﻿@using Wmsds.Entities;
-@using Wmsds.Entities.WC;
-@model WmsdsResponse<WcIdentification>
-@{
-    ViewBag.Title = "Index";
-}
+﻿
 @section styles {
 
-    <style>
-        .pagination > li > a, .pagination > li > span {
-            position: relative;
-            float: left;
-            padding: 6px 12px;
-            margin-left: -1px;
-            line-height: 1.42857143;
-            color: #337ab7;
-            text-decoration: none;
-            background-color: #fff;
-            border: 1px solid #ddd;
+    <style type="text/css">
+       
+        .Pager span {
+            text-align: center;
+            color: #333;
+            display: inline-block;
+            width: 20px;
+            background-color: #B8DBFD;
+            margin-right: 3px;
+            line-height: 150%;
+            border: 1px solid #B8DBFD;
         }
 
-        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
-            z-index: 2;
-            color: #fff;
-            cursor: default;
-            background-color: #337ab7;
-            border-color: #337ab7;
+        .Pager a {
+            text-align: center;
+            display: inline-block;
+            width: 20px;
+            background-color: #ccc;
+            color: #333;
+            border: 1px solid #ccc;
+            margin-right: 3px;
+            line-height: 150%;
+            text-decoration: none;
         }
     </style>
-    <!-- data tables -->
-    <link href="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 }
 <!-- start page content -->
 <div class="page-content-wrapper">
@@ -106,148 +103,32 @@
 
                                             </div>
                                         </div>
-                                        @using (Html.BeginForm("Index", "WaterCourses", FormMethod.Post, new { name = "tableform" }))
-                                        {
-                                            <div class="table-scrollable">
-                                                <input type="hidden" id="currentPageIndex" name="currentPageIndex" value="@(Model.Pager.CurrentPage)" />
-                                                <table id="example42" class="display" style="width:100%;">
-                                                    <thead>
-                                                        <tr>
 
-                                                            <th style="width: 150px !important;"> District. </th>
-                                                            <th> Tehsil </th>
-                                                            <th> Channel </th>
+                                        <div class="table-responsive">
+                                            <table id="tblCustomers" class="table table-striped custom-table table-hover">
+                                                <tr>
+                                                    <th> <a href="javascript:;"> District. </a></th>
+                                                    <th> <a href="javascript:;"> Tehsil </a></th>
+                                                    <th> <a href="javascript:;"> Channel </a></th>
+                                                    <th> <a href="javascript:;"> Impr Type </a></th>
+                                                    <th> <a href="javascript:;"> Impr Year </a> </th>
+                                                    <th> <a href="javascript:;"> WaterCourseNo </a></th>
+                                                    <th> <a href="javascript:;"> Action </a> </th>
+                                                </tr>
+                                                <tr style="display:none">
+                                                    <td>District.</td>
+                                                    <td>Tehsil</td>
+                                                    <td>Channel</td>
+                                                    <td>Impr Type</td>
+                                                    <td>Impr Year</td>
+                                                    <td>WaterCourseNo</td>
+                                                    <td>Action</td>
+                                                </tr>
+                                            </table>
+                                            <br />
+                                            <div class="Pager"></div>
+                                        </div>
 
-                                                            <th> Impr Type </th>
-                                                            <th> Impr Year </th>
-                                                            <th> WaterCourseNo </th>
-                                                            <th> Action </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach (var item in Model.Collections)
-                                                        {
-                                                            if (item.WcIdentificationDetails.Count > 0)
-                                                            {
-                                                                foreach (var subItem in item.WcIdentificationDetails)
-                                                                {
-                                                                    <tr class="odd gradeX">
-                                                                        <td>
-                                                                            <a href="#">
-                                                                                @item.DistrictName
-                                                                            </a>
-                                                                        </td>
-                                                                        <td>
-
-                                                                            @item.TehsilName
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <span class="label label-sm label-success">
-                                                                                @item.ChannelName
-                                                                            </span>
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @subItem.ImprovementType
-                                                                        </td>
-                                                                        <td>
-                                                                            @subItem.ImprovementYear
-                                                                        </td>
-
-                                                                        <td>
-
-                                                                            @item.WaterCourseNo
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=false" class="btn btn-success btn-xs">
-                                                                                <i class="fa fa-pencil"></i>
-
-                                                                            </a>
-                                                                            <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true" class="btn btn-primary btn-xs">
-                                                                                <i class="fa fa-plus"></i>
-                                                                            </a>
-
-                                                                        </td>
-                                                                    </tr>
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                <tr class="odd gradeX">
-                                                                    <td>
-                                                                        <a href="#">
-                                                                            @item.DistrictName
-                                                                        </a>
-                                                                    </td>
-                                                                    <td>
-
-                                                                        @item.TehsilName
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="label label-sm label-success">
-                                                                            @item.ChannelName
-                                                                        </span>
-                                                                    </td>
-
-                                                                    <td>
-                                                                    </td>
-                                                                    <td>
-                                                                    </td>
-
-                                                                    <td>
-
-                                                                        @item.WaterCourseNo
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="/WaterCourses/DataEntry?Id=@item.Id&IsNewEntry=true">Add</a>
-                                                                    </td>
-                                                                </tr>
-                                                            }
-
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                                <!-- Paging -->
-                                                <!-- pager -->
-                                                @if (Model.Pager.EndPage > 1)
-                                                {
-                                                    <ul class="pagination">
-                                                        @if (Model.Pager.CurrentPage > 1)
-                                                        {
-                                                            <li>
-                                                                <a href="~/WcListing/Index">First</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:PagerClick(@(Model.Pager.CurrentPage - 1));">Previous</a>
-
-                                                            </li>
-                                                        }
-
-                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-                                                        {
-                                                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                                                                <a href="javascript:PagerClick(@page);">@page</a>
-                                                            </li>
-                                                        }
-
-                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                                                        {
-                                                            <li>
-                                                                <a href="javascript:PagerClick(@(Model.Pager.CurrentPage + 1));">Next</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:PagerClick(@(Model.Pager.TotalPages))">Last</a>
-                                                            </li>
-                                                        }
-                                                    </ul>
-                                                }
-
-                                            </div>
-                                        }
                                     </div>
                                 </div>
                             </div>
@@ -317,30 +198,80 @@
 </div>
 @section scripts {
     <!-- data tables -->
-    <script src="~/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/Scripts/ASPSnippets_Pager.min.js"></script>
+    <script type="text/javascript">
+        var sortName = "";
+        var sortDirection = "ASC";
+        $(function () {
+            GetCustomers(1);
+        });
+        $("body").on("click", "#tblCustomers th a", function () {
+            sortName = $(this).html();
+            sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
+            GetCustomers(1);
+        });
+        $("body").on("click", ".Pager .page", function () {
+            GetCustomers(parseInt($(this).attr('page')));
+        });
+        function GetCustomers(pageIndex) {
+            $.ajax({
+                type: "POST",
+                url: "/WaterCourses/AjaxMethod",
+                data: '{pageIndex: ' + pageIndex + ', sortName: "' + sortName + '", sortDirection: "' + sortDirection + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                },
+                error: function (response) {
+                    alert(response.d);
+                }
+            });
+        };
+        function OnSuccess(response) {
+            debugger;
+            var model = response.Collections;
+            var row = $("#tblCustomers tr:last-child").removeAttr("style").clone(true);
+            $("#tblCustomers tr").not($("#tblCustomers tr:first-child")).remove();
+            $.each(model, function () {
+                var item = this;
+                debugger;
+                $("td", row).eq(0).html(item.DistrictName);
+                $("td", row).eq(1).html(item.TehsilName);
+                $("td", row).eq(2).html(item.ChannelName);
+                $("td", row).eq(3).html(item.ImprovementType);
+                $("td", row).eq(4).html(item.ImprovementYear);
+                $("td", row).eq(5).html(item.WaterCourseNo);
+                /**/
+                $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id+"&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
+        /**/
+
+        $("#tblCustomers").append(row);
+        row = $("#tblCustomers tr:last-child").clone(true);
+    });
+    $(".Pager").ASPSnippets_Pager({
+        ActiveCssClass: "current",
+        PagerCssClass: "pager",
+        PageIndex: response.PageIndex,
+        PageSize: response.PageSize,
+        RecordCount: response.RecordCount
+    });
+};
+    </script>
     <script type="text/javascript">
 
-        function PagerClick(index) {
-            debugger;
-            document.getElementById("currentPageIndex").value = index;
-            $('form[name="tableform"]').submit();
-        }
 
         var AllFilterData;
         $(document).ready(function () {
-
-            $('#example4').DataTable({
-                "pagingType": "full_numbers"
-            });
-
             $.ajax({
                 url: '/WaterCourses/LoadAllFilterData',
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {
                     AllFilterData = data;
-                    debugger;
+                    
                     $(data.Districts).each(function () {
                         //this refers to the current item being iterated over
                         var option = $('<option />');
@@ -368,7 +299,7 @@
 
             $("#ddlDistrict").on("change", onddlDistrictChange);
             function onddlDistrictChange() {
-                debugger;
+                
                 $('#ddlTehsil').empty();
                 var DistrictId = $('#ddlDistrict').val();
                 var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
@@ -385,10 +316,9 @@
                 });
             }
 
-
             $("#dllAddDistrict").on("change", ondllAddDistrictChange);
             function ondllAddDistrictChange() {
-                debugger;
+                
                 $('#dllAddTehsil').empty();
                 var optionSelect = $('<option />');
                 optionSelect.attr('value', "").text("--Select--");

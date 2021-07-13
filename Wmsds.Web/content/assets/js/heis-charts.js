@@ -6,7 +6,7 @@ $(document).ready(function () {
         dataType: "JSON",
         success: function (data) {
             AllFilterData = data;
-            debugger;
+           
             $(data.Districts).each(function () {
                 //this refers to the current item being iterated over
                 var option = $('<option />');
@@ -37,8 +37,8 @@ $(document).ready(function () {
         type: "GET",
         dataType: "JSON",
         success: function (DataObject) {
-            //debugger;
-            console.log(DataObject);
+            debugger;
+            //console.log(DataObject);
             var config = {
                 type: 'pie',
                 data: {
