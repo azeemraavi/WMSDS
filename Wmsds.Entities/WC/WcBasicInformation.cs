@@ -11,7 +11,7 @@ namespace Wmsds.Entities.WC
         public int Id { get; set; }
 
         public int WcIdentificationId { get; set; }
-        //public WcIdentification WcIdentification { get; set; }
+        public WcIdentification WcIdentification { get; set; }
 
 
         #region Basic Information

@@ -232,6 +232,7 @@
         };
         function OnSuccess(response) {
             debugger;
+            response = JSON.parse(response);
             var model = response.Collections;
             var row = $("#tblCustomers tr:last-child").removeAttr("style").clone(true);
             $("#tblCustomers tr").not($("#tblCustomers tr:first-child")).remove();
@@ -241,11 +242,31 @@
                 $("td", row).eq(0).html(item.DistrictName);
                 $("td", row).eq(1).html(item.TehsilName);
                 $("td", row).eq(2).html(item.ChannelName);
-                $("td", row).eq(3).html(item.ImprovementType);
-                $("td", row).eq(4).html(item.ImprovementYear);
+                //$("td", row).eq(3).html(item.WcIdentificationDetails[0].ImprovementType);
+                //$("td", row).eq(4).html(item.WcIdentificationDetails[0].ImprovementYear);
                 $("td", row).eq(5).html(item.WaterCourseNo);
                 /**/
-                $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id+"&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
+                $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
+
+
+                //Collention
+                $.each(item.WcIdentificationDetails, function () {
+                    var itemDetail = this;
+                    debugger;
+                    $("td", row).eq(0).html(itemDetail.DistrictName);
+                    $("td", row).eq(1).html(itemDetail.TehsilName);
+                    $("td", row).eq(2).html(itemDetail.ChannelName);
+                    $("td", row).eq(3).html(itemDetail.ImprovementType);
+                    $("td", row).eq(4).html(itemDetail.ImprovementYear);
+                    $("td", row).eq(5).html(itemDetail.WaterCourseNo);
+                    /**/
+                    $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
+                    /**/
+
+                    $("#tblCustomers").append(row);
+                    row = $("#tblCustomers tr:last-child").clone(true);
+                });
+                //Collection End
         /**/
 
         $("#tblCustomers").append(row);

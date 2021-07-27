@@ -47,26 +47,29 @@ namespace Wmsds.Bll.Dashboard
             }
 
         }
-        public async Task<WmsdsResponse<KeyValueDto>> GetWcImprovementStatus()
+        public async Task<WmsdsResponse<WcImprovementStatusDto>> GetWcImprovementStatus()
         {
 
-            var wmsdResponse = new WmsdsResponse<KeyValueDto>();
-            wmsdResponse.DataObject = new KeyValueDto();
+            var wmsdResponse = new WmsdsResponse<WcImprovementStatusDto>();
+            wmsdResponse.DataObject = new WcImprovementStatusDto();
             try
             {
 
                 using (var dbContext = new EntityContext())
                 {
-                    var wcImprovementStatus = await (from wd in dbContext.WcIdentificationDetails
-                                                     group wd by new { wd.ImprovementType } into g
-                                                     select new KeyValueDto
-                                                     {
-                                                         name = g.Key.ImprovementType,
-                                                         y = g.Count(x => x.WcIdentificationId != 0)
-                                                     }).ToListAsync();
+                    //var wcImprovementStatus = await (from wd in dbContext.WcIdentificationDetails
+                    //                                 group wd by new { wd.ImprovementType } into g
+                    //                                 select new KeyValueDto
+                    //                                 {
+                    //                                     name = g.Key.ImprovementType,
+                    //                                     y = g.Count(x => x.WcIdentificationId != 0)
+                    //                                 }).ToListAsync();
 
-                    wmsdResponse.ResponseCode = EnumStatus.Success;
-                    wmsdResponse.Collections = wcImprovementStatus;
+                    var regularCount = await dbContext.WcIdentificationDetails.Where(x=>x.ImprovementType== "Regular").CountAsync();
+                    var addlCount = await dbContext.WcIdentificationDetails.Where(x => x.ImprovementType == "Addl.").CountAsync();
+                    wmsdResponse.DataObject.RegularCount = regularCount;
+                    wmsdResponse.DataObject.AddlCount = addlCount;
+                    wmsdResponse.ResponseCode = EnumStatus.Success;                   
                     return wmsdResponse;
                 }
             }
@@ -142,7 +145,8 @@ namespace Wmsds.Bll.Dashboard
         {
 
             var wmsdResponse = new WmsdsResponse<DistrictWiseWcImprDto>();
-            wmsdResponse.DataObject = new DistrictWiseWcImprDto();
+            wmsdResponse.Collections = new List<DistrictWiseWcImprDto>();
+            
             try
             {
                 using (var dbContext = new EntityContext())
@@ -151,14 +155,28 @@ namespace Wmsds.Bll.Dashboard
                                               from wd in dbContext.WcIdentificationDetails
                                               where wc.Id == wd.WcIdentificationId
                                               group wd by new { wc.DistrictName, wd.ImprovementType } into g
-                                              select new DistrictWiseWcImprDto
+                                              select new 
                                               {
                                                   District = g.Key.DistrictName,
                                                   ImprovementType = g.Key.ImprovementType,
                                                   Value = g.Count(x => x.WcIdentificationId != 0)
                                               }).ToListAsync();
+
+                    
+                    foreach (var district in distWiseData.GroupBy(x=>x.District).ToList())
+                    {
+                        var districtWiseWcDto = new DistrictWiseWcImprDto();
+                        districtWiseWcDto.DistrictData = new List<DistrictWiseWcImprDtoLight>();
+                        districtWiseWcDto.District = district.Key;
+                        foreach (var item in district)
+                        {
+                            districtWiseWcDto.DistrictData.Add(new DistrictWiseWcImprDtoLight 
+                            { ImprovementType = item.ImprovementType, Value = item.Value });
+                        }
+                        wmsdResponse.Collections.Add(districtWiseWcDto);
+                    }
                     wmsdResponse.ResponseCode = EnumStatus.Success;
-                    wmsdResponse.Collections = distWiseData;
+                   // wmsdResponse.Collections = distWiseData;
                     return wmsdResponse;
                 }
             }

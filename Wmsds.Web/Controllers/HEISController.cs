@@ -392,8 +392,19 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> GetWcImprovementStatus()
         {
             IDashboardService dashboardService = new DashboardService();
-            var wmsdsResponse = await dashboardService.GetWcImprovementStatus();
-            return Json(wmsdsResponse.Collections, JsonRequestBehavior.AllowGet);
+
+            var wmsStatusOfWc = await dashboardService.GetStatusOfWatercourses();
+            var wmsStatusResp = await dashboardService.GetWcImprovementStatus();
+            int unImpr = wmsStatusOfWc.DataObject.TotalWaterCourse - wmsStatusResp.DataObject.RegularCount;
+            var responseOut = new
+            {
+                TotalWaterCourse = wmsStatusOfWc.DataObject.TotalWaterCourse,                
+                Regular = wmsStatusResp.DataObject.RegularCount,
+                Addational = wmsStatusResp.DataObject.AddlCount,
+                UnImprovedWaterCourse = unImpr
+            };
+
+            return Json(responseOut, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetLengthOfImprovedWc()
@@ -415,7 +426,14 @@ namespace Wmsds.Web.Controllers
         {
             IDashboardService dashboardService = new DashboardService();
             var wmsdsResponse = await dashboardService.GetYearWiseWcImprStatus();
-            return Json(wmsdsResponse.DataObject, JsonRequestBehavior.AllowGet);
+            return Json(wmsdsResponse.Collections, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetDistrictWiseWcImprStatus()
+        {
+            IDashboardService dashboardService = new DashboardService();
+            var wmsdsResponse = await dashboardService.GetDistrictWiseWcImprStatus();
+            return Json(wmsdsResponse.Collections, JsonRequestBehavior.AllowGet);
         }
 
         //GetDistrictWiseOverview

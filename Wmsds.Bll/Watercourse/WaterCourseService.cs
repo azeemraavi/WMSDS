@@ -107,7 +107,7 @@ namespace Wmsds.Bll.Watercourse
                 return wmsdResponse;
             }
         }
-        
+
         /// <summary>
         /// Get List of Identifications
         /// </summary>
@@ -116,46 +116,54 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="channelId"></param>
         /// <param name="improveYearId"></param>
         /// <returns></returns>
-        public async Task<WmsdsResponse<WcIdentification>> GetWcIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0,string improvementType=null)
+        public async Task<WmsdsResponse<WcIdentificationLightModel>> GetWcIdentifications(int currentPageIndex = 1, int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0, string improvementType = null)
         {
-            var wcIdentificationOut = new WmsdsResponse<WcIdentification>();
+            var wcIdentificationOut = new WmsdsResponse<WcIdentificationLightModel>();
             using (var _dbContext = new EntityContext())
             {
                 try
                 {
-
-                    //var wcIdentifications = await (from ep in _dbContext.WcIdentifications
-                    //                        join d in _dbContext.WcIdentificationDetails on ep.Id equals d.WcIdentificationId
-                    //                        where
-                    //                        (ep.DistrictId == 0 || ep.DistrictId == districtId) && (ep.TehsilId == 0 || ep.TehsilId == tehsilId)
-                    //                        && (d.ImprovementYearId == 0 || d.ImprovementYearId == tehsilId)
-                    //                        && (d.ImprovementType == null || d.ImprovementType == improvementType)
-
-                    //                               select new WcIdentification
-                    //                        {
-                    //                            Id = ep.Id,
-                    //                            DivisionName = ep.DivisionName,
-                    //                            DistrictName = ep.DistrictName,
-                    //                            TehsilName = ep.TehsilName
-
-                    //                        }).ToListAsync();
-
-                    int maxRows = 20;
-
-                    wcIdentificationOut.Collections = await _dbContext.WcIdentifications
-                                    .Where(c => districtId == 0 || c.DistrictId == districtId)
+                    int maxRows = 10;
+                    wcIdentificationOut.Collections = await (from ep in _dbContext.WcIdentifications
+                                                   join d in _dbContext.WcIdentificationDetails on ep.Id equals d.WcIdentificationId                                                                                                  
+                                                   select new WcIdentificationLightModel
+                                                   {
+                                                       Id = ep.Id,
+                                                       DistrictName = ep.DistrictName,
+                                                       DistrictId = ep.DistrictId,
+                                                       TehsilName = ep.TehsilName,
+                                                       TehsilId = ep.TehsilId,
+                                                       ChannelName = ep.ChannelName,
+                                                       ChannelId = ep.ChannelId,
+                                                       WaterCourseNo = ep.WaterCourseNo,
+                                                       ImprovementType = d.ImprovementType,
+                                                       ImprovementYear = d.ImprovementYear
+                                                   }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId)
-                                        .Include(x => x.WcIdentificationDetails)
-                                        .OrderBy(x=>x.Id)
+                                        .OrderBy(x => x.Id)
                                           .Skip((currentPageIndex - 1) * maxRows)
                               .Take(maxRows).ToListAsync();
 
-                    int rowCount = await _dbContext.WcIdentifications
-                                    .Where(c => districtId == 0 || c.DistrictId == districtId)
+                    var rowCount = await (from ep in _dbContext.WcIdentifications
+                                                   join d in _dbContext.WcIdentificationDetails on ep.Id equals d.WcIdentificationId                                                   
+                                                   select new WcIdentificationLightModel
+                                                   {
+                                                       Id = ep.Id,
+                                                       DistrictName = ep.DistrictName,
+                                                       DistrictId = ep.DistrictId,
+                                                       TehsilName = ep.TehsilName,
+                                                       TehsilId = ep.TehsilId,
+                                                       ChannelName = ep.ChannelName,
+                                                       ChannelId = ep.ChannelId,
+                                                       WaterCourseNo = ep.WaterCourseNo,
+                                                       ImprovementType = d.ImprovementType,
+                                                       ImprovementYear = d.ImprovementYear
+                                                   }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId).CountAsync();
-                   
+
+
                     wcIdentificationOut.TotalRecords = rowCount;
                     double pageCount = (double)((decimal)rowCount / Convert.ToDecimal(maxRows));
                     wcIdentificationOut.PageCount = (int)Math.Ceiling(pageCount);
@@ -166,8 +174,7 @@ namespace Wmsds.Bll.Watercourse
                 {
                     return null;
                 }
-
-                //.Where(c => improveYearId == 0 || c.ImprovementYearId == improveYearId)
+              
             }
         }
 
@@ -179,7 +186,7 @@ namespace Wmsds.Bll.Watercourse
         public async Task<WmsdsResponse<WcIdentification>> GetIdentificationById(int wcIdentificationId)
         {
             var wmsdResponse = new WmsdsResponse<WcIdentification>();
-            if (wcIdentificationId <=0)
+            if (wcIdentificationId <= 0)
             {
                 wmsdResponse.ResponseCode = EnumStatus.RequiredField;
                 wmsdResponse.ResponseMessage = "Water Course Id is missing.";
@@ -191,10 +198,10 @@ namespace Wmsds.Bll.Watercourse
                 try
                 {
                     var wcIdentification = await _dbContext.WcIdentifications
-                                    .Where(c => c.Id== wcIdentificationId)                                        
+                                    .Where(c => c.Id == wcIdentificationId)
                                     .SingleOrDefaultAsync();
-                    if (wcIdentification!=null)
-                    {                       
+                    if (wcIdentification != null)
+                    {
                         wmsdResponse.ResponseCode = EnumStatus.Success;
                         wmsdResponse.DataObject = wcIdentification;
                         wmsdResponse.ResponseMessage = "Record Found.";
@@ -229,7 +236,7 @@ namespace Wmsds.Bll.Watercourse
                                     .Where(c => c.DistrictId == wcIdentification.DistrictId)
                                         .Where(c => c.TehsilId == wcIdentification.TehsilId)
                                         .Where(c => c.ChannelId == wcIdentification.ChannelId)
-                                        .Where(c => c.WaterCourseId == wcIdentification.WaterCourseId)                                        
+                                        .Where(c => c.WaterCourseId == wcIdentification.WaterCourseId)
                                         .FirstOrDefaultAsync();
                 return wcIdentificationDb == null ? false : true;
             }
@@ -264,7 +271,7 @@ namespace Wmsds.Bll.Watercourse
                 {
                     _dbContext.WcIdentificationDetails.Add(wcIdentificationDetail);
                     var response = await _dbContext.SaveChangesAsync();
-                    
+
                     if (response > 0)
                     {
                         wmsdResponse.ResponseCode = EnumStatus.Success;
@@ -320,15 +327,15 @@ namespace Wmsds.Bll.Watercourse
             {
                 using (var _dbContext = new EntityContext())
                 {
-                    var basicInfoDb=await _dbContext.WcIdentificationDetails
-                        .Where(c=>c.Id==wcIdentificationDetail.Id 
-                        && c.WcIdentificationId==wcIdentificationDetail.WcIdentificationId)
+                    var basicInfoDb = await _dbContext.WcIdentificationDetails
+                        .Where(c => c.Id == wcIdentificationDetail.Id
+                        && c.WcIdentificationId == wcIdentificationDetail.WcIdentificationId)
                         .SingleOrDefaultAsync();
-                    if (basicInfoDb!=null)
+                    if (basicInfoDb != null)
                     {
 
-                        basicInfoDb.ProjectId = wcIdentificationDetail.ProjectId<=0
-                            ? basicInfoDb.ProjectId: wcIdentificationDetail.ProjectId;
+                        basicInfoDb.ProjectId = wcIdentificationDetail.ProjectId <= 0
+                            ? basicInfoDb.ProjectId : wcIdentificationDetail.ProjectId;
 
                         basicInfoDb.ProjectName = string.IsNullOrEmpty(wcIdentificationDetail.ProjectName)
                             ? basicInfoDb.ProjectName : wcIdentificationDetail.ProjectName;
@@ -339,13 +346,13 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.UC = string.IsNullOrEmpty(wcIdentificationDetail.UC)
                              ? basicInfoDb.UC : wcIdentificationDetail.UC;
 
-                        basicInfoDb.GCA = wcIdentificationDetail.GCA<=0
+                        basicInfoDb.GCA = wcIdentificationDetail.GCA <= 0
                               ? basicInfoDb.GCA : wcIdentificationDetail.GCA;
 
                         basicInfoDb.CCA = wcIdentificationDetail.CCA <= 0
                               ? basicInfoDb.CCA : wcIdentificationDetail.CCA;
 
-                        basicInfoDb.SanctionedDischargeLPS = wcIdentificationDetail.SanctionedDischargeLPS<=0
+                        basicInfoDb.SanctionedDischargeLPS = wcIdentificationDetail.SanctionedDischargeLPS <= 0
                              ? basicInfoDb.SanctionedDischargeLPS : wcIdentificationDetail.SanctionedDischargeLPS;
 
                         basicInfoDb.DesignDischargeLPS = wcIdentificationDetail.DesignDischargeLPS <= 0
@@ -360,7 +367,7 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.WUAChairman = string.IsNullOrEmpty(wcIdentificationDetail.WUAChairman)
                                ? basicInfoDb.WUAChairman : wcIdentificationDetail.WUAChairman;
 
-                        basicInfoDb.NoOfBeneficiaries = wcIdentificationDetail.NoOfBeneficiaries<=0
+                        basicInfoDb.NoOfBeneficiaries = wcIdentificationDetail.NoOfBeneficiaries <= 0
                                 ? basicInfoDb.NoOfBeneficiaries : wcIdentificationDetail.NoOfBeneficiaries;
 
                         basicInfoDb.TotalLengthM = wcIdentificationDetail.TotalLengthM <= 0
@@ -395,7 +402,7 @@ namespace Wmsds.Bll.Watercourse
                         wmsdResponse.ResponseMessage = "No Record found against given Ids.";
                         return wmsdResponse;
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -450,10 +457,10 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.MaterialCost = wcIdentificationDetail.MaterialCost <= 0
                             ? basicInfoDb.MaterialCost : wcIdentificationDetail.MaterialCost;
 
-                        basicInfoDb.EarthenWorks = wcIdentificationDetail.EarthenWorks<=0
+                        basicInfoDb.EarthenWorks = wcIdentificationDetail.EarthenWorks <= 0
                             ? basicInfoDb.EarthenWorks : wcIdentificationDetail.EarthenWorks;
 
-                        basicInfoDb.MasonryWorks =wcIdentificationDetail.MasonryWorks<=0
+                        basicInfoDb.MasonryWorks = wcIdentificationDetail.MasonryWorks <= 0
                              ? basicInfoDb.MasonryWorks : wcIdentificationDetail.MasonryWorks;
 
                         basicInfoDb.EarthenLengthM = wcIdentificationDetail.EarthenLengthM <= 0
@@ -462,7 +469,7 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.LiningLengthM = wcIdentificationDetail.LiningLengthM <= 0
                               ? basicInfoDb.LiningLengthM : wcIdentificationDetail.LiningLengthM;
 
-                        basicInfoDb.PcpSegmentSize = string.IsNullOrEmpty(wcIdentificationDetail.PcpSegmentSize  ) 
+                        basicInfoDb.PcpSegmentSize = string.IsNullOrEmpty(wcIdentificationDetail.PcpSegmentSize)
                              ? basicInfoDb.PcpSegmentSize : wcIdentificationDetail.PcpSegmentSize;
 
                         basicInfoDb.PcpSegment = wcIdentificationDetail.PcpSegment <= 0
@@ -471,10 +478,10 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.PipeType = string.IsNullOrEmpty(wcIdentificationDetail.PipeType)
                              ? basicInfoDb.PipeType : wcIdentificationDetail.PipeType;
 
-                        basicInfoDb.SizeOfPipeInch = wcIdentificationDetail.SizeOfPipeInch<=0
+                        basicInfoDb.SizeOfPipeInch = wcIdentificationDetail.SizeOfPipeInch <= 0
                               ? basicInfoDb.SizeOfPipeInch : wcIdentificationDetail.SizeOfPipeInch;
 
-                        basicInfoDb.LengthOfPipeM = wcIdentificationDetail.LengthOfPipeM<=0
+                        basicInfoDb.LengthOfPipeM = wcIdentificationDetail.LengthOfPipeM <= 0
                                ? basicInfoDb.LengthOfPipeM : wcIdentificationDetail.LengthOfPipeM;
 
                         basicInfoDb.Nakkas = wcIdentificationDetail.Nakkas <= 0
@@ -579,7 +586,7 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.ICR2ReleasedAmount = wcIdentificationDetail.ICR2ReleasedAmount <= 0
                              ? basicInfoDb.ICR2ReleasedAmount : wcIdentificationDetail.ICR2ReleasedAmount;
 
-                        
+
                         var response = await _dbContext.SaveChangesAsync();
                         if (response > 0)
                         {
@@ -656,7 +663,7 @@ namespace Wmsds.Bll.Watercourse
                         basicInfoDb.FCRLinedLength = wcIdentificationDetail.FCRLinedLength <= 0
                             ? basicInfoDb.FCRLinedLength : wcIdentificationDetail.FCRLinedLength;
 
-                        basicInfoDb.LinedPercentage = wcIdentificationDetail.LinedPercentage<=0
+                        basicInfoDb.LinedPercentage = wcIdentificationDetail.LinedPercentage <= 0
                             ? basicInfoDb.LinedPercentage : wcIdentificationDetail.LinedPercentage;
 
                         basicInfoDb.TotalCostOfCivilWrkVerfied = wcIdentificationDetail.TotalCostOfCivilWrkVerfied <= 0
@@ -677,7 +684,7 @@ namespace Wmsds.Bll.Watercourse
 
                         basicInfoDb.FCRPcpSegment = wcIdentificationDetail.FCRPcpSegment <= 0
                              ? basicInfoDb.FCRPcpSegment : wcIdentificationDetail.FCRPcpSegment;
-                        
+
                         basicInfoDb.FCRPipeType = string.IsNullOrEmpty(wcIdentificationDetail.FCRPipeType)
                              ? basicInfoDb.FCRPipeType : wcIdentificationDetail.FCRPipeType;
 

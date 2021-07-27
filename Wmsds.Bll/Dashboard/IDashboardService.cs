@@ -15,7 +15,7 @@ namespace Wmsds.Bll.Dashboard
         /// Watercourse Improvement Status
         /// </summary>
         /// <returns></returns>
-        Task<WmsdsResponse<KeyValueDto>> GetWcImprovementStatus();
+        Task<WmsdsResponse<WcImprovementStatusDto>> GetWcImprovementStatus();
         /// <summary>
         /// Length of Improved Watercourses (‘000’ KMs)
         /// </summary>

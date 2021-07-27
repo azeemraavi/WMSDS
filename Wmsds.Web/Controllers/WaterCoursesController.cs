@@ -12,6 +12,7 @@ using System.Net;
 using Wmsds.Bll.Watercourse;
 using Wmsds.Entities;
 using Wmsds.Web.Models;
+using Newtonsoft.Json;
 
 namespace Wmsds.Web.Controllers
 {
@@ -26,7 +27,7 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> AjaxMethod(int pageIndex, string sortName, string sortDirection)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            WmsdsResponse<WcIdentification> model = new WmsdsResponse<WcIdentification>();
+            WmsdsResponse<WcIdentificationLightModel> model = new WmsdsResponse<WcIdentificationLightModel>();
             model.PageIndex = pageIndex;
             model.PageSize = 10;
             var wmsdsResponse = await waterCourseService.GetWcIdentifications(pageIndex, 0, 0, 0, 0, null);
@@ -111,7 +112,13 @@ namespace Wmsds.Web.Controllers
             //        break;
             //}
 
-            return Json(model);
+            var result = JsonConvert.SerializeObject(model, Formatting.Indented,
+                          new JsonSerializerSettings
+                          {
+                              ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                          });
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
         public async Task<ActionResult> Index(int? page)
@@ -208,7 +215,7 @@ namespace Wmsds.Web.Controllers
         public async Task<JsonResult> GetWcListing(WcIdentification model)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
-            WmsdsResponse<WcIdentification> WcIdentifications = await waterCourseService.GetWcIdentifications(1,model.DistrictId ,model.TehsilId,model.ChannelId,0,null);
+            WmsdsResponse<WcIdentificationLightModel> WcIdentifications = await waterCourseService.GetWcIdentifications(1,model.DistrictId ,model.TehsilId,model.ChannelId,0,null);
             return Json(WcIdentifications.Collections, JsonRequestBehavior.AllowGet);
         }
 

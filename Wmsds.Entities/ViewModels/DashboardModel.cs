@@ -17,6 +17,10 @@ namespace Wmsds.Entities.ViewModels
         public string name { get; set; }
         public int y { get; set; }
     }
+    public class WcImprovementStatusDto {
+        public int RegularCount { get; set; }
+        public int AddlCount { get; set; }
+    }
     public class LengthOfWcDto
     {
         public int TotalLength { get; set; }
@@ -33,6 +37,10 @@ namespace Wmsds.Entities.ViewModels
     public class DistrictWiseWcImprDto
     {
         public string District { get; set; }
+        public List<DistrictWiseWcImprDtoLight> DistrictData { get; set; }
+    }
+    public class DistrictWiseWcImprDtoLight
+    {
         public string ImprovementType { get; set; }
         public int Value { get; set; }
     }

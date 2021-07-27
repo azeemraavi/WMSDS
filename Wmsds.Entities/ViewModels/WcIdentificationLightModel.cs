@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wmsds.Entities.WC
+namespace Wmsds.Entities.ViewModels
 {
-    public class WcIdentification
+    public class WcIdentificationLightModel
     {
         public int Id { get; set; }
 
@@ -22,24 +22,10 @@ namespace Wmsds.Entities.WC
         public int ChannelId { get; set; }
         public string ChannelName { get; set; }
 
+        public string ImprovementType { get; set; }
+        public string ImprovementYear { get; set; }
+
         public int WaterCourseId { get; set; }
         public string WaterCourseNo { get; set; }
-
-       
-
-        public int AdminDistrictId { get; set; }
-        public string AdminDistrictName { get; set; }
-
-        public int AdminTehsilId { get; set; }
-        public string AdminTehsilName { get; set; }
-
-        public List<WcIdentificationDetail> WcIdentificationDetails { get; set; }
-
-        public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
     }
-
-    //ToDo
-    
 }
