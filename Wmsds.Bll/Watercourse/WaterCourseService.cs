@@ -116,7 +116,7 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="channelId"></param>
         /// <param name="improveYearId"></param>
         /// <returns></returns>
-        public async Task<WmsdsResponse<WcIdentificationLightModel>> GetWcIdentifications(int currentPageIndex = 1, int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0, string improvementType = null)
+        public async Task<WmsdsResponse<WcIdentificationLightModel>> GetWcIdentifications(int currentPageIndex = 1, int districtId = 0, int tehsilId = 0, int channelId = 0, int improveYearId = 0, string improvementType = null, string channalName = null, string wcNo = null)
         {
             var wcIdentificationOut = new WmsdsResponse<WcIdentificationLightModel>();
             using (var _dbContext = new EntityContext())
@@ -141,6 +141,8 @@ namespace Wmsds.Bll.Watercourse
                                                    }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                         .Where(c => channelId == 0 || c.ChannelId == channelId)
+                                        .Where(c => channalName == null || c.ChannelName == channalName)
+                                        .Where(c => wcNo == null || c.WaterCourseNo == wcNo)
                                         .OrderBy(x => x.Id)
                                           .Skip((currentPageIndex - 1) * maxRows)
                               .Take(maxRows).ToListAsync();
@@ -161,7 +163,10 @@ namespace Wmsds.Bll.Watercourse
                                                        ImprovementYear = d.ImprovementYear
                                                    }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                         .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
-                                        .Where(c => channelId == 0 || c.ChannelId == channelId).CountAsync();
+                                        .Where(c => channelId == 0 || c.ChannelId == channelId)
+                                        .Where(c => channalName == null || c.ChannelName == channalName)
+                                        .Where(c => wcNo == null || c.WaterCourseNo == wcNo)
+                                        .CountAsync();
 
 
                     wcIdentificationOut.TotalRecords = rowCount;

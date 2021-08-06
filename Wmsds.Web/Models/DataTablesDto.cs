@@ -37,4 +37,8 @@ namespace Wmsds.Web.Models
         public string dir { get; set; }
     }
     /// End- JSon class sent from Datatables
+    /// 
+
+    //int pageIndex, string districtName, string sortName, string sortDirection
+    
 }

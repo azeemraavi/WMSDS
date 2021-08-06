@@ -28,7 +28,7 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="channelId"></param>
         /// <param name="improveYearId"></param>
         /// <returns></returns>
-        Task<WmsdsResponse<WcIdentificationLightModel>> GetWcIdentifications(int currentPageIndex=1,int districtId=0, int tehsilId=0, int channelId=0, int improveYearId=0, string improvementType=null);
+        Task<WmsdsResponse<WcIdentificationLightModel>> GetWcIdentifications(int currentPageIndex=1,int districtId=0, int tehsilId=0, int channelId=0, int improveYearId=0, string improvementType=null,string channalName=null,string wcNo=null);
 
         //To add Identification Detail
 

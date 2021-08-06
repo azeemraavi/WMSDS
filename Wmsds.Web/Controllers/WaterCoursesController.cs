@@ -24,101 +24,22 @@ namespace Wmsds.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AjaxMethod(int pageIndex, string sortName, string sortDirection)
+        public async Task<JsonResult> AjaxMethod(FilterRequest filterRequest)
         {
             IWaterCourseService waterCourseService = new WaterCourseService();
             WmsdsResponse<WcIdentificationLightModel> model = new WmsdsResponse<WcIdentificationLightModel>();
-            model.PageIndex = pageIndex;
+            model.PageIndex = filterRequest.PageIndex;
             model.PageSize = 10;
-            var wmsdsResponse = await waterCourseService.GetWcIdentifications(pageIndex, 0, 0, 0, 0, null);
+            var wmsdsResponse = await waterCourseService.GetWcIdentifications(filterRequest.PageIndex, filterRequest.DistrictId, filterRequest.TehsilId, 0, 0, null,filterRequest.ChannelName,filterRequest.WaterCourseNo);
             model.Collections = wmsdsResponse.Collections;
             model.RecordCount = wmsdsResponse.TotalRecords;
-            int startIndex = (pageIndex - 1) * model.PageSize;
-
-            //switch (sortName)
-            //{
-            //    case "CustomerID":
-            //    case "":
-            //        if (sortDirection == "ASC")
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderBy(customer => customer.CustomerID)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        else
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderByDescending(customer => customer.CustomerID)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        break;
-            //    case "ContactName":
-            //        if (sortDirection == "ASC")
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderBy(customer => customer.ContactName)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        else
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderByDescending(customer => customer.ContactName)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        break;
-            //    case "City":
-            //        if (sortDirection == "ASC")
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderBy(customer => customer.City)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        else
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderByDescending(customer => customer.City)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        break;
-            //    case "Country":
-            //        if (sortDirection == "ASC")
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderBy(customer => customer.Country)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        else
-            //        {
-            //            model.Customers = (from customer in entities.Customers
-            //                               select customer)
-            //                    .OrderByDescending(customer => customer.Country)
-            //                    .Skip(startIndex)
-            //                    .Take(model.PageSize).ToList();
-            //        }
-            //        break;
-            //}
-
+            int startIndex = (filterRequest.PageIndex - 1) * model.PageSize;
             var result = JsonConvert.SerializeObject(model, Formatting.Indented,
                           new JsonSerializerSettings
                           {
                               ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                           });
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         public async Task<ActionResult> Index(int? page)

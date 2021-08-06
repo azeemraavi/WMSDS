@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     $("#ddlDistrict").on("change", onddlDistrictChange);
     function onddlDistrictChange() {
-        debugger;
+        //debugger;
         var DistrictId = $('#ddlDistrict').val();
         loadDistrictWiseCharts(DistrictId);
     }
@@ -37,7 +37,7 @@ $(document).ready(function () {
         type: "GET",
         dataType: "JSON",
         success: function (DataObject) {
-            debugger;
+            //debugger;
             //console.log(DataObject);
             var config = {
                 type: 'pie',
@@ -145,7 +145,7 @@ $(document).ready(function () {
         type: "GET",
         dataType: "JSON",
         success: function (DataObject) {
-            debugger;
+            //debugger;
             //console.log(DataObject);
             var barChartData = {
                 labels: ["Total", "Regu", "Add", "Un-imp"],
@@ -283,7 +283,7 @@ $(document).ready(function () {
         type: "GET",
         dataType: "JSON",
         success: function (DataObject) {
-            debugger;
+            //debugger;
             var labels = [];
             var dataAddl = [];
             var dataRegular = [];
@@ -304,7 +304,7 @@ $(document).ready(function () {
 
                 
             }
-            console.log(DataObject);
+            //console.log(DataObject);
             var barChartData = {
                 labels: labels,
                 datasets: [{
@@ -348,7 +348,7 @@ $(document).ready(function () {
         type: "GET",
         dataType: "JSON",
         success: function (DataObject) {
-            debugger;
+            //debugger;
             var labels = [];
             var data = [];
             for (let i = 0; i < DataObject.length; ++i) {
@@ -396,8 +396,8 @@ function loadDistrictWiseCharts(districtId) {
             districtId: districtId
         },
         success: function (DataObject) {
-            debugger;
-
+            //debugger;
+            //console.log(DataObject);
             var Regular = 0;
             if (typeof DataObject.KeyValueDtos.find(e => e.name === "Regular") !== 'undefined') {
                 Regular = DataObject.KeyValueDtos.find(e => e.name === "Regular").y;
@@ -418,7 +418,6 @@ function loadDistrictWiseCharts(districtId) {
                         ],
                         backgroundColor: [
                             window.chartColors.red,
-
                             window.chartColors.green,
 
                         ],
@@ -507,135 +506,31 @@ function loadDistrictWiseCharts(districtId) {
             //===============districtWise_TehsilWiseWatercourseImprovement=================//
 
             var color = Chart.helpers.color;
+            var labelsTehsil = [];
+            var dataImprovedTehsil = [];
+            var dataUnImprovedTehsil = [];
+            for (let i = 0; i < DataObject.TehsilWiseDtos.length; ++i) {
+                labelsTehsil.push(DataObject.TehsilWiseDtos[i].Tehsil);
+                dataImprovedTehsil.push(DataObject.TehsilWiseDtos[i].ImprovedWaterCourse);
+                dataUnImprovedTehsil.push(DataObject.TehsilWiseDtos[i].UnImprovedWaterCourse);
+            }
+            console.log(labelsTehsil);
+            console.log(dataImprovedTehsil);
+            console.log(dataUnImprovedTehsil);
             var barChartData = {
-                labels: ["Bahawalnagar",
-                    "Bahawalpur",
-                    "Rahim Yar Khan",
-                    "Dera Ghazi Khan",
-                    "Layyah",
-                    "Muzaffargarh",
-                    "Rajanpur",
-                    "Chiniot",
-                    "Faisalabad",
-                    "Jhang",
-                    "Toba Tek Singh",
-                    "Gujranwala",
-                    "Gujrat",
-                    "Hafizabad",
-                    "Mandi Bahauddin",
-                    "Narowal",
-                    "Sialkot",
-                    "Kasur",
-                    "Lahore",
-                    "Nankana Sahib",
-                    "Sheikhupura",
-                    "Khanewal",
-                    "Lodhran",
-                    "Multan",
-                    "Vehari",
-                    "Attock",
-                    "Chakwal",
-                    "Jhelum",
-                    "Rawalpindi",
-                    "Okara",
-                    "Pakpattan",
-                    "Sahiwal",
-                    "Bhakkar",
-                    "Khushab",
-                    "Mianwali",
-                    "Sargodha"],
+                labels: labelsTehsil,
                 datasets: [{
                     type: 'bar',
-                    label: 'Regular',
+                    label: 'Improved',
                     backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
                     borderColor: window.chartColors.red,
-                    data: [
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor()
-                    ]
+                    data: dataImprovedTehsil
                 }, {
                     type: 'bar',
-                    label: 'Addtional',
+                        label: 'UnImproved',
                     backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
                     borderColor: window.chartColors.blue,
-                    data: [
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor()
-                    ]
+                    data: dataUnImprovedTehsil
                 }]
             };
 

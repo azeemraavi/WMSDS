@@ -53,16 +53,10 @@
                                 data-upgraded=",MaterialButton">
                             <i class="material-icons">more_vert</i>
                         </button>
-                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                            data-mdl-for="panel-button6">
-                            <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
-                            <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
-                            <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
-                        </ul>
                     </div>
                     <div class="card-body " id="bar-parent5">
 
-                        <form method="post" class="row" name="frmGetWCListing" id="frmGetWCListing" action="@Url.Action("Index", "WaterCourses")">
+                        <form class="row">
                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
                                 <label>District </label>
                                 <select id="ddlDistrict" name="ddlDistrict" class="form-control" required>
@@ -75,11 +69,13 @@
                                     <option value="" selected>--Select--</option>
                                 </select>
                             </div>
-
                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
-                                <label>  </label>
-                                @*<input id="btnGetWCListing" value="Get WC Listing" onClick='btnGetWCListingClick()' style="margin-top:21%" type="button" class="btn btn-round btn-primary" />*@
-                                <button type="submit" value="Get WC Listing" class="form-control btn btn-round btn-primary">Submit</button>
+                                <label>	Channel </label>
+                                <input id="txtChannelName" class="form-control" />
+                            </div>
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-2">
+                                <label>	WaterCourseNo </label>
+                                <input id="txtwaterCourseNo" class="form-control" />
                             </div>
                         </form>
 
@@ -107,22 +103,22 @@
                                         <div class="table-responsive">
                                             <table id="tblCustomers" class="table table-striped custom-table table-hover">
                                                 <tr>
-                                                    <th> <a href="javascript:;"> District. </a></th>
-                                                    <th> <a href="javascript:;"> Tehsil </a></th>
-                                                    <th> <a href="javascript:;"> Channel </a></th>
-                                                    <th> <a href="javascript:;"> Impr Type </a></th>
-                                                    <th> <a href="javascript:;"> Impr Year </a> </th>
-                                                    <th> <a href="javascript:;"> WaterCourseNo </a></th>
-                                                    <th> <a href="javascript:;"> Action </a> </th>
+                                                    <th>  District. </th>
+                                                    <th>  Tehsil </th>
+                                                    <th> Channel </th>
+                                                    <th>Impr Type</th>
+                                                    <th>Impr Year</th>
+                                                    <th>WaterCourseNo</th>
+                                                    <th> Action </th>
                                                 </tr>
-                                                <tr style="display:none">
-                                                    <td>District.</td>
-                                                    <td>Tehsil</td>
-                                                    <td>Channel</td>
-                                                    <td>Impr Type</td>
-                                                    <td>Impr Year</td>
-                                                    <td>WaterCourseNo</td>
-                                                    <td>Action</td>
+                                                <tr class="trclass" style="display:none">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             </table>
                                             <br />
@@ -206,19 +202,30 @@
         $(function () {
             GetCustomers(1);
         });
-        $("body").on("click", "#tblCustomers th a", function () {
-            sortName = $(this).html();
-            sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
-            GetCustomers(1);
-        });
+        //$("body").on("click", "#tblCustomers th a", function () {
+        //    sortName = $(this).html();
+        //    sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
+        //    GetCustomers(1);
+        //});
         $("body").on("click", ".Pager .page", function () {
             GetCustomers(parseInt($(this).attr('page')));
         });
         function GetCustomers(pageIndex) {
+            var filterRequest = {
+                PageIndex: pageIndex,
+                DistrictName: ($("#ddlDistrict").text().toLowerCase().indexOf("select") >= 0) ? "" : $("#ddlDistrict").text(),
+                DistrictId: ($("#ddlDistrict").val() == "") ? 0 : $("#ddlDistrict").val(),
+                TehsilName: ($("#ddlTehsil").text().toLowerCase().indexOf("select") >= 0) ? "" : $("#ddlTehsil").text(),
+                TehsilId: ($("#ddlTehsil").val() == "") ? 0 : $("#ddlTehsil").val(),
+                ChannelName: $("#txtChannelName").val(),
+                WaterCourseNo: $("#txtwaterCourseNo").val(),
+                sortName: sortName,
+                sortDirection: sortDirection
+            };
             $.ajax({
                 type: "POST",
                 url: "/WaterCourses/AjaxMethod",
-                data: '{pageIndex: ' + pageIndex + ', sortName: "' + sortName + '", sortDirection: "' + sortDirection + '"}',
+                data: JSON.stringify(filterRequest),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: OnSuccess,
@@ -234,44 +241,25 @@
             debugger;
             response = JSON.parse(response);
             var model = response.Collections;
+            if (model.length != 0) {
             var row = $("#tblCustomers tr:last-child").removeAttr("style").clone(true);
             $("#tblCustomers tr").not($("#tblCustomers tr:first-child")).remove();
-            $.each(model, function () {
-                var item = this;
-                debugger;
-                $("td", row).eq(0).html(item.DistrictName);
-                $("td", row).eq(1).html(item.TehsilName);
-                $("td", row).eq(2).html(item.ChannelName);
-                //$("td", row).eq(3).html(item.WcIdentificationDetails[0].ImprovementType);
-                //$("td", row).eq(4).html(item.WcIdentificationDetails[0].ImprovementYear);
-                $("td", row).eq(5).html(item.WaterCourseNo);
-                /**/
-                $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
-
-
-                //Collention
-                $.each(item.WcIdentificationDetails, function () {
-                    var itemDetail = this;
+                $.each(model, function () {
+                    var item = this;
                     debugger;
-                    $("td", row).eq(0).html(itemDetail.DistrictName);
-                    $("td", row).eq(1).html(itemDetail.TehsilName);
-                    $("td", row).eq(2).html(itemDetail.ChannelName);
-                    $("td", row).eq(3).html(itemDetail.ImprovementType);
-                    $("td", row).eq(4).html(itemDetail.ImprovementYear);
-                    $("td", row).eq(5).html(itemDetail.WaterCourseNo);
-                    /**/
+                    $("td", row).eq(0).html(item.DistrictName);
+                    $("td", row).eq(1).html(item.TehsilName);
+                    $("td", row).eq(2).html(item.ChannelName);
+                    $("td", row).eq(3).html(item.ImprovementType);
+                    $("td", row).eq(4).html(item.ImprovementYear);
+                    $("td", row).eq(5).html(item.WaterCourseNo);
                     $("td", row).eq(6).html("<a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=false' class='btn btn-success btn-xs'><i class='fa fa-pencil'></i></a><a href='/WaterCourses/DataEntry?Id=" + item.Id + "&IsNewEntry=true' class='btn btn-primary btn-xs'><i class='fa fa-plus'></i></a>");
-                    /**/
-
                     $("#tblCustomers").append(row);
                     row = $("#tblCustomers tr:last-child").clone(true);
                 });
-                //Collection End
-        /**/
-
-        $("#tblCustomers").append(row);
-        row = $("#tblCustomers tr:last-child").clone(true);
-    });
+            } else {
+                $(".trclass").hide();
+            }
     $(".Pager").ASPSnippets_Pager({
         ActiveCssClass: "current",
         PagerCssClass: "pager",
@@ -282,8 +270,6 @@
 };
     </script>
     <script type="text/javascript">
-
-
         var AllFilterData;
         $(document).ready(function () {
             $.ajax({
@@ -303,8 +289,6 @@
                         option1.attr('value', this.Id).text(this.Name);
                         $('#dllAddDistrict').append(option1);
                     });
-
-
                     $(data.FinancialYears).each(function () {
                         //this refers to the current item being iterated over
                         var option = $('<option />');
@@ -313,30 +297,8 @@
 
 
                     });
-
-                    console.log(data);
                 }
             });
-
-            $("#ddlDistrict").on("change", onddlDistrictChange);
-            function onddlDistrictChange() {
-                
-                $('#ddlTehsil').empty();
-                var DistrictId = $('#ddlDistrict').val();
-                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
-
-                var optionSelect = $('<option />');
-                optionSelect.attr('value', "").text("--Select--");
-                $('#ddlTehsil').append(optionSelect);
-
-                $(data_filter).each(function () {
-                    //this refers to the current item being iterated over
-                    var option = $('<option />');
-                    option.attr('value', this.Id).text(this.Name);
-                    $('#ddlTehsil').append(option);
-                });
-            }
-
             $("#dllAddDistrict").on("change", ondllAddDistrictChange);
             function ondllAddDistrictChange() {
                 
@@ -421,6 +383,40 @@
                     }
                 });
             }
+
+            $("#ddlDistrict").on("change", onddlDistrictChange);
+            function onddlDistrictChange() {
+
+                $('#ddlTehsil').empty();
+                var DistrictId = $('#ddlDistrict').val();
+                var data_filter = AllFilterData.Tehsils.filter(element => element.DistrictId == DistrictId);
+
+                var optionSelect = $('<option />');
+                optionSelect.attr('value', "").text("--Select--");
+                $('#ddlTehsil').append(optionSelect);
+
+                $(data_filter).each(function () {
+                    //this refers to the current item being iterated over
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Name);
+                    $('#ddlTehsil').append(option);
+                });
+
+                GetCustomers(1);
+            }
+
+            $("#ddlTehsil").on("change", onddlTehsilChange);
+            function onddlTehsilChange() {
+                GetCustomers(1);
+            }
+
+            $("#txtChannelName").change(function () {
+                GetCustomers(1);
+            });
+
+            $("#txtwaterCourseNo").change(function () {
+                GetCustomers(1);
+            });
         });
 
         $("#btnAddWCIdentification").on("click", onbtnAddWCIdentificationClick);
@@ -486,18 +482,5 @@
 
             });
         }
-
-        $("#frmGetWCListing").validate({
-            errorClass: 'help-block',
-            validClass: 'success',
-            errorElement: "span",
-            highlight: function (element, errorClass, validClass) {
-                $(element).parents("div.form-group").addClass('has-error').removeClass(validClass);
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).parents("div.form-group").removeClass('has-error').addClass(validClass);
-            }
-        });
-
     </script>
 }

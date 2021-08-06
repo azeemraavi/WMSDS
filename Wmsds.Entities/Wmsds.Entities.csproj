@@ -53,6 +53,7 @@
     <Compile Include="HEIS\HeisWorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DashboardModel.cs" />
+    <Compile Include="ViewModels\FilterRequest.cs" />
     <Compile Include="ViewModels\WcIdentificationDto.cs" />
     <Compile Include="ViewModels\WcIdentificationLightModel.cs" />
     <Compile Include="WC\EnumWcImprovementType.cs" />
