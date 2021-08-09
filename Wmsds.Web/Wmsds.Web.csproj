@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HEISController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WaterCoursesController.cs" />
@@ -440,6 +441,8 @@
     <Content Include="Views\HEIS\DataEntry.cshtml" />
     <Content Include="Views\HEIS\Dashboard.cshtml" />
     <Content Include="Views\WaterCourses\WcListing.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
