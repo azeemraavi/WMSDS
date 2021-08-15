@@ -42,7 +42,11 @@ namespace Wmsds.Dal
         public DbSet<HeisIdentification> HeisIdentifications { get; set; }
         public DbSet<HeisIdentificationDetail> HeisIdentificationDetails { get; set; }
         public DbSet<HeisVendor> HeisVendors { get; set; }
-        
+
+        #endregion
+
+        #region Users
+        public DbSet<AppUser> AppUsers { get; set; }
         #endregion
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

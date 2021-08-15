@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AppUser.cs" />
     <Compile Include="Common\WmsdsModel.cs" />
     <Compile Include="HEIS\HeisBasicInformation.cs" />
     <Compile Include="HEIS\HeisDesignParameters.cs" />

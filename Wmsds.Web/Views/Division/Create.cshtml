@@ -1,0 +1,74 @@
+﻿@model Wmsds.Entities.Common.Division
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        @using (Html.BeginForm("Create", "Division", FormMethod.Post, new { name = "Createform", id = "Createform" }))
+        {
+            <div class="modal-header">
+                <h5 class="modal-title">Create Division Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="Id" name="Id" value="0">
+                <div class="form-group">
+                    <label>Province</label>
+                    <select id="ProvinceId" name="ProvinceId" class="form-control" required>
+                        <option value="">--Select--</option>
+                        <option value="1">Punjab</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    @Html.TextBox("Name", "",
+                                                new { @class = "form-control", @id = "Name", @placeholder = "Enter Name", required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Code</label>
+                    @Html.TextBox("Code", "",
+                                            new { @class = "form-control", @id = "Code", @placeholder = "Enter Code", required = "required" })
+                </div>
+
+                @Html.ValidationSummary(true)
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    // this is the id of the form
+    $("#Createform").submit(function (e) {
+        debugger;
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                console.log(data);
+                debugger;
+                if (data.Id > 0) {
+                    $.toast({
+                        heading: 'Division has been added successfully.',
+                        text: data.Name + 'has been successfully added',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'success',
+                        hideAfter: 3500,
+                        stack: 6
+                    });
+                }
+                $('#indexTable tr:last').after('<tr id="' + data.Id + '" role="row"><td class="sorting_1">' + data.Id + '</td><td>' + data.Name + '</td><td>' + data.Code + '</td><td>Punjab</td><td><a onclick="Edit(' + data.Id + ')">Edit</a><a onclick="Delete(' + data.Id + ')">Delete</a></td></tr>');
+                $(".modal").modal('hide');
+            }
+        });
+    });
+</script>

@@ -14,10 +14,11 @@ namespace Wmsds.Bll.Common
         Task<WmsdsResponse<int>> AddProvince(Province province);
         Task<List<Province>> GetAllProvinces();
 
-        Task<WmsdsResponse<int>> AddDivision(Division province);
+        Task<WmsdsResponse<int>> AddDivision(Division division);
         Task<List<Division>> GetDivisionByProvinceId(int provinceId);
         Task<List<Division>> GetAllDivisions();
-
+        Task<Division> GetDivisionById(int Id);
+        Task<Division> UpdateDivision(Division division);
         Task<WmsdsResponse<int>> AddDistrict(District district);
         Task<List<District>> GetAllDistrictsByDivId(int divisionId);
         Task<List<District>> GetAllDistricts();
@@ -32,7 +33,7 @@ namespace Wmsds.Bll.Common
         Task<WmsdsResponse<int>> AddChannel(Channel channel);
         Task<List<Channel>> GetChannelsByDistAndTehId(int districtId,int tehsilId);
 
-        Task<WmsdsResponse<int>> AddWaterCourse(WaterCourse channel);
+        Task<WmsdsResponse<int>> AddWaterCourse(WaterCourse waterCourse);
         Task<List<WaterCourse>> GetWaterCourses(int districtId, int tehsilId,int channelId);
         
     }

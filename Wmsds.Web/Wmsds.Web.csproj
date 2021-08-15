@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\HEISController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WaterCoursesController.cs" />
@@ -292,6 +293,8 @@
     <Content Include="content\assets\plugins\bootstrap-editable\bootstrap-editable\img\loading.gif" />
     <Content Include="content\assets\plugins\bootstrap-editable\inputs-ext\address\address.css" />
     <Content Include="content\assets\plugins\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <Content Include="content\assets\plugins\bootstrap-notify\bootstrap-notify.js" />
+    <Content Include="content\assets\plugins\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Include="content\assets\plugins\bootstrap-tabdrop\js\bootstrap-tabdrop.js" />
     <Content Include="content\assets\plugins\bootstrap-treeview\bootstrap-treeview.js" />
     <Content Include="content\assets\plugins\bootstrap\css\bootstrap.min.css" />
@@ -443,6 +446,9 @@
     <Content Include="Views\WaterCourses\WcListing.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutAccount.cshtml" />
+    <Content Include="Views\Division\Index.cshtml" />
+    <Content Include="Views\Division\Create.cshtml" />
+    <Content Include="Views\Division\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -56,7 +56,6 @@ namespace Wmsds.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(FormCollection formCollection)
         {
-
             int District = Convert.ToInt16(formCollection["ddlDistrict"]);
             int Tehsil = Convert.ToInt16(formCollection["ddlTehsil"]);
             int currentPage = Convert.ToInt16(formCollection["currentPageIndex"]);
@@ -385,7 +384,6 @@ namespace Wmsds.Web.Controllers
             }
         }
 
-        
         public async Task<JsonResult> LoadFinancialYears()
         {
             ICommonService commonService = new CommonService();

@@ -100,6 +100,9 @@ namespace Wmsds.Entities.HEIS
         public string SystemClassification { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public string DistrictAdmin { get; set; }
+        public string TehsilAdmin { get; set; }
         #endregion
 
 

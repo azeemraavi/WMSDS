@@ -71,37 +71,276 @@ namespace Wmsds.Bll.Common
             }
 
         }
-
         public async Task<WmsdsResponse<int>> AddDistrict(District district)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (district == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(district.Name))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Name is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.Districts.Add(district);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "District has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Failed to add District.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
-        public async Task<WmsdsResponse<int>> AddDivision(Division province)
+        public async Task<WmsdsResponse<int>> AddDivision(Division division)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (division == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(division.Name))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Name is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.Divisions.Add(division);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "Division has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Failed to add Division.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
         public async Task<WmsdsResponse<int>> AddFinancialYear(FinancialYear financial)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (financial == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(financial.Year))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Year is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.FinancialYears.Add(financial);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "F.Year has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Failed to add year.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
         public async Task<WmsdsResponse<int>> AddProvince(Province province)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (province == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(province.Name))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Name is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.Provinces.Add(province);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "Province has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Operation failed.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
         public async Task<WmsdsResponse<int>> AddTehsil(Tehsil tehsil)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (tehsil == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(tehsil.Name))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Name is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.Tehsils.Add(tehsil);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "Tehsil has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Operation failed.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
-        public async Task<WmsdsResponse<int>> AddWaterCourse(WaterCourse channel)
+        public async Task<WmsdsResponse<int>> AddWaterCourse(WaterCourse waterCourse)
         {
-            throw new NotImplementedException();
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (waterCourse == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(waterCourse.WcNo))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Watercourse is a required field.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(waterCourse.ChannelName))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Name is a required field.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(waterCourse.TehsilName))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "Tehsil is a required field.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(waterCourse.DistrictName))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "District Name is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.WaterCourses.Add(waterCourse);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "Water course has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Operation failed.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
         }
-
         public async Task<List<District>> GetAllDistricts()
         {
             using (var _dbContext = new EntityContext())
@@ -116,7 +355,6 @@ namespace Wmsds.Bll.Common
                 }
             }
         }
-
         public async Task<List<District>> GetAllDistrictsByDivId(int divisionId)
         {
             using (var _dbContext = new EntityContext())
@@ -131,7 +369,6 @@ namespace Wmsds.Bll.Common
                 }
             }
         }
-
         public async Task<List<Division>> GetAllDivisions()
         {
             using (var _dbContext = new EntityContext())
@@ -139,6 +376,42 @@ namespace Wmsds.Bll.Common
                 try
                 {
                     return await _dbContext.Divisions.ToListAsync();
+                }
+                catch (Exception ex)
+                {
+                    return null; ;
+                }
+            }
+        }
+
+        public async Task<Division> GetDivisionById(int Id)
+        {
+            using (var _dbContext = new EntityContext())
+            {
+                try
+                {
+                    return await _dbContext.Divisions.Where(x=> x.Id == Id).FirstOrDefaultAsync();
+                }
+                catch (Exception ex)
+                {
+                    return null; ;
+                }
+            }
+        }
+
+        public async Task<Division> UpdateDivision(Division division)
+        {
+            using (var _dbContext = new EntityContext())
+            {
+                try
+                {
+                    var dbEntity =  await _dbContext.Divisions.Where(x => x.Id == division.Id).FirstOrDefaultAsync();
+                    dbEntity.Name = division.Name;
+                    if (dbEntity != null)
+                    {
+                      var response = await _dbContext.SaveChangesAsync();
+                    }
+                    return dbEntity;
                 }
                 catch (Exception ex)
                 {

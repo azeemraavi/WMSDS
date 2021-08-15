@@ -12,9 +12,9 @@
     </div>
     <div class="form formLogin">
         <h2>Login to your account</h2>
-        <form>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
+        <form method="post" class="row" name="frmLogin" id="frmLogin" action="@Url.Action("DoLogin", "Account")">
+            <input type="text" name="userName" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
             <div class="remember text-left">
                 <div class="checkbox checkbox-primary">
                     <input id="checkbox2" type="checkbox" checked>
@@ -23,7 +23,7 @@
                     </label>
                 </div>
             </div>
-            <button>Login</button>
+            <button type="submit">Login</button>
             <div class="forgetPassword">
                 <a href="javascript:void(0)">Forgot your password?</a>
             </div>

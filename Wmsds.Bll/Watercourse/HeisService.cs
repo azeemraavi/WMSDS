@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Wmsds.Dal;
 using Wmsds.Entities;
 using Wmsds.Entities.HEIS;
+using Wmsds.Entities.ViewModels;
 
 namespace Wmsds.Bll.Watercourse
 {
@@ -74,7 +75,7 @@ namespace Wmsds.Bll.Watercourse
             using (var _dbContext = new EntityContext())
             {
                 var wcIdentificationDb = await _dbContext.HeisIdentifications
-                                    .Where(c => c.FarmerCNIC == heisIdentification.FarmerCNIC)                                        
+                                    .Where(c => c.FarmerCNIC == heisIdentification.FarmerCNIC)
                                         .FirstOrDefaultAsync();
                 return wcIdentificationDb == null ? false : true;
             }
@@ -118,36 +119,72 @@ namespace Wmsds.Bll.Watercourse
                 }
             }
         }
-        public async Task<WmsdsResponse<HeisIdentification>> GetHeisIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0, string byName = null, string byCnic = null)
+        public async Task<WmsdsResponse<HeisIdentificationLightModel>> GetHeisIdentifications(int currentPageIndex = 1, int districtId = 0, int tehsilId = 0, string byName = null, string byCnic = null)
         {
-            var heisIdentificationOut = new WmsdsResponse<HeisIdentification>();
+            var heisIdentificationOut = new WmsdsResponse<HeisIdentificationLightModel>();
             using (var _dbContext = new EntityContext())
             {
-                int maxRows = 20;
-                heisIdentificationOut.Collections = await _dbContext.HeisIdentifications
-                                .Where(c => districtId == 0 || c.DistrictId == districtId)
+                int maxRows = 10;
+                //heisIdentificationOut.Collections = await _dbContext.HeisIdentifications
+                //                .Where(c => districtId == 0 || c.DistrictId == districtId)
+                //                    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                //                    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
+                //                    .Where(c => byName == null || c.FarmerName.Contains(byName))
+                //                    .Include(x => x.HeisIdentificationDetails)
+                //                    .OrderBy(x => x.Id)
+                //                    .Skip((currentPageIndex - 1) * maxRows)
+                //              .Take(maxRows).ToListAsync();
+                heisIdentificationOut.Collections = await (from m in _dbContext.HeisIdentifications
+                                                         join d in _dbContext.HeisIdentificationDetails on m.Id equals d.HeisIdentificationId
+                                                         select new HeisIdentificationLightModel
+                                                         {
+                                                             Id = m.Id,
+                                                             DistrictName = m.DistrictName,
+                                                             DistrictId = m.DistrictId,
+                                                             TehsilName = m.TehsilName,
+                                                             TehsilId = m.TehsilId,
+                                                             FarmerName = m.FarmerName,
+                                                             FarmerCNIC = m.FarmerCNIC,
+                                                             ContactNo = d.ContactNumber                                                             
+                                                         }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                     .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                     .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
-                                    .Where(c => byName == null || c.FarmerName.Contains(byName))
-                                    .Include(x => x.HeisIdentificationDetails)
+                                    .Where(c => byName == null || c.FarmerName.Contains(byName))                                    
                                     .OrderBy(x => x.Id)
                                     .Skip((currentPageIndex - 1) * maxRows)
                               .Take(maxRows).ToListAsync();
 
-                int rowCount = await _dbContext.HeisIdentifications
-                                  .Where(c => districtId == 0 || c.DistrictId == districtId)
+                int rowCount = await (from m in _dbContext.HeisIdentifications
+                                      join d in _dbContext.HeisIdentificationDetails on m.Id equals d.HeisIdentificationId
+                                      select new HeisIdentificationLightModel
+                                      {
+                                          Id = m.Id,
+                                          DistrictName = m.DistrictName,
+                                          DistrictId = m.DistrictId,
+                                          TehsilName = m.TehsilName,
+                                          TehsilId = m.TehsilId,
+                                          FarmerName = m.FarmerName,
+                                          FarmerCNIC = m.FarmerCNIC,
+                                          ContactNo = d.ContactNumber
+                                      }).Where(c => districtId == 0 || c.DistrictId == districtId)
                                     .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
                                     .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
                                     .Where(c => byName == null || c.FarmerName.Contains(byName))
                                     .CountAsync();
-                
+                //int rowCount = await _dbContext.HeisIdentifications
+                //                  .Where(c => districtId == 0 || c.DistrictId == districtId)
+                //                    .Where(c => tehsilId == 0 || c.TehsilId == tehsilId)
+                //                    .Where(c => byCnic == null || c.FarmerCNIC.Contains(byCnic))
+                //                    .Where(c => byName == null || c.FarmerName.Contains(byName))
+                //                    .CountAsync();
+
 
                 heisIdentificationOut.TotalRecords = rowCount;
                 double pageCount = (double)((decimal)rowCount / Convert.ToDecimal(maxRows));
                 heisIdentificationOut.PageCount = (int)Math.Ceiling(pageCount);
                 heisIdentificationOut.CurrentPageIndex = currentPageIndex;
                 return heisIdentificationOut;
-                
+
             }
         }
         public async Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailById(int heisIdentifictionDetailId)
@@ -442,7 +479,7 @@ namespace Wmsds.Bll.Watercourse
 
                         basicInfoDb.TotalApprovedProjectCost = heisIdentificationDetail.TotalApprovedProjectCost <= 0
                             ? basicInfoDb.TotalApprovedProjectCost : heisIdentificationDetail.TotalApprovedProjectCost;
-                        
+
                         basicInfoDb.TotalDynamicHead = heisIdentificationDetail.TotalDynamicHead <= 0
                            ? basicInfoDb.TotalDynamicHead : heisIdentificationDetail.TotalDynamicHead;
 
@@ -512,7 +549,7 @@ namespace Wmsds.Bll.Watercourse
 
                         basicInfoDb.ICRIIIQualifyingDate = basicInfoDb.ICRIIIQualifyingDate == null
                             ? basicInfoDb.ICRIIIQualifyingDate : heisIdentificationDetail.ICRIIIQualifyingDate;
-                             
+
                         #endregion
 
                         var response = await _dbContext.SaveChangesAsync();
@@ -545,5 +582,206 @@ namespace Wmsds.Bll.Watercourse
                 return wmsdResponse;
             }
         }
+        #region Vendors/SSC
+        public async Task<WmsdsResponse<int>> AddHeisVendor(HeisVendor heisVendor)
+        {
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (heisVendor == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+            if (string.IsNullOrEmpty(heisVendor.SSCName))
+            {
+                wmsdResponse.ResponseCode = EnumStatus.ValidationFailed; ;
+                wmsdResponse.ResponseMessage = "SSCName is a required field.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var _dbContext = new EntityContext())
+                {
+                    _dbContext.HeisVendors.Add(heisVendor);
+                    var response = await _dbContext.SaveChangesAsync();
+                    if (response > 0)
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "SSC has been added successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                        wmsdResponse.ResponseMessage = "Failed to add SSC.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
+        }
+        public async Task<WmsdsResponse<int>> UpdateHeisVendor(HeisVendor heisVendor)
+        {
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (heisVendor == null)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Object is empty.";
+                return wmsdResponse;
+            }
+
+            if (heisVendor.Id <= 0)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Key is empty.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var dbContext = new EntityContext())
+                {
+                    var dbEntity = await dbContext.HeisVendors.FindAsync(heisVendor.Id);
+                    if (dbEntity != null)
+                    {
+                        dbEntity.SSCName = heisVendor.SSCName;
+                        var response = await dbContext.SaveChangesAsync();
+                        if (response > 0)
+                        {
+                            wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                            wmsdResponse.ResponseMessage = "Record has been added successfully.";
+                            return wmsdResponse;
+                        }
+                        else
+                        {
+                            wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                            wmsdResponse.ResponseMessage = "Failed to update record.";
+                            return wmsdResponse;
+                        }
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.NotFound; ;
+                        wmsdResponse.ResponseMessage = "No Record found against given Ids.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
+        }
+        public async Task<WmsdsResponse<int>> DeleteHeisVendor(int vendorId)
+        {
+            var wmsdResponse = new WmsdsResponse<int>();
+            if (vendorId <= 0)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Key is empty.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var dbContext = new EntityContext())
+                {
+                    var dbEntity = await dbContext.HeisVendors.FindAsync(vendorId);
+                    if (dbEntity != null)
+                    {
+                        dbEntity.IsActive = false;
+                        var response = await dbContext.SaveChangesAsync();
+                        if (response > 0)
+                        {
+                            wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                            wmsdResponse.ResponseMessage = "Record has been inactive successfully.";
+                            return wmsdResponse;
+                        }
+                        else
+                        {
+                            wmsdResponse.ResponseCode = EnumStatus.Failed; ;
+                            wmsdResponse.ResponseMessage = "Failed to update record.";
+                            return wmsdResponse;
+                        }
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.NotFound; ;
+                        wmsdResponse.ResponseMessage = "No Record found against given Ids.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
+        }
+        public async Task<WmsdsResponse<HeisVendor>> GetHeisVendorById(int vendorId)
+        {
+            var wmsdResponse = new WmsdsResponse<HeisVendor>();
+            if (vendorId <= 0)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.EmptyObject;
+                wmsdResponse.ResponseMessage = "Key is empty.";
+                return wmsdResponse;
+            }
+            try
+            {
+                using (var dbContext = new EntityContext())
+                {
+                    var dbEntity = await dbContext.HeisVendors.FindAsync(vendorId);
+                    if (dbEntity != null)
+                    {
+                        wmsdResponse.DataObject = dbEntity;
+                        wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                        wmsdResponse.ResponseMessage = "Record has been loaded successfully.";
+                        return wmsdResponse;
+                    }
+                    else
+                    {
+                        wmsdResponse.ResponseCode = EnumStatus.NotFound; ;
+                        wmsdResponse.ResponseMessage = "No Record found against given Ids.";
+                        return wmsdResponse;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                wmsdResponse.ResponseCode = EnumStatus.InternalServer;
+                wmsdResponse.ResponseMessage = ex.Message;
+                return wmsdResponse;
+            }
+        }
+        public async Task<WmsdsResponse<HeisVendor>> GetAllHeisVendors()
+        {
+            var wmsdResponse = new WmsdsResponse<HeisVendor>();
+            using (var _dbContext = new EntityContext())
+            {
+                var sscVendors = await _dbContext.HeisVendors.Where(x => x.IsActive).ToListAsync();
+                if (sscVendors.Count > 0)
+                {
+                    wmsdResponse.Collections = sscVendors;
+                    wmsdResponse.ResponseCode = EnumStatus.Success; ;
+                    wmsdResponse.ResponseMessage = "Record loaded successfully.";
+                    return wmsdResponse;
+                }
+                else
+                {
+                    wmsdResponse.ResponseCode = EnumStatus.NotFound; ;
+                    wmsdResponse.ResponseMessage = "No record found.";
+                    return wmsdResponse;
+                }
+
+            }
+        }
+        #endregion
     }
 }

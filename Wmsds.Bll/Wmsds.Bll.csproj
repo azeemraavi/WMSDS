@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\IUserAccount.cs" />
+    <Compile Include="Account\UserAccountService.cs" />
     <Compile Include="Common\CommonService.cs" />
     <Compile Include="Common\ICommonService.cs" />
     <Compile Include="Dashboard\DashboardService.cs" />

@@ -14,6 +14,8 @@ namespace Wmsds.Entities.HEIS
         /// With Dashes
         /// </summary>
         public string FarmerCNIC { get; set; }
+        public int DivisionId { get; set; }
+        public string DivisionName { get; set; }
 
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }

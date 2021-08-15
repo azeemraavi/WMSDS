@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wmsds.Entities;
 using Wmsds.Entities.HEIS;
+using Wmsds.Entities.ViewModels;
 
 namespace Wmsds.Bll.Watercourse
 {
@@ -17,7 +18,7 @@ namespace Wmsds.Bll.Watercourse
         /// <param name="heisIdentificationId"></param>
         /// <returns></returns>
         Task<WmsdsResponse<HeisIdentification>> GetHeisIdentificationById(int heisIdentificationId);
-        Task<WmsdsResponse<HeisIdentification>> GetHeisIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0,string byName=null,string byCnic=null);
+        Task<WmsdsResponse<HeisIdentificationLightModel>> GetHeisIdentifications(int currentPageIndex=1,int districtId = 0, int tehsilId = 0,string byName=null,string byCnic=null);
 
         Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailById(int heisIdentifictionDetailId);
         Task<WmsdsResponse<HeisIdentificationDetail>> GetHeisIdentificationDetailByMasterId(int heisMasterIdentificationId);
@@ -26,5 +27,17 @@ namespace Wmsds.Bll.Watercourse
         Task<WmsdsResponse<int>> UpdateHeisBasicInformation(HeisIdentificationDetail heisIdentificationDetail);
 
         Task<WmsdsResponse<int>> AddWorksExecuted(HeisIdentificationDetail heisIdentificationDetail);
+
+        #region Vendor Related
+
+        Task<WmsdsResponse<int>> AddHeisVendor(HeisVendor heisVendor);
+        Task<WmsdsResponse<int>> UpdateHeisVendor(HeisVendor heisVendor);
+        Task<WmsdsResponse<int>> DeleteHeisVendor(int vendorId);
+        Task<WmsdsResponse<HeisVendor>> GetAllHeisVendors();
+        Task<WmsdsResponse<HeisVendor>> GetHeisVendorById(int vendorId);
+
+        #endregion
+
+
     }
 }

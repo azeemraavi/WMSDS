@@ -1,0 +1,163 @@
+﻿@using Wmsds.Entities.Common;
+@model List<Division>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">HEIS Dashboard</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li>
+                        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">HEIS Dashboard</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-topline-yellow">
+                    <div class="card-head">
+                        <header>Division Information List</header>
+                        <div class="tools">
+                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row p-b-20">
+                            <div class="col-md-6 col-sm-6 col-6">
+                                <div class="btn-group">
+                                    <button onclick="Create()" class="btn btn-info">
+                                        Add New
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-6">
+                                <div class="btn-group pull-right">
+                                    <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">
+                                        show/hide
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a class="toggle-vis" data-column="0">Name</a>
+                                        </li>
+                                        <li>
+                                            <a class="toggle-vis" data-column="1">Position</a>
+                                        </li>
+                                        <li>
+                                            <a class="toggle-vis" data-column="2">Office</a>
+                                        </li>
+                                        <li>
+                                            <a class="toggle-vis" data-column="3">Age</a>
+                                        </li>
+                                        <li>
+                                            <a class="toggle-vis" data-column="4">Start Date</a>
+                                        </li>
+                                        <li>
+                                            <a class="toggle-vis" data-column="5">Salary</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert label-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            Division has been added successfully.
+                        </div>
+                        <table id="indexTable" class="display" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Province</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.Id">
+                                        <td>@item.Id</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Code</td>
+                                        <td>Punjab</td>
+                                        <td>
+                                            <a onclick='Edit(@item.Id)'>Edit</a>
+                                            <a onclick='Delete(@item.Id)'>Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chart end -->
+</div>
+<div class="modal" tabindex="-1" role="dialog">
+
+</div>
+@section scripts{
+    <script src="~/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/content/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#indexTable').DataTable();
+        });
+        function Create() {
+            debugger;
+            $.ajax({
+                type: "GET",
+                url: "/Division/Create",
+                success: function (data) {
+                    console.log();
+                    debugger;
+                    $(".modal").html(data);
+                    $(".modal").modal('show');
+                },
+                error: function (errorData) { onError(errorData); }
+            });
+        }
+
+        function Edit(_Id) {
+            $.ajax({
+                type: "GET",
+                url: "/Division/Edit?divisionId=" + _Id,
+                success: function (data) {
+                    $(".modal").html(data); 
+                    $(".modal").modal('show');
+                },
+                error: function (errorData) { onError(errorData); }
+            });
+        }
+
+
+
+        function Delete(_Id) {
+            if (confirm("Are You Sure Delete Selected Employee Record No.? " + _Id)) {
+                var data = { 'EmpID': _Id }
+                $.post('/Division/Delete', data,
+                    function (data) {
+                        if (data == true)
+                            location = location.href;
+                        else
+                            alert("Not delete something Wrong");
+                    });
+            }
+        }
+
+    </script>
+}

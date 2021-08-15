@@ -65,3 +65,17 @@ D:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CoreCompileInputs.cache
 D:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
 D:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
 D:\WMSDS\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll.config
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\Wmsds.Dal.dll
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\Wmsds.Dal.pdb
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\EntityFramework.dll
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\Wmsds.Entities.dll
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\Wmsds.Entities.pdb
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\EntityFramework.xml
+Z:\Repositories\Azeem\Wmsds.Dal\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Repositories\Azeem\Wmsds.Dal\obj\Debug\Wmsds.Dal.csprojAssemblyReference.cache
+Z:\Repositories\Azeem\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CoreCompileInputs.cache
+Z:\Repositories\Azeem\Wmsds.Dal\obj\Debug\Wmsds.Dal.csproj.CopyComplete
+Z:\Repositories\Azeem\Wmsds.Dal\obj\Debug\Wmsds.Dal.dll
+Z:\Repositories\Azeem\Wmsds.Dal\obj\Debug\Wmsds.Dal.pdb
